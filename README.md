@@ -1,8 +1,6 @@
-# Open Aqua 0.3 — Operating System Foundation
+# Open Aqua 0.3.1 — Product and Operating System Foundation
 
 An iPhone-first freshwater digital aquarium twin for busy owners in Singapore and Asia.
-
-Its initial dataset now comes from the founder's real, six-month-old planted community aquarium. See [FOUNDING_TANK.md](FOUNDING_TANK.md) for confirmed measurements, livestock and deliberately unresolved data.
 
 Open Aqua succeeds when owners spend less time inside an app and more time confidently caring for the real aquarium. Owners record water tests and observations manually. Every update is written to the phone first, then synchronised to the owner's private Supabase account.
 
@@ -43,7 +41,7 @@ Open Aqua succeeds when owners spend less time inside an app and more time confi
 
 ## Open Aqua OS
 
-Version 0.3 moves the product from a loose feature list to a governed operating system. Each capability now has a stable identifier, owner benefit, delivery state, dependencies and—in the case of working features—implementation evidence and a customer route.
+Open Aqua uses a governed operating-system model. Each capability has a stable identifier, owner benefit, delivery state, dependencies and—in the case of working features—implementation evidence and a customer route.
 
 The complete source-of-truth registry is in `src/os/capabilities.ts`. The human-readable architecture and delivery matrix are in [OPEN_AQUA_OS.md](OPEN_AQUA_OS.md). Delivery states have strict meanings:
 
@@ -53,6 +51,20 @@ The complete source-of-truth registry is in `src/os/capabilities.ts`. The human-
 - **Deferred** — intentionally held until owner validation or a later business stage.
 
 The app never shows unfinished roadmap pages to customers.
+
+## Product documentation
+
+The public Open Aqua 2.0 product baseline is maintained as reviewable Markdown:
+
+- [Product documentation map](docs/README.md)
+- [Product Constitution](docs/PRODUCT_CONSTITUTION.md)
+- [MVP Requirements](docs/MVP_REQUIREMENTS.md)
+- [Architecture Decisions](docs/ARCHITECTURE_DECISIONS.md)
+- [Roadmap and Release Gates](docs/ROADMAP_AND_RELEASE_GATES.md)
+- [Decision Log](docs/DECISION_LOG.md)
+- [Clean-Room and Source Policy](docs/CLEAN_ROOM_AND_SOURCES.md)
+
+These documents define intent and acceptance. Current delivery status remains governed by `src/os/capabilities.ts`, implementation evidence and automated tests.
 
 ## Run locally
 
@@ -97,16 +109,6 @@ Cloud conflict handling preserves independently added water and care logs from b
 - `supabase/functions/delete-account` — secure server-side account deletion
 - `eas.json` — development, preview and production iOS build profiles
 
-## Upload this version to GitHub without GitHub CLI
-
-1. Download and unzip the Open Aqua 0.3 source package.
-2. Open the extracted `open-aqua` folder and select everything **inside** it.
-3. In `AndrewLamSingapore/open-aqua`, choose **Add file → Upload files**.
-4. Drag the selected files and folders into GitHub.
-5. Use commit message `Add Open Aqua OS foundation` and commit directly to `main`.
-
-This replaces the older files and adds the new folders. Do not upload the ZIP itself, `.env`, `node_modules`, `dist` or `.expo`.
-
 ## Product status
 
-Version 0.3 is a testable cloud-enabled MVP plus the governed operating-system foundation. It does **not** falsely claim that every registered capability is already built; the registry makes the difference explicit. Run `npm run release:check` before building. Code alone cannot place a build in TestFlight: the owner must activate the Supabase project, Apple Developer membership, App Store Connect app and Expo/EAS project. Those final account-bound steps are intentionally documented rather than hidden or impersonated.
+Version 0.3.1 is a testable cloud-enabled vertical slice plus the governed product and operating-system foundations. It does **not** claim that every registered capability or P0 requirement is already built; the capability registry makes the difference explicit. Run `npm run release:check` before building. Code alone cannot place a build in TestFlight: the owner must activate the Supabase project, Apple Developer membership, App Store Connect app and Expo/EAS project. Those final account-bound steps are documented rather than hidden or impersonated.
