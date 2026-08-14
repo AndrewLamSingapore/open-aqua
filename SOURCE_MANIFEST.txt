@@ -1,0 +1,46 @@
+Open Aqua 0.3.1 Founding Tank source package
+Built: 2026-08-13
+
+Included:
+- React Native / Expo application source
+- Owner authentication and password recovery
+- Encrypted session storage
+- Local-first, account-scoped tank storage
+- Supabase migration and owner-only Row Level Security
+- Cloud sync, realtime refresh, retry and conflict merge
+- Open Aqua OS constitution, module registry and capability governance
+- Asia-first freshwater product modules and hard product boundaries
+- Expanded manual parameters and specific care-action capture
+- Cloud-compatible livestock, plant, equipment, photo and care-task contracts
+- Tank-context packet for future tank-aware guidance
+- Real Founding Tank dimensions, volume provenance, livestock groups and breeding history
+- Conservative migration that never overwrites an owner-modified tank
+- 108 governed capabilities across 13 operating-system modules
+- Data export and server-side account deletion function
+- EAS/TestFlight configuration
+- Privacy, security, setup and App Store release documents
+- Automated tests and GitHub Actions workflow
+
+Intentionally excluded:
+- node_modules, dist and .expo generated directories
+- .env and all live credentials
+- Apple certificates and provisioning profiles
+- Supabase service-role keys
+- Expo or GitHub authentication tokens
+
+Verification at packaging:
+- TypeScript: passed
+- Automated tests: 22 passed across 8 test files
+- iOS JavaScript bundle export: passed
+- Capability delivery states: 26 working, 14 foundation, 54 planned, 14 deferred
+- Diff whitespace check: passed
+- iOS icon: 1024 x 1024 and fully opaque
+- Secret-pattern review: no live credential detected
+
+Account-bound activation still required:
+- Create and configure the owner's Supabase project
+- Create and configure the owner's Expo/EAS project
+- Create the owner's Apple Developer and App Store Connect records
+- Build with EAS, test on a real iPhone, and submit through TestFlight
+
+See SETUP_SIMPLE.md and APP_STORE_RELEASE.md.

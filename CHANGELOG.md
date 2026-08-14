@@ -1,0 +1,33 @@
+# Changelog
+
+## 0.3.1 — 2026-08-13
+
+- Replaced the invented starter aquarium with the founder's real Singapore planted community tank.
+- Added approximate physical dimensions, gross-volume provenance and explicit volume certainty.
+- Added confirmed livestock groups without inventing species or quantities.
+- Added the first in-tank breeding observation for newly bred guppy fry.
+- Added an owner-facing livestock section and clear warning that gross capacity is not dosing volume.
+- Added a conservative migration that replaces only the exact untouched legacy starter and preserves all owner changes.
+- Kept Aqua Now in `More information needed` until real decision-critical water tests are entered.
+
+## 0.3.0 — 2026-08-13
+
+- Added Open Aqua OS: a complete, original freshwater capability registry with stable identifiers, delivery states, dependencies, evidence and product boundaries.
+- Added Asia-first modules for regional fish and plants, local names, tropical heat, source water, blackwater, shrimp, large exotics and power-outage planning.
+- Expanded the tank twin contract with livestock, plants, equipment, photos and care tasks while keeping existing cloud documents compatible.
+- Expanded manual Quick Update with additional freshwater parameters and specific care-action types.
+- Expanded deterministic cloud conflict merging to cover the new twin records.
+- Added a private tank-context packet for future tank-aware guidance.
+- Added governance and context tests that prevent roadmap features being mislabeled as working.
+- Kept the app freshwater-only, manual-first and free of Fish Passports.
+
+## 0.2.0 — 2026-08-13
+
+- Added owner accounts, email confirmation and password recovery.
+- Added encrypted on-device session storage.
+- Added private Supabase tank documents with Row Level Security.
+- Added local-first cloud synchronisation, retries, realtime refresh and deterministic conflict merging.
+- Added in-app JSON export and permanent account deletion.
+- Added EAS production configuration for iOS and TestFlight.
+- Added original opaque iOS artwork, CI checks, privacy policy and release checklist.
+- Kept water quality and observations manual-first; no sensors are required.

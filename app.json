@@ -2,15 +2,31 @@
   "expo": {
     "name": "Open Aqua",
     "slug": "open-aqua",
-    "version": "0.1.0",
+    "version": "0.3.1",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "scheme": "openaqua",
+    "icon": "./assets/icon.png",
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.openaqua.app"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.andrewlamsingapore.openaqua",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      "package": "com.openaqua.app"
-    }
+      "package": "com.andrewlamsingapore.openaqua",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B2748"
+      }
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F4F8F8"
+    },
+    "plugins": ["expo-secure-store"]
   }
 }
