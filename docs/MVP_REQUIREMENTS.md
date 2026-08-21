@@ -1,6 +1,6 @@
 # Open Aqua MVP Requirements
 
-**Baseline:** Open Aqua 2.0
+**Baseline:** Open Aqua 2.0 + Ammonia Toxicity Fusion V1 (21 August 2026)
 
 **Priority:** Every requirement in this document is P0 and release-blocking unless an approved decision record changes it.
 
@@ -32,6 +32,7 @@
 | CAP-08 | Save updates locally during connection loss and synchronize later. | Flight-mode create, edit and recovery produce one cloud record without loss. |
 | CAP-09 | Allow correction with visible audit history. | The correction preserves original value, editor, time and reason. |
 | CAP-10 | Complete a common single-test or activity log within ten seconds at p75 after onboarding. | Instrumented beta sessions meet the threshold without hidden prefill errors. |
+| CAP-11 | Preserve total-ammonia reporting convention, method/test source, timestamp and confidence/provenance needed for governed toxicity interpretation. | Export and decision replay distinguish raw ammonia observations from derived NH3 estimates and identify the exact source observation. |
 
 ## Aqua Now and recommendations
 
@@ -46,6 +47,9 @@
 | NOW-07 | Apply change restraint after qualifying recent interventions. | Tests choose wait or retest unless an approved higher-tier rule overrides. |
 | NOW-08 | Keep secondary work collapsed and non-competing. | Accessibility and visual review confirm one primary hierarchy. |
 | NOW-09 | Make potential-harm guidance kill-switchable. | An operator can disable a rule and stop new use without an app release. |
+| NOW-10 | When a usable total-ammonia reference observation exists, interpret ammonia risk with reviewed pH/temperature-dependent NH3 logic rather than treating the total-ammonia number as context-free toxicity. | Golden fixtures verify the versioned calculation, synchronized inputs, derived-state separation and evidence trace. |
+| NOW-11 | Never silently treat an aging total-ammonia observation as a confirmed current concentration. | Freshness fixtures lower confidence and eventually return `More information needed` with the governed re-test request. |
+| NOW-12 | Gate ammonia fusion on supported units/reporting convention and sufficiently trusted pH/temperature inputs. | Unsupported, stale or contradictory inputs fail safely and do not produce false precision. |
 
 ## Tank Memory
 
@@ -58,6 +62,7 @@
 | MEM-05 | Show Tank Normal only after the configured evidence threshold and label it descriptive. | Insufficient history hides it; sufficient history shows sample count and period. |
 | MEM-06 | Never overwrite a raw observation with a normalized or estimated value. | Database and export contain original and derived fields. |
 | MEM-07 | Show last successful sync and pending local changes. | Offline and failed-sync states are visible and recoverable. |
+| MEM-08 | Store derived ammonia/NH3 interpretation as replayable derived state linked to the exact raw ammonia, pH and temperature inputs and calculation revision. | Editing/correcting an input does not rewrite historical evidence; re-evaluation creates a traceable result. |
 
 ## Try a Change and outcomes
 
@@ -78,6 +83,8 @@ For a well-mixed tank, the supported concentration estimate is:
 `result = current × (1 - changed fraction) + replacement × changed fraction`
 
 This is a simplified physical estimate. It excludes biological generation, substrate release, imperfect mixing and measurement error.
+
+Ammonia biology is not promoted into the `Try a Change` P0 simulator by the new ammonia-fusion work. The NH3 module is an observational/decision interpretation path unless a separately reviewed scope change adds simulation.
 
 ## Quiet Plan
 
@@ -132,6 +139,12 @@ This is a simplified physical estimate. It excludes biological generation, subst
 | Auditability | Reconstruct each recommendation from immutable inputs and rule revisions. | Decision replay fixture |
 | Portability | Keep domain packages portable without weakening native-quality iPhone UX. | Architecture review; no Android or web parity promise |
 | Support | In-app feedback, unsafe-guidance reporting and a human response process before external beta. | Test submissions and escalation rota |
+
+## Ammonia fusion implementation reference
+
+The normative V1 technical direction is documented in `docs/AMMONIA_TOXICITY_FUSION_V1.md`.
+
+The module must remain consistent with the Product Constitution: manual-first, deterministic and auditable, unknown-before-false-comfort, and no automatic equipment control.
 
 ## Definition of done
 
