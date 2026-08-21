@@ -45,6 +45,20 @@ The prototype should test whether cheap continuous observables such as pH, tempe
 
 A derived relationship is not accepted merely because it correlates retrospectively. It must be evaluated for lead time, false alarms, misses, calibration/confidence, robustness across normal interventions and plausible confounders, and incremental information gain over the periodic-testing baseline.
 
+### Candidate experiment: continuous dissolved oxygen — TEST, NOT COMMITMENT
+
+Dissolved oxygen (DO) is a high-value candidate sensor because oxygen dynamics can reflect biological respiration, microbial activity, oxygen transfer, organic loading and interactions with temperature and circulation. Its importance does **not** automatically justify including DO hardware in Prototype V1.
+
+The candidate experiment is:
+
+> **Does adding continuous dissolved oxygen and its temporal dynamics materially improve aquarium-risk prediction beyond the cheaper pH + temperature + conductivity/TDS fusion set and periodic/reference chemistry?**
+
+Candidate DO features include absolute DO, rate of change, overnight decline, recovery after aeration or normal interventions, deviation from the tank-specific daily baseline, and relationships among DO, temperature, pH and conductivity/TDS.
+
+DO earns inclusion only if controlled testing shows useful incremental information gain after accounting for sensor purchase cost, calibration, drift, maintenance burden, reliability, false alarms and predictive lead time. If it does not materially improve the experiment, it is excluded or deferred.
+
+This candidate does not authorize ozone generation, automated oxygen dosing, automated treatment or equipment control. Those are outside the prototype proof question unless separately approved through controlled change.
+
 ### Primary proof question
 
 Can a low-cost combination of continuous observations, periodic/reference tests, tank context and time-aware deterministic/analytical inference provide useful warning of developing aquarium risk earlier or more meaningfully than periodic testing alone?
@@ -96,6 +110,8 @@ Normative truth says what Open Aqua is allowed or required to be. Delivery truth
 `docs/AMMONIA_TOXICITY_FUSION_V1.md` is the first approved cross-parameter biological-inference specification. It does not make sensors mandatory. It combines a reference total-ammonia observation with trusted pH, temperature, provenance and freshness to derive an auditable NH3 interpretation. Raw observations remain distinct from derived state. Stale ammonia is never silently treated as current.
 
 The prototype additionally adopts the relational sensor-fusion principle above: correlate first, infer second, and validate predictive value against a periodic-testing baseline. This is an experimental architecture principle, not authorization to invent causal relationships or unsupported safety thresholds.
+
+Continuous dissolved oxygen is recorded as a candidate experiment, not a V1 requirement. It must demonstrate incremental predictive value relative to its total experimental burden before promotion into the minimum sensor set.
 
 ## External artifacts
 
