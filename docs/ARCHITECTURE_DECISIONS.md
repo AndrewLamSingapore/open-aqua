@@ -49,6 +49,20 @@ The complete MVP remains manual-first and works without sensors. If validated ha
 
 Sensor integration remains read-side unless a future controlled decision explicitly changes the hard exclusion on automatic equipment control.
 
+### ADR-012: Relational and temporal sensor fusion
+Prototype inference must model observations as a time-linked evidence system rather than a collection of independent gauges. Candidate predictors may include raw values, deltas, rates of change, cross-parameter relationships, temporal ordering, intervention history, tank baseline, reference chemistry and measurement-quality/provenance features.
+
+No proxy may be silently promoted into the analyte or biological state it merely correlates with. In particular, conductivity/TDS is not ammonia, pH is not water quality, and correlation is not causation.
+
+The experimental architecture must support comparison between at least:
+
+1. a periodic/reference-testing baseline; and
+2. a low-cost fusion model using continuous observations plus available reference chemistry, context and history.
+
+Evaluation must preserve prospective or otherwise leakage-controlled separation between predictor information and later ground truth. Candidate relationships are judged by early-warning lead time, false alarms, misses, confidence calibration, robustness to normal interventions/confounders and incremental information gain. Hardware additions should be justified by measured incremental information rather than parameter importance alone.
+
+Continuous ammonia sensing is therefore not a prerequisite for the first prototype. Periodic/reference ammonia may serve as ground truth or a label while cheaper continuous observables test whether useful predictive structure exists. This is an experimental choice, not a claim that pH, conductivity/TDS or temperature can directly measure ammonia.
+
 ## Architecture boundaries
 
 - Freshwater launch only.
