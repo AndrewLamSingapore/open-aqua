@@ -25,6 +25,26 @@ The prototype is **not** a miniature finished consumer product and is **not** an
 - Industrial design, custom PCB, dedicated display, enclosure refinement and production tooling wait unless required for valid experimentation.
 - No deliberate harmful exposure of livestock is permitted to create training or validation events.
 
+### Relational sensor-fusion principle — LOCKED
+
+Open Aqua does not treat individual measurements as independent declarations of aquarium state. **Individual measurements are evidence; relationships among measurements, their trajectories through time, tank context and reference chemistry are the primary material for inference.**
+
+Prototype analysis therefore prioritizes:
+
+- joint trajectories and rates of change, not isolated thresholds alone;
+- cross-parameter consistency and contradiction;
+- temporal ordering and intervention history;
+- tank-specific historical baseline;
+- sensor quality, calibration, drift, freshness and provenance;
+- periodic/reference chemistry as ground truth or labels where continuous direct sensing is disproportionately expensive;
+- explicit competing explanations rather than silently equating a proxy with a biological condition.
+
+Examples of governing interpretation boundaries: **TDS/conductivity is not ammonia; pH is not water quality; a proxy is not toxicity.** These observations may become useful evidence only through reviewed relationships and validation.
+
+The prototype should test whether cheap continuous observables such as pH, temperature and conductivity/TDS, combined with periodic/reference chemistry (including ammonia where appropriate), context and time, can infer or forecast risk sufficiently well to justify avoiding expensive continuous analyte sensors in the first experiment.
+
+A derived relationship is not accepted merely because it correlates retrospectively. It must be evaluated for lead time, false alarms, misses, calibration/confidence, robustness across normal interventions and plausible confounders, and incremental information gain over the periodic-testing baseline.
+
 ### Primary proof question
 
 Can a low-cost combination of continuous observations, periodic/reference tests, tank context and time-aware deterministic/analytical inference provide useful warning of developing aquarium risk earlier or more meaningfully than periodic testing alone?
@@ -75,6 +95,8 @@ Normative truth says what Open Aqua is allowed or required to be. Delivery truth
 
 `docs/AMMONIA_TOXICITY_FUSION_V1.md` is the first approved cross-parameter biological-inference specification. It does not make sensors mandatory. It combines a reference total-ammonia observation with trusted pH, temperature, provenance and freshness to derive an auditable NH3 interpretation. Raw observations remain distinct from derived state. Stale ammonia is never silently treated as current.
 
+The prototype additionally adopts the relational sensor-fusion principle above: correlate first, infer second, and validate predictive value against a periodic-testing baseline. This is an experimental architecture principle, not authorization to invent causal relationships or unsupported safety thresholds.
+
 ## External artifacts
 
 ChatGPT conversations/memory, PDFs/DOCX/slides, investor plans, social/public blueprints, collaborator messages, historical checkpoints and private notes are non-authoritative. Useful external information becomes truth only after controlled promotion into repository decisions, requirements, architecture/domain specifications, capabilities and/or tests.
@@ -88,5 +110,7 @@ A material change is not normalized until all affected layers agree: governing d
 Before material Open Aqua work: read this file, Product Constitution, latest relevant Decision Log entries, affected requirements/architecture/domain specs, and `src/os/capabilities.ts` before claiming something is shipped. Preserve hard exclusions unless explicit controlled change supersedes them.
 
 For prototype work, begin with the Prototype North Star. Challenge every proposed component with: **What predictive information does this add, and is there a cheaper trustworthy way to obtain or infer it?**
+
+For inference work, additionally ask: **What relationship among observations is being claimed, what competing explanation could produce the same pattern, and what evidence would falsify it?**
 
 Do not delete historical evidence merely because it is superseded. Mark it historical where needed. Never allow two active normative documents to silently define incompatible behavior.
