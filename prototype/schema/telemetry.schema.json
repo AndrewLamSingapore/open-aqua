@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-aqua.local/schema/prototype-v0-telemetry.json",
+  "title": "Open Aqua Prototype V0 Telemetry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tank_id", "sensor_id", "observed_at", "parameter", "value", "unit", "quality"],
+  "properties": {
+    "schema_version": { "const": "prototype-v0.1" },
+    "tank_id": { "type": "string", "minLength": 1 },
+    "sensor_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "parameter": { "enum": ["temperature", "ph", "conductivity", "tds", "dissolved_oxygen"] },
+    "value": { "type": "number" },
+    "unit": { "type": "string", "minLength": 1 },
+    "quality": { "enum": ["good", "suspect", "bad", "unknown"] },
+    "calibration_id": { "type": ["string", "null"] },
+    "source": { "enum": ["prototype_sensor", "replay", "bench_test"] },
+    "notes": { "type": ["string", "null"] }
+  }
+}
