@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-aqua.local/schema/prototype-v0-reference-test.json",
+  "title": "Open Aqua Prototype V0 Reference Test",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tank_id", "observed_at", "parameter", "value", "unit", "method", "confidence"],
+  "properties": {
+    "schema_version": { "const": "prototype-v0.1" },
+    "tank_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "parameter": { "enum": ["total_ammonia", "nitrite", "nitrate", "kh", "ph", "temperature", "conductivity", "tds", "dissolved_oxygen", "other"] },
+    "value": { "type": "number" },
+    "unit": { "type": "string", "minLength": 1 },
+    "method": { "type": "string", "minLength": 1 },
+    "brand_or_reference": { "type": ["string", "null"] },
+    "operator": { "type": ["string", "null"] },
+    "confidence": { "enum": ["high", "medium", "low", "unknown"] },
+    "notes": { "type": ["string", "null"] }
+  }
+}
