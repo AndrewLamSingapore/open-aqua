@@ -23,6 +23,13 @@
         "backgroundColor": "#0B2748"
       }
     },
+    "web": {
+      "favicon": "./assets/icon.png",
+      "name": "Open Aqua",
+      "shortName": "Open Aqua",
+      "themeColor": "#0B2748",
+      "backgroundColor": "#F4F8F8"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

@@ -4,6 +4,7 @@ import {
   Alert,
   AppState,
   Linking,
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -177,10 +178,71 @@ export default function App() {
     };
   }, []);
 
+  if (Platform.OS === 'web' && !cloudConfiguration.ready) return <BrowserDemoApp />;
   if (!cloudConfiguration.ready) return <CloudSetupScreen missing={cloudConfiguration.missing} />;
   if (booting) return <Loading label="Opening your private tank…" />;
   if (!session) return <AuthScreen client={requireSupabase()} />;
   return <><TankApp session={session} />{recovering && <RecoverySheet client={requireSupabase()} onDone={() => setRecovering(false)} />}</>;
+}
+
+const BROWSER_DEMO_OWNER = 'open-aqua-browser-demo';
+
+function BrowserDemoApp() {
+  const [record, setRecord] = useState<LocalTankRecord | null>(null);
+  const [tab, setTab] = useState<Tab>('now');
+  const [quick, setQuick] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    loadTankRecord(BROWSER_DEMO_OWNER)
+      .then((loaded) => { if (active) setRecord(loaded); })
+      .catch((error) => Alert.alert('Browser preview could not open', error instanceof Error ? error.message : 'Reload the page.'));
+    return () => { active = false; };
+  }, []);
+
+  const persist = async (next: LocalTankRecord) => {
+    setRecord(next);
+    await saveTankRecord(BROWSER_DEMO_OWNER, next);
+  };
+
+  const updateTank = async (tank: Tank) => {
+    if (!record) return;
+    await persist(markTankChanged(record, tank));
+  };
+
+  const completeSetup = async (tank: Tank) => {
+    if (!record) return;
+    await persist(completeTankOnboarding(record, tank));
+  };
+
+  if (!record) return <Loading label="Opening the browser preview…" />;
+  if (!record.onboardingComplete) return <TankOnboarding tankId={record.tank.id} onComplete={completeSetup} />;
+
+  const tank = record.tank;
+  return <SafeAreaView style={styles.safe}>
+    <StatusBar style="dark" />
+    <View style={styles.header}>
+      <View style={styles.headerCopy}><Text style={styles.brand}>OPEN AQUA</Text><Text style={styles.tankName}>{tank.name}</Text></View>
+      <View style={styles.ownerButton} accessibilityLabel="Browser preview">
+        <Text style={styles.ownerInitial}>O</Text>
+        <Text numberOfLines={2} style={styles.saved}>Saved in this browser</Text>
+      </View>
+    </View>
+    <ScrollView style={styles.body} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+      <Card><Text style={styles.cardTitle}>Browser preview</Text><Text style={styles.reason}>Your preview data stays in this browser. Private account sync will activate after production cloud setup.</Text></Card>
+      {tab === 'now' && <AquaNow tank={tank} onPreview={() => setTab('plan')} onQuickUpdate={() => setQuick(true)} />}
+      {tab === 'memory' && <TankMemory tank={tank} onSave={updateTank} />}
+      {tab === 'plan' && <TryChange tank={tank} />}
+      {tab === 'library' && <Library />}
+    </ScrollView>
+    <View style={styles.nav}>
+      {(Object.keys(labels) as Tab[]).map((key) => <Pressable key={key} style={styles.navItem} onPress={() => setTab(key)} accessibilityRole="tab" accessibilityState={{ selected: tab === key }}>
+        <Text style={[styles.navText, tab === key && styles.navActive]}>{labels[key]}</Text>
+      </Pressable>)}
+      <Pressable accessibilityLabel="Quick Update" style={styles.plus} onPress={() => setQuick(true)}><Text style={styles.plusText}>＋</Text></Pressable>
+    </View>
+    {quick && <QuickUpdate tank={tank} onClose={() => setQuick(false)} onSave={updateTank} />}
+  </SafeAreaView>;
 }
 
 function TankApp({ session }: { session: Session }) {
