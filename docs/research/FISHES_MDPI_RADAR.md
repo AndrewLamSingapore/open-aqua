@@ -11,6 +11,8 @@ Open Aqua uses the Fishes/MDPI landscape as a research radar: a structured way t
 
 A paper, Special Issue, or editorial theme does **not** become a feature requirement merely because it exists. Research signals must pass through Open Aqua's evidence, safety, originality, feasibility, and product-governance boundaries before they influence implementation.
 
+This radar is the **scientific frontier** input to [`OPPORTUNITY_EVIDENCE_MATRIX.md`](OPPORTUNITY_EVIDENCE_MATRIX.md). Commercial/engineering attempts are tracked separately in [`OCEANSTAR_COMPETITIVE_RADAR.md`](OCEANSTAR_COMPETITIVE_RADAR.md). The matrix keeps scientifically demonstrated, commercially attempted, Open Aqua hypothesis, experimentally validated and productized states distinct.
+
 ## Why this radar matters
 
 Fishes currently contains a dense convergence of topics directly adjacent to Open Aqua's long-term thesis:
@@ -154,4 +156,4 @@ When reviewing the radar, prioritize signals that can change one of three things
 2. the evidence model behind Aqua Now / future Aqua Guide; or
 3. a genuinely new capability that can pass the research-to-product gates.
 
-Record durable product decisions in the Decision Log. Change capability delivery state only in the governed capability registry with implementation evidence.
+Update `OPPORTUNITY_EVIDENCE_MATRIX.md` when a source materially changes scientific maturity. Record durable product decisions in the Decision Log. Change capability delivery state only in the governed capability registry with implementation evidence.
