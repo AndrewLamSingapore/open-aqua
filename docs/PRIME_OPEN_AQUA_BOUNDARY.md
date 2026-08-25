@@ -1,8 +1,15 @@
 # Prime ↔ Open Aqua ↔ Open Aqua Edge Boundary
 
-**Status:** Architecture boundary / integration map
+**Status:** Domain-specific architecture boundary / integration map
 **Effective:** 25 August 2026
 **Prime inspected:** Prime 7.3.1.1 Evidence Grounded (`AndrewLamSingapore/prime`)
+**Parent architecture:** `ECOSYSTEM_ARCHITECTURE.md`
+
+## Scope relationship
+
+This document is the **Open Aqua-specific boundary underneath the ecosystem architecture**. It must not be interpreted as making Prime an Open Aqua subsystem or designing Prime primarily around aquariums.
+
+The ecosystem-level roles of Prime, Open Aqua, the Career Website, The Portal, GitHub/evidence and Edge are governed by `ECOSYSTEM_ARCHITECTURE.md`. This document goes deeper only where aquarium-domain and physical-device boundaries require additional precision.
 
 ## Decision
 
@@ -167,6 +174,8 @@ Allow Prime to coordinate research, experiment analysis, benchmark planning and 
 
 Only after Open Aqua has validated observability, confidence, hardware qualification and safe fallback rules should any Prime-coordinated physical action be considered. Every action remains subject to explicit domain and authority gates.
 
-## Architectural invariant
+## Domain invariant
 
 **Prime orchestrates. Open Aqua understands the aquarium. Edge observes and, only when separately qualified, acts. Safety and evidence determine authority.**
+
+This invariant operates underneath the broader ecosystem invariant in `ECOSYSTEM_ARCHITECTURE.md`.
