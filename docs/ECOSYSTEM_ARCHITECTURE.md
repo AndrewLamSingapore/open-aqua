@@ -1,148 +1,109 @@
 # Prime Ecosystem Architecture
 
-**Status:** Governing ecosystem architecture
+**Status:** Governing future-state ecosystem architecture
 **Effective:** 25 August 2026
-**Scope:** Prime, Open Aqua, Open Aqua Edge, Career Website, The Portal, GitHub/evidence layer
+**Scope:** Prime, Open Aqua, Open Aqua Edge, Career Website, candidate human control surface, GitHub/evidence layer
+**Present-state authority:** `ECOSYSTEM_REALITY_MAP.md`
+**Truth ownership:** `ECOSYSTEM_SSOT_CONTRACT.md`
+
+## Reality warning
+
+> **Architecture may anticipate the future. Status must describe the present.**
+
+This document describes intended boundaries and possible future integration. It is **not** evidence that every box or arrow is implemented. For any claim about what currently exists, works, is integrated or is validated, `ECOSYSTEM_REALITY_MAP.md` takes precedence.
 
 ## Governing decision
 
-Prime is not an Open Aqua subsystem. It is the shared governed intelligence and orchestration plane for a larger personal ecosystem.
+Prime is not an Open Aqua subsystem. It is an existing private, local, evidence-grounded multi-agent system for bounded planning, reasoning, verification and orchestration. **Prime is not currently integrated with Open Aqua.**
 
-Each domain remains independently authoritative for its own truth, data and safety rules. Prime coordinates across domains using explicit evidence and bounded authority; it does not silently absorb or replace them.
+Each domain remains independently authoritative for its own truth, data and safety rules. Future Prime integrations must use explicit evidence and bounded authority; Prime must not silently absorb or replace domain truth.
 
 ```text
+                    CURRENT / INDEPENDENT
+
+ Open Aqua             Prime 7.3.1.1
+    │                 (not integrated)
+ GitHub evidence
+
+ Career Website         The Portal
+ (separate project)     (separate project)
+
+====================================================
+              REALITY / FUTURE BOUNDARY
+====================================================
+
+                  FUTURE-STATE MODEL
+
                          PRIME
               Governed Intelligence Plane
                          │
        ┌─────────────────┼──────────────────┐
        │                 │                  │
-   OPEN AQUA       CAREER WEBSITE       THE PORTAL
-   Domain OS        Public proof        Private human
-       │               surface          command surface
- OPEN AQUA EDGE           │                  │
-       │                  │                  │
- Aquarium /          Published          Cross-domain
- sensors/devices      evidence          decisions/views
+   OPEN AQUA       CAREER WEBSITE      HUMAN CONTROL
+   Domain OS        Public proof       SURFACE (planned)
+       │               surface          candidate: Portal
+ OPEN AQUA EDGE
+       │
+ Aquarium / sensors/devices
 
              GITHUB / EVIDENCE LAYER
-        versioned code, research, experiments,
-       architecture, provenance and proof history
 ```
+
+Arrows below the boundary express intended contracts/dependencies, not current integration.
 
 ## Prime — governed intelligence plane
 
-Prime owns reusable cross-domain intelligence infrastructure:
+Prime currently exists independently and already owns reusable generic infrastructure such as objectives, portfolios, projects/task queues, specialist routing, planning, evidence grounding, verification, retries/supervision, compacted context, approvals/authority grants, watchdogs, internal automations and provenance-aware artifacts.
 
-- objectives, portfolios, projects and task queues;
-- specialist/agent routing;
-- planning and bounded orchestration;
-- evidence-grounding guards;
-- verification and quality scoring;
-- retries and supervision;
-- compacted durable mission context;
-- approvals and authority grants;
-- watchdogs and execution budgets;
-- internal automations;
-- generic research/data/engineering/strategy workflows;
-- provenance-aware internal artifacts.
+Future domain integrations should consume this machinery rather than rebuilding a second generic agent organization.
 
-Prime should not contain duplicate domain models for Open Aqua, career identity or Portal state when an authoritative domain source already exists.
+Prime should not contain duplicate domain models for Open Aqua, career identity or other domain state when an authoritative source already exists.
 
 ## Open Aqua — aquarium domain authority
 
-Open Aqua owns aquarium-specific truth and product behavior:
+Open Aqua owns aquarium-specific truth and product behavior: freshwater event ledger/digital twin, readings and care provenance, freshness/confidence semantics, biological rules, ammonia interpretation, sensor-fusion research, observability requirements, aquarium-specific safety and owner-facing workflows.
 
-- freshwater event ledger and digital twin;
-- readings, care events and aquarium provenance;
-- freshness/confidence semantics;
-- biological rules and risk interpretation;
-- ammonia interpretation;
-- sensor fusion and instability models;
-- Minimum Biological Observability;
-- aquarium-specific safety policy;
-- livestock, plants and equipment context;
-- owner-facing aquarium workflows.
+Some listed capabilities have different implementation/evidence maturity. Consult `ECOSYSTEM_REALITY_MAP.md` and Open Aqua's own capability registry before treating them as working.
 
 The detailed Prime ↔ Open Aqua ↔ Edge boundary remains governed separately by `PRIME_OPEN_AQUA_BOUNDARY.md`.
 
-## Open Aqua Edge — physical observation layer
+## Open Aqua Edge — planned physical observation layer
 
-Edge is optional and must never become a prerequisite for the manual-first Open Aqua product.
+Open Aqua Edge is **planned/unvalidated**, not an operating hardware system today.
 
-It may eventually own ESP32-class firmware, sensor/probe adapters, device identity, sampling, timestamps, buffering, calibration identifiers, raw observations and device-health telemetry. It does not own biological interpretation.
+It may eventually own ESP32-class firmware, sensor/probe adapters, device identity, sampling, timestamps, buffering, calibration identifiers, raw observations and device-health telemetry. It will not own biological interpretation.
 
-## Career Website — public proof layer
+## Career Website — existing public surface; future proof consumer
 
-The Career Website is a deliberately curated public representation of demonstrated capability and professional identity.
+The Career Website exists separately. Its potential future role in this architecture is to publish deliberately selected, sufficiently supported professional proof.
 
-It may present:
+The validated Open Aqua hardware/research publication pipeline does **not** currently exist. No architecture arrow is permission to claim experimental validation that has not occurred.
 
-- verified projects and case studies;
-- selected GitHub work;
-- demonstrated technical capabilities;
-- experimentally supported Open Aqua results;
-- research outputs suitable for public presentation;
-- professional narrative and career positioning.
+Prime may eventually recommend/draft publication material, but publication remains explicitly approved and evidence-backed.
 
-It must not automatically expose Prime memory, private Portal data, unpublished research, personal information, failed/private experiments, secrets or unvalidated claims.
+## Human Control Surface — planned
 
-Publication remains an explicit approval boundary. Prime may recommend or draft what to publish; it does not autonomously turn private ecosystem state into public claims.
+A unified private cross-domain command/decision surface is **not currently demonstrated**.
 
-## The Portal — private human command surface
+The existing project called **The Portal** is a candidate for this role, but the architecture does not retroactively redefine its historical/current purpose. Turning The Portal into this surface requires a separate explicit product decision and implementation.
 
-The Portal is the owner's cross-domain command and decision surface, not another intelligence engine.
+Until that happens, diagrams and implementation plans should use the neutral term **Human Control Surface (planned)**.
 
-Its eventual role is to present, with appropriate permissions:
-
-- North Stars and objectives;
-- portfolio status across domains;
-- evidence and confidence;
-- important decisions requiring human judgment;
-- Prime approval requests;
-- Open Aqua state and research progress;
-- career/publication opportunities;
-- experiment/research status;
-- system health and exceptions.
-
-The Portal should call domain services and Prime rather than duplicate their business logic. It is where the human sees and governs the ecosystem.
+A future surface may present North Stars/objectives, portfolio status, evidence/confidence, Prime approvals, Open Aqua research state, publication opportunities and system exceptions without becoming the canonical database for those domains.
 
 ## GitHub / evidence layer
 
-GitHub is the versioned engineering and evidence substrate across the ecosystem. It preserves:
+GitHub currently provides versioned code, architecture, hypotheses, provenance and engineering/research artifacts. It is not the live runtime database for every system.
 
-- source code;
-- architecture decisions;
-- hypotheses;
-- research provenance;
-- experiment definitions/results where appropriate;
-- validation status;
-- competitive/scientific intelligence artifacts;
-- change history;
-- reproducible technical proof.
-
-GitHub is not the live domain database for every system. Runtime/private state remains in the appropriate application stores.
+A GitHub document can be current governance while the capability described by that document remains future or unvalidated.
 
 ## Information classes and default flow
 
-### Private internal
-
-Prime memory, Portal state, private datasets, internal strategy and unvalidated hypotheses remain private by default.
-
-### Domain evidence
-
-Open Aqua observations, experiments and derived interpretations remain governed by Open Aqua provenance/confidence semantics. Prime may consume explicit evidence packets.
-
-### Versioned evidence
-
-Appropriate code, architecture, research and experiment artifacts may be preserved in GitHub with maturity/provenance labels.
-
-### Public proof
-
-Only deliberately selected, sufficiently supported material moves to the Career Website.
+Private internal state remains private by default. Domain evidence remains owned by its canonical domain. Versioned evidence may be preserved in GitHub with maturity/provenance. Only deliberately selected, sufficiently supported material may move to a public surface.
 
 The default is **no automatic private → public propagation**.
 
-## Cross-domain flow
+## Future cross-domain flow
 
 ```text
 DOMAIN SYSTEMS / EVIDENCE
@@ -152,8 +113,8 @@ DOMAIN SYSTEMS / EVIDENCE
         PRIME
  reason / plan / verify / coordinate
           ↓
-     THE PORTAL
- human review / decision / approval
+ HUMAN CONTROL SURFACE
+ review / decision / approval
           ↓
  ┌────────┴─────────┐
  │                  │
@@ -162,46 +123,50 @@ internal action   approved publication
 Domain/GitHub     Career Website
 ```
 
+This is a target contract, not a currently demonstrated end-to-end path.
+
 ## Non-duplication rules
 
-1. Prime owns generic orchestration; domain repositories do not rebuild a second generic agent organization.
-2. Open Aqua owns aquarium truth; Prime does not maintain a competing aquarium digital twin.
-3. The Portal owns presentation/control of cross-domain state; it does not become the authoritative database for every domain.
-4. The Career Website owns curated public presentation; it does not become the source of truth for private accomplishments or evidence.
+1. Prime owns generic orchestration; domain repositories should not rebuild a second generic agent organization.
+2. Open Aqua owns aquarium truth; Prime must not maintain a competing aquarium digital twin.
+3. A future Human Control Surface should aggregate/control through contracts, not become the authoritative database for every domain.
+4. The Career Website owns what is publicly presented, not the underlying private evidence.
 5. GitHub preserves engineering/evidence history; it does not replace runtime application state.
-6. Edge owns device-side acquisition; it does not decide biological meaning.
-7. A capability is implemented once at the lowest sensible reusable layer and consumed elsewhere through contracts.
+6. Edge will own device-side acquisition; it will not decide biological meaning.
+7. A capability should be implemented once at the lowest sensible reusable layer and consumed elsewhere through contracts.
 
 ## Authority model
 
 Prime may reason and coordinate only within granted authority. Domain-specific safety rules remain binding even when Prime proposes an action.
 
-The Portal is the preferred human approval surface for consequential cross-domain decisions once that workflow exists.
-
 Public publishing, financial actions, account changes, destructive actions and physical aquarium control must never be inferred from a planning result alone.
 
 ## Sequencing
 
-### Stage 1 — independent systems and evidence
+### Stage 0 — current reality
 
-Keep Open Aqua V0 focused on trustworthy aquarium evidence. Keep Career Website public and curated. Keep Portal development focused on useful private visibility/control. Keep Prime generic.
+Open Aqua, Prime, Career Website and The Portal exist as separate projects/systems at different maturity levels. GitHub contains architecture/governance. No end-to-end ecosystem integration should be implied.
+
+### Stage 1 — first physical evidence
+
+Keep Open Aqua V0 focused on producing trustworthy aquarium evidence. Do not make Prime integration, Portal unification or career publication automation prerequisites.
 
 ### Stage 2 — read-only bridges
 
-Connect domains to Prime through the smallest useful read-only evidence contracts. Begin with explicit, provenance-rich exports rather than shared databases.
+After real evidence exists, connect domains to Prime through the smallest useful read-only, provenance-rich contracts.
 
-### Stage 3 — Portal unification
+### Stage 3 — human control decision
 
-Expose Prime objectives, domain status, evidence and approval requests through The Portal so the human can govern cross-domain work from one place.
+Decide whether The Portal should actually become the Human Control Surface. If yes, design it to consume authoritative state rather than duplicate it.
 
 ### Stage 4 — bounded write paths
 
 Introduce narrowly scoped, auditable writes only where the owning domain defines the contract and Prime has explicit authority.
 
-### Stage 5 — qualified autonomy
+### Stage 5 — qualified autonomy/public proof
 
-Only experimentally validated and safety-governed workflows may progress toward greater autonomy. Domain safety gates always remain authoritative.
+Only experimentally supported, safety-governed workflows may progress toward greater autonomy. Only validated/qualified evidence may support corresponding public claims.
 
 ## Ecosystem invariant
 
-**Prime coordinates intelligence. Domain systems own truth. The Portal gives the human control. The Career Website publishes selected proof. GitHub preserves evidence. Edge connects software to the physical world. Authority never follows from intelligence alone.**
+**Prime may coordinate intelligence. Domain systems own truth. A future human control surface may unify governance. The Career Website may publish selected proof. GitHub preserves evidence. Edge may connect software to the physical world. Authority never follows from intelligence alone.**
