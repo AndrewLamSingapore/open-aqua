@@ -199,6 +199,7 @@ export const openAquaModules = [
       { id: 'platform.android', title: 'Android application', ownerValue: 'Reuses the shared product model after iPhone validation.', status: 'deferred', audience: 'platform' },
       { id: 'platform.web', title: 'Web application', ownerValue: 'Provides a larger-screen view after mobile workflows are proven.', status: 'deferred', audience: 'platform' },
       { id: 'platform.watch', title: 'Watch companion', ownerValue: 'Shows approved glanceable status and quick task completion.', status: 'deferred', audience: 'platform' },
+      { id: 'platform.thematic-sound', title: 'Original thematic sound', ownerValue: 'Lets the owner play a short, calm aquatic motif without autoplay or looping.', status: 'working', audience: 'owner', route: 'now', evidence: ['src/sound/SoundControl.tsx', 'assets/open-aqua-theme-v1.mp3', 'sound preference tests'] },
       { id: 'platform.accessibility', title: 'Accessible interaction', ownerValue: 'Uses screen-reader labels, large targets, readable contrast and dynamic layouts.', status: 'foundation', audience: 'platform', evidence: ['React Native accessibility labels'] },
       { id: 'platform.localization', title: 'Regional language packs', ownerValue: 'Localises interface and species names without changing scientific identity.', status: 'planned', audience: 'platform', asiaFirst: true },
       { id: 'platform.backup-restore', title: 'Backup and tested restoration', ownerValue: 'Documents, tests and monitors database and media recovery.', status: 'planned', audience: 'platform' },

@@ -62,6 +62,7 @@ Continuous ammonia hardware is deliberately deferred unless evidence shows it is
 - **Try a Change** with a transparent water-change estimate and no-action baseline
 - Singapore Freshwater Library seed records
 - Private tank-context builder for the future tank-aware Aqua Guide
+- Original 12-second **Open Aqua Theme**, always owner-initiated, never autoplayed or looped
 
 ### Engineering and release foundation
 - Automated decision-engine and sync-merge tests
@@ -131,6 +132,7 @@ Cloud conflict handling preserves independently added water, care, concern and o
 - `src/sync` — upload, download, retry and deterministic merge logic
 - `src/domain` — tank types, rules and transparent estimates
 - `src/os` — capability registry and tank-context contract
+- `src/sound` — accessible thematic-sound playback and saved owner preference
 - `supabase/migrations` — database, indexes and owner-only RLS policies
 - `supabase/functions/delete-account` — secure account deletion
 - `eas.json` — iOS build profiles

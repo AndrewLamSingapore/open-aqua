@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { Button, Card, SectionTitle } from '../components';
 import { Tank } from '../domain/types';
+import { SoundControl } from '../sound/SoundControl';
 import { colors } from '../theme';
 import {
   buildTankFromOnboarding,
@@ -59,7 +60,10 @@ export function TankOnboarding({
   return <SafeAreaView style={styles.safe}>
     <KeyboardAvoidingView style={styles.safe} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
-        <Text style={styles.brand}>OPEN AQUA</Text>
+        <View style={styles.brandRow}>
+          <Text style={styles.brand}>OPEN AQUA</Text>
+          <SoundControl />
+        </View>
         <Text style={styles.hero}>Set up your freshwater tank.</Text>
         <Text style={styles.copy}>Start with confirmed facts. Optional details can stay unknown and be added later.</Text>
 
@@ -159,7 +163,8 @@ export function TankOnboarding({
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.cloud },
   content: { padding: 22, paddingBottom: 48 },
-  brand: { color: colors.teal, fontSize: 13, fontWeight: '900', letterSpacing: 2, marginTop: 8 },
+  brandRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 8 },
+  brand: { color: colors.teal, fontSize: 13, fontWeight: '900', letterSpacing: 2 },
   hero: { color: colors.navy, fontSize: 34, lineHeight: 40, fontWeight: '900', marginTop: 10 },
   copy: { color: colors.muted, fontSize: 16, lineHeight: 23, marginTop: 10, marginBottom: 12 },
   label: { color: colors.ink, fontSize: 14, fontWeight: '800', marginTop: 12 },

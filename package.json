@@ -12,7 +12,9 @@
     "vercel-build": "npm run build:web",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "verify": "npm run typecheck && npm test",
+    "verify": "npm run typecheck && npm test && npm run verify:sound",
+    "verify:sound": "node scripts/verify-sound.mjs",
+    "generate:theme": "node scripts/generate-theme.mjs",
     "export:ios": "expo export --platform ios --output-dir dist",
     "release:check": "npm run verify && npm run export:ios"
   },
@@ -23,6 +25,7 @@
     "@supabase/supabase-js": "^2.112.3",
     "expo": "~57.0.12",
     "expo-apple-authentication": "~57.0.1",
+    "expo-audio": "~57.0.4",
     "expo-auth-session": "~57.0.6",
     "expo-crypto": "~57.0.1",
     "expo-file-system": "~57.0.2",

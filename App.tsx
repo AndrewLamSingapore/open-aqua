@@ -39,6 +39,7 @@ import {
   WaterParameter
 } from './src/domain/types';
 import { TankOnboarding } from './src/onboarding/TankOnboarding';
+import { SoundControl } from './src/sound/SoundControl';
 import {
   completeTankOnboarding,
   LocalTankRecord,
@@ -223,9 +224,12 @@ function BrowserDemoApp() {
     <StatusBar style="dark" />
     <View style={styles.header}>
       <View style={styles.headerCopy}><Text style={styles.brand}>OPEN AQUA</Text><Text style={styles.tankName}>{tank.name}</Text></View>
-      <View style={styles.ownerButton} accessibilityLabel="Browser preview">
-        <Text style={styles.ownerInitial}>O</Text>
-        <Text numberOfLines={2} style={styles.saved}>Saved in this browser</Text>
+      <View style={styles.headerActions}>
+        <SoundControl compact />
+        <View style={styles.ownerButton} accessibilityLabel="Browser preview">
+          <Text style={styles.ownerInitial}>O</Text>
+          <Text numberOfLines={2} style={styles.saved}>Saved in this browser</Text>
+        </View>
       </View>
     </View>
     <ScrollView style={styles.body} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
@@ -381,10 +385,13 @@ function TankApp({ session }: { session: Session }) {
     <StatusBar style="dark" />
     <View style={styles.header}>
       <View style={styles.headerCopy}><Text style={styles.brand}>OPEN AQUA</Text><Text style={styles.tankName}>{tank.name}</Text></View>
-      <Pressable onPress={() => setAccount(true)} accessibilityLabel="Owner account" style={styles.ownerButton}>
-        <Text style={styles.ownerInitial}>{(session.user.email?.[0] ?? 'O').toUpperCase()}</Text>
-        <Text numberOfLines={2} style={[styles.saved, syncState === 'error' && styles.savedError]}>{syncLabels[syncState]}</Text>
-      </Pressable>
+      <View style={styles.headerActions}>
+        <SoundControl compact />
+        <Pressable onPress={() => setAccount(true)} accessibilityLabel="Owner account" style={styles.ownerButton}>
+          <Text style={styles.ownerInitial}>{(session.user.email?.[0] ?? 'O').toUpperCase()}</Text>
+          <Text numberOfLines={2} style={[styles.saved, syncState === 'error' && styles.savedError]}>{syncLabels[syncState]}</Text>
+        </Pressable>
+      </View>
     </View>
     <ScrollView style={styles.body} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
       {tab === 'now' && <AquaNow tank={tank} onPreview={() => setTab('plan')} onQuickUpdate={() => setQuick(true)} />}
@@ -839,9 +846,10 @@ const styles = StyleSheet.create({
   loadingText: { color: colors.muted, marginTop: 12 },
   header: { paddingHorizontal: 20, paddingVertical: 12, backgroundColor: colors.white, borderBottomWidth: 1, borderColor: colors.line, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   headerCopy: { flex: 1, paddingRight: 10 },
+  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   brand: { fontSize: 12, fontWeight: '900', letterSpacing: 2, color: colors.teal },
   tankName: { fontSize: 18, fontWeight: '800', color: colors.navy, marginTop: 2 },
-  ownerButton: { flexDirection: 'row', alignItems: 'center', maxWidth: 155, minHeight: 44 },
+  ownerButton: { flexDirection: 'row', alignItems: 'center', maxWidth: 130, minHeight: 44 },
   ownerInitial: { width: 34, height: 34, borderRadius: 17, backgroundColor: colors.teal, color: colors.white, textAlign: 'center', lineHeight: 34, fontWeight: '900', marginRight: 7 },
   saved: { flex: 1, fontSize: 10, color: colors.muted, textAlign: 'right' },
   savedError: { color: colors.coral },

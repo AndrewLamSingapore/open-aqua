@@ -2,6 +2,8 @@
 
 ## 0.5.0 — 2026-08-25
 
+- Added an original 12-second Open Aqua thematic motif with an accessible play/pause/replay control in onboarding and the main tank header.
+- Kept sound muted until explicit owner interaction, prevented autoplay and looping, paused playback outside the foreground and saved the owner preference locally.
 - Added first-class structured concern records for uncertain tests, possible ammonia, tiered nitrite risk, progressive wasting, serial deaths or disappearances, breathing/oxygen concerns and related investigation branches.
 - Kept direct observations, measurements with source and confidence, bounded colour estimates, possible causes and unknowns separate in storage and the interface.
 - Added deterministic rule set `OA-CONCERN-1.0.0` with symptom-over-chemistry safety priority, one primary action, urgency, owner time, recheck window and replayable provenance.
