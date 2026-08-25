@@ -1,6 +1,7 @@
 import {
   Activity,
   CareTask,
+  ConcernRecord,
   EquipmentRecord,
   LivestockRecord,
   PhotoRecord,
@@ -18,6 +19,8 @@ const readingTime = (item: Reading) => millis(item.updatedAt ?? item.observedAt)
 const activityTime = (item: Activity) => millis(item.updatedAt ?? item.occurredAt);
 const recordTime = (item: { updatedAt?: string }) => millis(item.updatedAt);
 const photoTime = (item: PhotoRecord) => millis(item.updatedAt ?? item.capturedAt);
+const concernTime = (item: ConcernRecord) => millis(item.updatedAt ?? item.observedAt);
+const outcomeTime = (item: ConcernRecord['outcomes'][number]) => millis(item.updatedAt ?? item.checkedAt);
 
 function mergeById<T extends { id: string }>(left: T[], right: T[], getTime: (item: T) => number): T[] {
   const merged = new Map<string, T>();
@@ -28,6 +31,20 @@ function mergeById<T extends { id: string }>(left: T[], right: T[], getTime: (it
   return [...merged.values()].sort((a, b) => getTime(b) - getTime(a));
 }
 
+function mergeConcerns(left: ConcernRecord[], right: ConcernRecord[]): ConcernRecord[] {
+  const grouped = new Map<string, ConcernRecord[]>();
+  for (const concern of [...left, ...right]) grouped.set(concern.id, [...(grouped.get(concern.id) ?? []), concern]);
+  return [...grouped.values()]
+    .map((versions) => {
+      const newest = [...versions].sort((a, b) => concernTime(b) - concernTime(a))[0] as ConcernRecord;
+      return {
+        ...newest,
+        outcomes: mergeById(versions.flatMap((version) => version.outcomes), [], outcomeTime)
+      };
+    })
+    .sort((a, b) => concernTime(b) - concernTime(a));
+}
+
 export function mergeTankSnapshots(local: Tank, cloud: Tank): Tank {
   const localIsNewest = millis(local.updatedAt) >= millis(cloud.updatedAt);
   const newest = localIsNewest ? local : cloud;
@@ -36,6 +53,7 @@ export function mergeTankSnapshots(local: Tank, cloud: Tank): Tank {
     id: local.id,
     readings: mergeById(local.readings, cloud.readings, readingTime),
     activities: mergeById(local.activities, cloud.activities, activityTime),
+    concerns: mergeConcerns(local.concerns ?? [], cloud.concerns ?? []),
     livestock: mergeById<LivestockRecord>(local.livestock ?? [], cloud.livestock ?? [], recordTime),
     plants: mergeById<PlantRecord>(local.plants ?? [], cloud.plants ?? [], recordTime),
     equipment: mergeById<EquipmentRecord>(local.equipment ?? [], cloud.equipment ?? [], recordTime),

@@ -17,13 +17,19 @@ export type SyncOutcome = {
   direction: 'uploaded' | 'downloaded' | 'merged' | 'unchanged';
 };
 
-async function fetchCloudTank(client: SupabaseClient, userId: string, tankId: string): Promise<CloudTankRow | null> {
-  const { data, error } = await client
+async function fetchCloudTank(
+  client: SupabaseClient,
+  userId: string,
+  tankId?: string
+): Promise<CloudTankRow | null> {
+  const ownerQuery = client
     .from('tank_documents')
     .select('id,user_id,payload,client_updated_at,revision,updated_at')
-    .eq('user_id', userId)
-    .eq('id', tankId)
-    .maybeSingle();
+    .eq('user_id', userId);
+  const query = tankId
+    ? ownerQuery.eq('id', tankId)
+    : ownerQuery.order('updated_at', { ascending: false }).limit(1);
+  const { data, error } = await query.maybeSingle();
   if (error) throw error;
   return data as CloudTankRow | null;
 }
@@ -64,14 +70,19 @@ export async function syncTankRecord(
   userId: string,
   local: LocalTankRecord
 ): Promise<SyncOutcome> {
-  const cloud = await fetchCloudTank(client, userId, local.tank.id);
+  // A blank first-device record has a local-only ID. Query the owner's latest
+  // tank so a returning owner can recover it before onboarding is shown.
+  const cloud = await fetchCloudTank(client, userId, local.starter ? undefined : local.tank.id);
   if (!cloud) {
+    // A blank onboarding record is private local state. It is not an owner tank
+    // until the owner confirms setup, so it must never become a cloud record.
+    if (!local.onboardingComplete) return { record: local, direction: 'unchanged' };
     const tank = { ...local.tank, updatedAt: local.localUpdatedAt };
     return { record: await upload(client, local, tank, local.localUpdatedAt), direction: 'uploaded' };
   }
 
-  // A newly installed device begins with sample data. If the owner already has
-  // a cloud tank, the real owner record wins instead of merging in the sample.
+  // A newly installed device begins with a private blank record. If the owner
+  // already has a cloud tank, the owner record wins without merging blank data.
   if (local.starter === true && local.lastCloudRevision === undefined) {
     return {
       record: markTankSynced(local, cloud.payload, cloud.revision, cloud.client_updated_at),

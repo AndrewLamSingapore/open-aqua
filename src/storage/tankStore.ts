@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createSampleTank } from '../domain/sample';
+import { createStarterTank } from '../domain/starter';
 import { migrateUntouchedLegacyStarter } from '../domain/starterMigration';
 import { Tank } from '../domain/types';
 
@@ -15,16 +15,22 @@ export type LocalTankRecord = {
   lastCloudRevision?: number;
   pending: boolean;
   starter?: boolean;
+  onboardingComplete: boolean;
 };
 
-const freshRecord = (tank = createSampleTank(), starter = true): LocalTankRecord => {
+const freshRecord = (
+  tank = createStarterTank(),
+  starter = true,
+  onboardingComplete = false
+): LocalTankRecord => {
   const now = new Date().toISOString();
   return {
     schemaVersion: 2,
     tank: { ...tank, updatedAt: tank.updatedAt ?? now },
     localUpdatedAt: now,
     pending: true,
-    starter
+    starter,
+    onboardingComplete
   };
 };
 
@@ -49,7 +55,11 @@ function parseRecord(value: string | null): LocalTankRecord | null {
   try {
     const parsed = JSON.parse(value) as LocalTankRecord;
     return parsed?.schemaVersion === 2 && parsed.tank && typeof parsed.localUpdatedAt === 'string'
-      ? { ...parsed, starter: parsed.starter ?? false }
+      ? {
+          ...parsed,
+          starter: parsed.starter ?? false,
+          onboardingComplete: parsed.onboardingComplete ?? true
+        }
       : null;
   } catch {
     return null;
@@ -61,7 +71,7 @@ export async function loadTankRecord(userId: string): Promise<LocalTankRecord> {
   if (existing) {
     const migration = migrateUntouchedLegacyStarter(existing.tank);
     if (!migration.migrated) return existing;
-    const migrated = freshRecord(migration.tank, true);
+    const migrated = freshRecord(migration.tank, true, false);
     await saveTankRecord(userId, migrated);
     return migrated;
   }
@@ -70,7 +80,7 @@ export async function loadTankRecord(userId: string): Promise<LocalTankRecord> {
   if (!migratedOwner) {
     const legacyTank = parseTank(await AsyncStorage.getItem(LEGACY_KEY));
     if (legacyTank) {
-      const migrated = freshRecord(legacyTank, false);
+      const migrated = freshRecord(legacyTank, false, true);
       await AsyncStorage.multiSet([
         [keyFor(userId), JSON.stringify(migrated)],
         [MIGRATION_OWNER_KEY, userId]
@@ -99,6 +109,18 @@ export function markTankChanged(record: LocalTankRecord, tank: Tank): LocalTankR
   };
 }
 
+export function completeTankOnboarding(record: LocalTankRecord, tank: Tank): LocalTankRecord {
+  const now = new Date().toISOString();
+  return {
+    ...record,
+    tank: { ...tank, updatedAt: now },
+    localUpdatedAt: now,
+    pending: true,
+    starter: false,
+    onboardingComplete: true
+  };
+}
+
 export function markTankSynced(
   record: LocalTankRecord,
   tank: Tank,
@@ -113,7 +135,8 @@ export function markTankSynced(
     lastSyncedAt: syncCompletedAt,
     lastCloudRevision: cloudRevision,
     pending: false,
-    starter: false
+    starter: false,
+    onboardingComplete: true
   };
 }
 

@@ -34,18 +34,19 @@ Initial supported profiles are:
 
 Tell it once. See what matters. Try before you act.
 
-The owner records tests, observations and care manually through taps, confirmed speech drafts and photographs. Open Aqua maintains a transparent Tank Memory, returns one action or a confident no-action result, previews bounded changes and follows up to compare the expected direction with the real outcome.
+The owner records tests, observations, concerns and care manually through taps, confirmed speech drafts and photographs. Open Aqua maintains a transparent Tank Memory, returns one action or a confident no-action result, previews bounded changes and follows up to compare the expected direction with the real outcome. When something looks wrong, it provides calm triage and the smallest useful checks without manufacturing a diagnosis.
 
 Success means the owner spends less time managing aquarium information and more time enjoying a healthy tank.
 
 ## Core loop
 
-1. **Quick Update** records a confirmed fact or action in seconds.
-2. **Tank Memory** separates facts, estimates and unknowns.
-3. **Aqua Now** returns exactly one current state and at most one primary action.
-4. **Try a Change** compares a no-action baseline with bounded alternatives without changing real history.
-5. **Quiet Plan** fits useful care to the time the owner has.
-6. **Outcome Check** records what happened and closes the loop.
+1. **Quick Update** records a confirmed fact, concern or action in seconds.
+2. **Check a Concern** turns an observation into a bounded request for context, not a diagnosis.
+3. **Tank Memory** separates facts, estimates and unknowns.
+4. **Aqua Now** returns exactly one current state and at most one primary action.
+5. **Try a Change** compares a no-action baseline with bounded alternatives without changing real history.
+6. **Quiet Plan** fits useful care to the time the owner has.
+7. **Outcome Check** records what happened and closes the loop.
 
 ## Governing principles
 
@@ -61,6 +62,7 @@ Success means the owner spends less time managing aquarium information and more 
 10. **Owner control.** The owner confirms consequential drafts, corrects records, exports data and deletes the account.
 11. **No commercial distortion.** Care advice is independent of advertising, affiliate placement and retailer funding.
 12. **Calm safety.** Urgency is rare, specific, evidenced and paired with an appropriate next step.
+13. **Anxiety is not evidence.** Open Aqua may acknowledge an urgent concern, but it never increases certainty or sells fear because an owner is worried.
 
 ## Product language
 
@@ -68,6 +70,7 @@ Success means the owner spends less time managing aquarium information and more 
 |---|---|---|
 | Home | Aqua Now | One state, one primary action, why it matters and how long it should take |
 | Capture | Quick Update | Common logs without multi-screen navigation |
+| Concern triage | Check a Concern | Structured observation, smallest useful checks and an explicit diagnosis boundary |
 | History | Tank Memory | Facts, estimates, unknowns, trends and chronological records |
 | Simulation | Try a Change | Immutable snapshot, no-action baseline and bounded scenarios |
 | Planning | Quiet Plan | Useful work fitted to the owner’s time budget |
@@ -83,6 +86,7 @@ Every authoritative recommendation must:
 - distinguish recorded facts, owner observations, derived state and estimates;
 - show the triggering evidence, rule revision, freshness, confidence and limitations;
 - ask for one decision-changing measurement when evidence is insufficient;
+- use method, protocol, repeat, storage and recent-care context when judging a surprising measurement;
 - support a valid wait-and-observe or no-action result;
 - preserve the exact input snapshot needed for later replay; and
 - support immediate rule withdrawal without rewriting historical records.

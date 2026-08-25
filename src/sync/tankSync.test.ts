@@ -15,13 +15,16 @@ const local = (): LocalTankRecord => ({
     updatedAt: '2026-08-13T10:00:00.000Z'
   },
   localUpdatedAt: '2026-08-13T10:00:00.000Z',
-  pending: true
+  pending: true,
+  onboardingComplete: true
 });
 
 function clientWithCloud(row: unknown) {
   const maybeSingle = vi.fn().mockResolvedValue({ data: row, error: null });
+  const limit = vi.fn().mockReturnValue({ maybeSingle });
+  const order = vi.fn().mockReturnValue({ limit });
   const eq2 = vi.fn().mockReturnValue({ maybeSingle });
-  const eq1 = vi.fn().mockReturnValue({ eq: eq2 });
+  const eq1 = vi.fn().mockReturnValue({ eq: eq2, order });
   const select = vi.fn().mockReturnValue({ eq: eq1 });
   const from = vi.fn().mockReturnValue({ select });
   const single = vi.fn().mockResolvedValue({
@@ -41,6 +44,15 @@ describe('syncTankRecord', () => {
     expect(outcome.record.pending).toBe(false);
   });
 
+  it('does not upload a blank tank before onboarding is confirmed', async () => {
+    const { client, rpc } = clientWithCloud(null);
+    const blank = { ...local(), starter: true, onboardingComplete: false };
+    const outcome = await syncTankRecord(client, 'owner-1', blank);
+    expect(outcome.direction).toBe('unchanged');
+    expect(outcome.record.pending).toBe(true);
+    expect(rpc).not.toHaveBeenCalled();
+  });
+
   it('downloads a newer cloud revision when local data is clean', async () => {
     const record = { ...local(), pending: false, lastCloudRevision: 1, lastSyncedAt: '2026-08-13T09:00:00.000Z' };
     const cloudTank = { ...record.tank, name: 'Cloud River', updatedAt: '2026-08-13T11:00:00.000Z' };
@@ -54,16 +66,17 @@ describe('syncTankRecord', () => {
   });
 
   it('downloads the owner cloud tank on a fresh second device without merging sample data', async () => {
-    const starter = { ...local(), starter: true };
-    const cloudTank = { ...starter.tank, name: 'Owner Tank', readings: [], updatedAt: '2026-08-12T11:00:00.000Z' };
+    const starter = { ...local(), starter: true, onboardingComplete: false };
+    const cloudTank = { ...starter.tank, id: 'different-cloud-tank-id', name: 'Owner Tank', readings: [], updatedAt: '2026-08-12T11:00:00.000Z' };
     const { client, rpc } = clientWithCloud({
-      id: 'tank-1', user_id: 'owner-1', payload: cloudTank,
+      id: 'different-cloud-tank-id', user_id: 'owner-1', payload: cloudTank,
       client_updated_at: '2026-08-12T11:00:00.000Z', revision: 7, updated_at: '2026-08-12T11:00:00.000Z'
     });
     const outcome = await syncTankRecord(client, 'owner-1', starter);
     expect(outcome.direction).toBe('downloaded');
     expect(outcome.record.tank.name).toBe('Owner Tank');
     expect(outcome.record.lastCloudRevision).toBe(7);
+    expect(outcome.record.onboardingComplete).toBe(true);
     expect(rpc).not.toHaveBeenCalled();
   });
 
@@ -82,8 +95,10 @@ describe('syncTankRecord', () => {
       data: read++ === 0 ? firstCloud : { ...firstCloud, payload: competingTank, revision: 2 },
       error: null
     }));
+    const limit = vi.fn().mockReturnValue({ maybeSingle });
+    const order = vi.fn().mockReturnValue({ limit });
     const eq2 = vi.fn().mockReturnValue({ maybeSingle });
-    const eq1 = vi.fn().mockReturnValue({ eq: eq2 });
+    const eq1 = vi.fn().mockReturnValue({ eq: eq2, order });
     const select = vi.fn().mockReturnValue({ eq: eq1 });
     const from = vi.fn().mockReturnValue({ select });
     const single = vi.fn()

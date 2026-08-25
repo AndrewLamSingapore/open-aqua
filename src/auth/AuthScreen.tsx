@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Linking, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import { Alert, KeyboardAvoidingView, Linking, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { Button, Card } from '../components';
 import { PRIVACY_POLICY_URL } from '../legal';
 import { colors } from '../theme';
+import { isAppleSignInCancellation, signInWithApple } from './appleSignIn';
+import { nativeAppleSignIn } from './nativeAppleSignIn';
 
 type Mode = 'sign_in' | 'create';
 
@@ -14,6 +17,35 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
+  const [appleAvailable, setAppleAvailable] = useState(false);
+
+  useEffect(() => {
+    if (Platform.OS !== 'ios') return;
+
+    let active = true;
+    AppleAuthentication.isAvailableAsync()
+      .then((available) => { if (active) setAppleAvailable(available); })
+      .catch(() => { if (active) setAppleAvailable(false); });
+
+    return () => { active = false; };
+  }, []);
+
+  const submitApple = async () => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const result = await signInWithApple(client, nativeAppleSignIn);
+      if (!result.profileSaved) {
+        Alert.alert('Signed in', 'Apple signed you in, but Open Aqua could not save your display name. Your aquarium data is unaffected.');
+      }
+    } catch (error) {
+      if (!isAppleSignInCancellation(error)) {
+        Alert.alert('Could not sign in with Apple', messageFor(error));
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const submit = async () => {
     const normalizedEmail = email.trim().toLowerCase();
@@ -61,7 +93,8 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
   };
 
   return <SafeAreaView style={styles.safe}>
-    <KeyboardAvoidingView style={styles.wrap} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView style={styles.keyboard} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ScrollView contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">
       <View style={styles.intro}>
         <Text style={styles.brand}>OPEN AQUA</Text>
         <Text style={styles.hero}>Your aquarium remembers.</Text>
@@ -69,6 +102,20 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
       </View>
       <Card>
         <Text style={styles.title}>{mode === 'create' ? 'Create your owner account' : 'Welcome back'}</Text>
+        {appleAvailable && <>
+          <AppleAuthentication.AppleAuthenticationButton
+            buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+            buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+            cornerRadius={14}
+            onPress={() => { void submitApple(); }}
+            style={[styles.appleButton, busy && styles.appleButtonBusy]}
+          />
+          <View style={styles.divider}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>or use email</Text>
+            <View style={styles.dividerLine} />
+          </View>
+        </>}
         <TextInput
           accessibilityLabel="Email"
           autoCapitalize="none"
@@ -104,18 +151,25 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
         onPress={() => { void Linking.openURL(PRIVACY_POLICY_URL); }}
         style={styles.privacyLink}
       >Privacy policy</Text>
+      </ScrollView>
     </KeyboardAvoidingView>
   </SafeAreaView>;
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.cloud },
-  wrap: { flex: 1, justifyContent: 'center', padding: 22 },
+  keyboard: { flex: 1 },
+  wrap: { flexGrow: 1, justifyContent: 'center', padding: 22 },
   intro: { marginBottom: 20 },
   brand: { color: colors.teal, fontSize: 13, fontWeight: '900', letterSpacing: 2 },
   hero: { color: colors.navy, fontSize: 35, lineHeight: 40, fontWeight: '900', marginTop: 10 },
   copy: { color: colors.muted, fontSize: 16, lineHeight: 23, marginTop: 10 },
   title: { color: colors.navy, fontSize: 21, fontWeight: '900', marginBottom: 5 },
+  appleButton: { width: '100%', height: 52, marginTop: 14 },
+  appleButtonBusy: { opacity: 0.5 },
+  divider: { flexDirection: 'row', alignItems: 'center', marginTop: 16 },
+  dividerLine: { flex: 1, height: 1, backgroundColor: colors.line },
+  dividerText: { color: colors.muted, fontSize: 12, paddingHorizontal: 10 },
   input: { borderWidth: 1, borderColor: colors.line, borderRadius: 14, minHeight: 54, padding: 14, fontSize: 16, color: colors.ink, marginTop: 12 },
   privacy: { color: colors.muted, fontSize: 12, lineHeight: 18, textAlign: 'center', paddingHorizontal: 20 },
   privacyLink: { color: colors.teal, fontSize: 13, fontWeight: '800', textAlign: 'center', textDecorationLine: 'underline', padding: 12 }

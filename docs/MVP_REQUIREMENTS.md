@@ -13,7 +13,7 @@
 | ONB-01 | Support Sign in with Apple and an email-based option without a social-login dependency. | A reviewer can create or access an account, log out and return. |
 | ONB-02 | Create a tank with name, volume, optional dimensions, timezone, country pack and profile. Unknown optional values must remain unknown, not zero. | Required fields validate and unknowns persist correctly. |
 | ONB-03 | Offer community, planted low-tech, planted CO2, shrimp and large/exotic profiles with launch-coverage labels. | Profiles change only reviewed fields and never imply unsupported guidance. |
-| ONB-04 | Allow an optional source-water profile for tap, filtered, RO or remineralized water. | Source observations remain separate from tank readings and can be aged and updated. |
+| ONB-04 | Allow an optional source-water profile for tap, filtered, RO or remineralized water. | Source observations remain separate from tank readings, can be aged and updated after onboarding, and never assume a household value. |
 | ONB-05 | Add occupants and plants from verified search or as unverified free text. | Unverified entries remain visible and cannot trigger species-specific rules. |
 | ONB-06 | Permit skipping non-critical setup without returning a false `All clear`. | Missing decision-critical setup produces `More information needed` with the smallest request. |
 | ONB-07 | Complete median tested onboarding in under five minutes. | Moderated launch-cohort usability testing meets the threshold. |
@@ -23,16 +23,29 @@
 | ID | Requirement | Acceptance evidence |
 |---|---|---|
 | CAP-01 | Expose Quick Update from every main destination. | One tap opens capture from Aqua Now, Tank Memory, Quiet Plan and Freshwater Library. |
-| CAP-02 | Record temperature, pH, total ammonia, nitrite, nitrate, GH, KH and optional TDS/conductivity using explicit units. | Each metric stores original value, canonical value, unit, method and time. |
+| CAP-02 | Record temperature, pH, total ammonia, nitrite, nitrate, GH, KH and optional TDS/conductivity using explicit units and optional test-quality context. | Each metric stores original value, canonical value, unit, time, method, instruction confirmation, repeat confirmation and any storage or expiry concern. |
 | CAP-03 | Remember a per-tank test template and last-used units. | A repeat test needs no reselection of common fields. |
 | CAP-04 | Validate numeric type, plausible bounds, unit and future timestamps without silently changing values. | Errors explain correction; unusual but possible values require confirmation and an audit flag. |
-| CAP-05 | Record water change, feeding, filter service, cleaning, pruning, fertilization context and custom activity. | The activity appears immediately in the timeline and rule inputs. |
+| CAP-05 | Record water change, feeding, filter service, cleaning, pruning, fertilization context, custom activity and structured fish, plant, algae, cloudy-water or cycling concern. | The activity appears immediately in the timeline and rule inputs; concern observations remain distinct from diagnoses and measurements. |
 | CAP-06 | Convert speech into a structured draft for owner review. | No voice-derived field becomes authoritative before confirmation. |
 | CAP-07 | Attach a compressed photo and optional note and strip location metadata before upload. | Timeline shows the asset; a metadata test confirms location removal. |
 | CAP-08 | Save updates locally during connection loss and synchronize later. | Flight-mode create, edit and recovery produce one cloud record without loss. |
 | CAP-09 | Allow correction with visible audit history. | The correction preserves original value, editor, time and reason. |
 | CAP-10 | Complete a common single-test or activity log within ten seconds at p75 after onboarding. | Instrumented beta sessions meet the threshold without hidden prefill errors. |
 | CAP-11 | Preserve total-ammonia reporting convention, method/test source, timestamp and confidence/provenance needed for governed toxicity interpretation. | Export and decision replay distinguish raw ammonia observations from derived NH3 estimates and identify the exact source observation. |
+
+## Structured concern triage
+
+| ID | Requirement | Acceptance evidence |
+|---|---|---|
+| CON-01 | Preserve direct observations, measurements, bounded estimates, hypotheses and unknowns as different record classes. | Storage, sync and UI fixtures never relabel a hypothesis as a fact or a colour estimate as an exact measurement. |
+| CON-02 | Keep tank, tap and other source-water samples distinct with method, time, viewing conditions and confidence. | Tap-versus-tank fixtures preserve both values; a photograph never becomes an exact result. |
+| CON-03 | Apply the safety hierarchy: immediate water/oxygen hazard, rapid decline or multiple deaths, single-animal deterioration, uncertain test, then routine monitoring. | A severe symptom overrides reassuring chemistry and Aqua Now renders one primary action. |
+| CON-04 | Treat any detectable nitrite as a verification concern, 0.25–0.5 mg/L as urgent and at least 0.5 mg/L as high urgency, subject to governed rule revision. | Exact and bounded-estimate fixtures cover every tier and planted profiles never suppress the warning. |
+| CON-05 | Keep progressive wasting unresolved when snapshot chemistry is acceptable; rank food access, environmental/temperature stress, bullying, possible internal process and age/congenital causes without diagnosis. | The fixture asks discriminating checks and contains no unsupported genetics, parasite or medication claim. |
+| CON-06 | Investigate serial deaths or disappearances through episodic water/oxygen, temperature, chronic/infectious, toxin, physical-loss, starvation/wasting and acclimation branches. | A survivable snapshot cannot close the concern; count, timing and physical-route unknowns remain visible. |
+| CON-07 | Escalate gasping, neurological signs, suspected contamination or multiple losses within 24–48 hours as emergency. | Emergency fixtures prioritise aeration/stabilisation and qualified help before speculative cause selection. |
+| CON-08 | Persist urgency, one primary action, reason, owner time, recheck window, rule version and later outcomes with deterministic multi-device merging. | Concern and independent outcome records survive offline edits from two devices. |
 
 ## Aqua Now and recommendations
 
@@ -43,7 +56,7 @@
 | NOW-03 | Treat no action and wait-and-observe as valid outputs. | A rule fixture produces a no-action result with a clear explanation. |
 | NOW-04 | Show urgency, estimated owner time, confidence and data freshness. | The primary card contains all four or explains why one is unavailable. |
 | NOW-05 | Provide `Why this` with triggering facts, rule revision and sources. | A reviewer can trace the output to immutable evaluation evidence. |
-| NOW-06 | Ask for one decision-changing measurement when data is insufficient. | Missing-data fixtures never claim healthy or stable state. |
+| NOW-06 | Ask for the smallest decision-changing measurement or observation context when data is insufficient. | Missing-data and structured-concern fixtures never claim healthy, stable, deficient or diagnosed state. |
 | NOW-07 | Apply change restraint after qualifying recent interventions. | Tests choose wait or retest unless an approved higher-tier rule overrides. |
 | NOW-08 | Keep secondary work collapsed and non-competing. | Accessibility and visual review confirm one primary hierarchy. |
 | NOW-09 | Make potential-harm guidance kill-switchable. | An operator can disable a rule and stop new use without an app release. |
@@ -63,6 +76,7 @@
 | MEM-06 | Never overwrite a raw observation with a normalized or estimated value. | Database and export contain original and derived fields. |
 | MEM-07 | Show last successful sync and pending local changes. | Offline and failed-sync states are visible and recoverable. |
 | MEM-08 | Store derived ammonia/NH3 interpretation as replayable derived state linked to the exact raw ammonia, pH and temperature inputs and calculation revision. | Editing/correcting an input does not rewrite historical evidence; re-evaluation creates a traceable result. |
+| MEM-09 | Display structured concerns as Observed, Measured, Possible causes and Unknown, followed by dated outcome checks. | Memory fixtures preserve the four evidence classes and improved/unchanged/worse outcomes without claiming causality. |
 
 ## Try a Change and outcomes
 
@@ -92,7 +106,7 @@ Ammonia biology is not promoted into the `Try a Change` P0 simulator by the new 
 |---|---|---|
 | PLN-01 | Offer two-, five-, ten- and twenty-minute budgets plus `Not today`. | Task selection changes deterministically with the owner’s choice. |
 | PLN-02 | Rank eligible work using tier, evidence, consequence and estimated time. | A fixture exposes the ordered candidates and winning reason. |
-| PLN-03 | Let the owner approve, edit, pause and delete recurring routines. | No routine or notification is created silently. |
+| PLN-03 | Let the owner approve, edit, pause and delete recurring test, filter-media, equipment-service and maintenance routines. | No routine or notification is created silently. |
 | PLN-04 | Explain what can safely wait in Care Load. | Deferred work includes a reason and next review point. |
 | PLN-05 | Avoid streaks, shaming and low-value badges. | UX review confirms none are present. |
 | PLN-06 | Send only owner-requested reminders and approved state-change notifications. | Every notification maps to consent and a rule. |

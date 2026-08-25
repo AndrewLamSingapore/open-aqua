@@ -1,4 +1,4 @@
-# Open Aqua 0.3 — TestFlight and App Store release checklist
+# Open Aqua 0.5 — TestFlight and App Store release checklist
 
 The source is release-candidate ready when `npm run release:check` passes. A real TestFlight build still requires the owner-controlled Supabase, Expo and Apple accounts described in `SETUP_SIMPLE.md`.
 
@@ -12,12 +12,30 @@ The source is release-candidate ready when `npm run release:check` passes. A rea
 - [ ] Production Supabase URL and publishable key stored as EAS environment variables
 - [ ] Apple Developer membership active
 - [ ] App Store Connect record owns bundle ID `com.andrewlamsingapore.openaqua`
+- [ ] App ID has the Sign in with Apple capability enabled
+- [ ] Supabase Apple provider accepts `com.andrewlamsingapore.openaqua` as a Client ID
 - [ ] Agreements, tax and banking sections completed if Apple requests them
 
 ## Real-device acceptance test
 
-- [ ] Create, confirm, sign in, reset password and sign out
+- [ ] Sign in with Apple on a real iPhone, sign out and sign in again
+- [ ] Verify first-approval Apple name metadata is saved and survives later sign-ins
+- [ ] Cancel the Apple sheet and confirm no failure alert appears
+- [ ] Create and confirm an email account, sign in, reset its password and sign out
 - [ ] Add all supported manual water-test types
+- [ ] Add a liquid-reagent nitrate test with instruction and repeat confirmation, then verify its context in Tank Memory
+- [ ] Add a single unverified high nitrate result and confirm Aqua Now requests a repeat instead of a large intervention
+- [ ] Record a water change followed by a repeated high nitrate result and confirm event-aware input investigation
+- [ ] Add `Plants look healthy` beside low nitrate and confirm no automatic dosing or stocking advice appears
+- [ ] Add cloudy water, algae increase and fish gasping concerns; verify bounded checks, urgent welfare escalation and no disease diagnosis
+- [ ] In a planted profile, record possible 0.25 mg/L ammonia and confirm verification with no plant-based reassurance
+- [ ] Record nitrite plausibly at 0.5–1.0 mg/L and confirm one urgent partial-water-change action, aeration context and daily recheck
+- [ ] Record one progressively thinner fish beside ammonia and nitrite at zero; confirm the concern stays unresolved without a genetics, parasite or medication claim
+- [ ] Record seven losses from nine fish over two weeks and confirm one survivable snapshot cannot close the investigation
+- [ ] Record a purple nitrite colour under poor light and confirm a bounded low-confidence estimate rather than an exact image result
+- [ ] Record fish gasping with normal snapshot tests and confirm emergency oxygen/water priority overrides chemistry
+- [ ] Record tap nitrate above planted-tank nitrate and confirm both samples remain separate with plant uptake shown only as a hypothesis
+- [ ] Add improved, unchanged or worse outcomes on two devices and confirm all independent outcome records survive synchronisation
 - [ ] Add an observation and verify Tank Memory
 - [ ] Save offline, reconnect and confirm cloud synchronisation
 - [ ] Create independent logs on two devices and confirm both remain

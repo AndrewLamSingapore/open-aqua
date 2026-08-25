@@ -1,4 +1,4 @@
-# Put Open Aqua 0.3 on your iPhone
+# Put Open Aqua 0.5 on your iPhone
 
 This is the shortest safe route. You do not need to install GitHub CLI.
 
@@ -45,12 +45,14 @@ npx expo start
 
 Use Expo Go on an iPhone to open the QR code for a first functional check. The production TestFlight build in Part 5 is the real compiled iOS app.
 
-## Part 4 — Create the Apple and Expo records
+## Part 4 — Create the Apple, Apple sign-in and Expo records
 
 1. Join the Apple Developer Program at **https://developer.apple.com/programs/**.
-2. In App Store Connect, create an app named **Open Aqua** with bundle ID `com.andrewlamsingapore.openaqua`.
-3. Create an Expo account at **https://expo.dev**.
-4. In the same terminal, run:
+2. In Apple Developer **Certificates, Identifiers & Profiles**, register the App ID `com.andrewlamsingapore.openaqua` and enable its **Sign in with Apple** capability. Leave the server-to-server notification endpoint blank.
+3. In App Store Connect, create an app named **Open Aqua** with that bundle ID.
+4. In Supabase, open **Authentication → Providers → Apple**, enable the provider and add `com.andrewlamsingapore.openaqua` to **Client IDs**. A native-only iPhone build does not require the Apple OAuth Services ID, signing key or six-month client-secret rotation.
+5. Create an Expo account at **https://expo.dev**.
+6. In the same terminal, run:
 
 ```bash
 npm install --global eas-cli
@@ -59,6 +61,8 @@ eas init
 ```
 
 `eas init` adds the Expo project ID to the app configuration. Keep the GitHub repository, Supabase project, Expo project and Apple app in accounts you own.
+
+If you test Apple sign-in inside Expo Go before making an EAS build, temporarily add `host.exp.Exponent` to the Supabase Apple provider's **Client IDs**. Remove it after that check. The TestFlight build uses Open Aqua's own bundle ID.
 
 ## Part 5 — Add the two build settings
 
@@ -89,6 +93,9 @@ Follow the prompts to sign into the Apple account that owns Open Aqua. When Appl
 
 Test all of these on the real iPhone:
 
+- Sign in with Apple, approve name and email access, then confirm the Supabase user contains the returned name metadata.
+- Sign out and sign in with Apple again; Apple normally returns the name only on first approval, so the stored name must remain.
+- Cancel the Apple sign-in sheet and confirm Open Aqua stays on the account screen without an error alert.
 - Create an account and confirm its email.
 - Sign in and sign out.
 - Add ammonia, nitrite and nitrate manually.

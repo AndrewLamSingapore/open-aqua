@@ -2,7 +2,7 @@
   "expo": {
     "name": "Open Aqua",
     "slug": "open-aqua",
-    "version": "0.3.1",
+    "version": "0.5.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "scheme": "openaqua",
@@ -10,7 +10,8 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.andrewlamsingapore.openaqua",
-      "buildNumber": "1",
+      "buildNumber": "3",
+      "usesAppleSignIn": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -27,6 +28,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#F4F8F8"
     },
-    "plugins": ["expo-secure-store"]
+    "plugins": ["expo-secure-store", "expo-apple-authentication"]
   }
 }

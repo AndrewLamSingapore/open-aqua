@@ -1,6 +1,6 @@
 # Open Aqua Architecture Decisions
 
-**Status:** Active Open Aqua 2.0 direction + 21 August 2026 inference extension
+**Status:** Active Open Aqua 2.0 direction + 21 August 2026 inference extension + 25 August 2026 concern-safety record
 
 This document separates current implementation from intended architecture. A target decision is not a claim that migration is complete. `SSOT.md` defines precedence; `src/os/capabilities.ts` defines current delivery status.
 
@@ -62,6 +62,15 @@ The experimental architecture must support comparison between at least:
 Evaluation must preserve prospective or otherwise leakage-controlled separation between predictor information and later ground truth. Candidate relationships are judged by early-warning lead time, false alarms, misses, confidence calibration, robustness to normal interventions/confounders and incremental information gain. Hardware additions should be justified by measured incremental information rather than parameter importance alone.
 
 Continuous ammonia sensing is therefore not a prerequisite for the first prototype. Periodic/reference ammonia may serve as ground truth or a label while cheaper continuous observables test whether useful predictive structure exists. This is an experimental choice, not a claim that pH, conductivity/TDS or temperature can directly measure ammonia.
+
+### ADR-013: Structured concern evidence and safety priority
+Aquarium concerns are versioned first-class records, not free-text notes. Each record keeps direct observations, measurements or bounded estimates with sample source and confidence, possible causes, unknowns, urgency, one primary action, recheck timing, rule provenance and later outcomes as distinct fields.
+
+The deterministic priority is immediate water/oxygen hazard, rapid livestock decline or multiple deaths, single-animal deterioration, uncertain test interpretation, then routine monitoring. A severe observation may override reassuring-looking snapshot chemistry. A planted profile never suppresses an ammonia or nitrite warning.
+
+Colour and photograph interpretation remains a bounded owner estimate, never an exact measurement. Progressive wasting and serial-loss branches rank hypotheses and discriminating checks without diagnosing disease or prescribing medication. Independent concern outcomes from multiple offline devices are merged by stable ID so one acknowledged follow-up does not erase another.
+
+The existing owner-scoped JSON tank document can carry this optional record collection without a destructive database migration. Historical records without `concerns` remain valid and are treated as having no structured concern history.
 
 ## Architecture boundaries
 

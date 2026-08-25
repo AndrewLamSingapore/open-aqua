@@ -1,6 +1,6 @@
 export const openAquaOS = {
   product: 'Open Aqua',
-  release: '0.3.1',
+  release: '0.5.0',
   operatingSystem: 'Open Aqua OS',
   mission: 'Protect the owner’s time while helping them make calmer, safer freshwater aquarium decisions.',
   market: 'Freshwater aquarium owners in Singapore and Asia, expanding globally through region packs.',
@@ -8,6 +8,7 @@ export const openAquaOS = {
   principles: [
     'The real aquarium is the product; screen time is not the goal.',
     'Record observations before interpreting them.',
+    'Meet a concern with calm triage, never certainty manufactured from anxiety.',
     'Use the owner’s tank history, not a generic aquarium profile.',
     'Separate measured facts, owner observations, rules and estimates.',
     'Lower confidence when important information is missing or stale.',
@@ -18,6 +19,7 @@ export const openAquaOS = {
   boundaries: [
     'Freshwater only.',
     'No disease diagnosis or replacement for a qualified aquatic veterinarian.',
+    'No diagnosis, deficiency claim or product cure from appearance or one measurement alone.',
     'No ownership-transfer or animal-identity marketplace features.',
     'No photograph is treated as a laboratory measurement.',
     'No simulation is silently saved as a real event.',

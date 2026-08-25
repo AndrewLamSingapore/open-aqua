@@ -1,9 +1,10 @@
-import { createSampleTank } from './sample';
+import { createStarterTank } from './starter';
 import { Tank } from './types';
 
 /**
- * Replaces only the exact invented v0.1 starter. Any owner-added record, changed
- * identity or different inventory makes the predicate false and preserves data.
+ * Replaces only the exact invented v0.1 starter with a private blank onboarding
+ * record. Any owner-added record, changed identity or different inventory makes
+ * the predicate false and preserves data.
  */
 export function isUntouchedLegacyStarter(tank: Tank): boolean {
   return tank.id === 'tank-sg-001'
@@ -22,5 +23,5 @@ export function isUntouchedLegacyStarter(tank: Tank): boolean {
 
 export function migrateUntouchedLegacyStarter(tank: Tank): { tank: Tank; migrated: boolean } {
   if (!isUntouchedLegacyStarter(tank)) return { tank, migrated: false };
-  return { tank: createSampleTank(), migrated: true };
+  return { tank: createStarterTank(tank.id), migrated: true };
 }

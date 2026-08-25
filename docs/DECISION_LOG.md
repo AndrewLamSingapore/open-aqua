@@ -19,6 +19,9 @@ This log records material product decisions that affect scope, safety, privacy, 
 | 12 Aug 2026 | Defer Android and owner-facing web until iPhone retention and trust are proven. | Deferred | Portable architecture does not require a public parity promise. |
 | 12 Aug 2026 | Keep founding beta care advice free of advertising, affiliate and retailer funding bias. | Locked | Animal-care recommendations must remain independent. |
 | 12 Aug 2026 | Use clean-room capability benchmarking only. | Locked | Public user needs may inform original design; competitor expression and private systems may not enter the product. |
+| 15 Aug 2026 | Bridge the anxiety moment with deterministic concern triage and measurement-quality context, while preserving the disease-diagnosis boundary. | Locked | Owners need help deciding what to check when something looks wrong; fear or one ambiguous result must not create false certainty. |
+| 15 Aug 2026 | Raise calm maintenance reminders and reviewed rules-based stocking compatibility ahead of photo diagnosis, public community features or generative troubleshooting. | Delivery priority | These capabilities prevent common problems with lower safety and moderation risk. A public feed remains excluded. |
+| 25 Aug 2026 | Make structured aquarium concerns first-class, versioned records with symptom-over-chemistry priority and one safety-bounded action. | Locked | Ambiguous tests, progressive decline and serial losses cannot be represented safely as a generic note or closed by one reassuring snapshot. |
 
 ## Repository delivery decisions
 
@@ -27,6 +30,8 @@ This log records material product decisions that affect scope, safety, privacy, 
 | 0.2 | Add owner accounts, local-first private Supabase sync, conflict merge, export, deletion, privacy policy and TestFlight configuration. | Auth, storage, sync, Supabase migration and Edge Function in the repository |
 | 0.3 | Introduce the governed Open Aqua OS with stable capability IDs and explicit Working, Foundation, Planned and Deferred states. | `src/os/capabilities.ts` and `OPEN_AQUA_OS.md` |
 | 0.3.1 docs | Convert stable, non-sensitive v2 product direction into reviewable Markdown. Keep raw source documents and private commercial material outside GitHub. | `docs/` and root `README.md` |
+| 0.4.0 | Replace founder-specific starter data with private blank onboarding state; synchronize only after owner confirmation while still downloading an existing cloud tank on a new device. Add native Sign in with Apple while retaining independent email authentication. Add structured concern capture and measurement-quality context without disease diagnosis. | `src/onboarding`, `src/domain/starter.ts`, `src/storage/tankStore.ts`, `src/auth/appleSignIn.ts`, `src/domain/decisionEngine.ts` and tests |
+| 0.5.0 | Complete Issue #1 with structured concern facts, bounded test estimates, tiered nitrite rules, livestock-decline and serial-loss triage, grouped evidence, outcome memory and conflict-safe two-device merging. | `src/domain/concernEngine.ts`, `ConcernRecord`, `App.tsx`, `src/sync/merge.ts` and acceptance tests |
 
 ## v1.0 to v2.0 changes
 

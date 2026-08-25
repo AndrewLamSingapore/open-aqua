@@ -2,7 +2,7 @@
 
 ## A freshwater digital twin — and an experiment in earlier warning.
 
-**Current release: 0.3.1 · iPhone-first · freshwater-only · local-first**
+**Current release: 0.5.0 · iPhone-first · freshwater-only · local-first**
 
 Open Aqua is built around one question:
 
@@ -54,6 +54,9 @@ Continuous ammonia hardware is deliberately deferred unless evidence shows it is
 - **Aqua Now** with transparent `All clear`, `Needs attention` and `More information needed` states
 - **Quick Update** for manual tests, observations and care actions
 - **Tank Memory** for water and care history
+- Structured concern triage for uncertain tests, nitrite, progressive wasting, serial losses and breathing emergencies
+- Explicit separation of observations, measurements, possible causes and unknowns with one primary action
+- Concern outcome checks preserved through local-first, two-device conflict merging
 - Capture for GH, KH, TDS, conductivity, dissolved oxygen and planted-tank nutrients
 - First-class records for livestock, plants, equipment, photos and care tasks
 - **Try a Change** with a transparent water-change estimate and no-action baseline
@@ -117,7 +120,7 @@ Supabase Auth + tank_documents
 RLS: auth.uid() = user_id
 ```
 
-Cloud conflict handling preserves independently added water and care logs from multiple devices. When the same log ID is edited twice, the version with the newest explicit update timestamp wins and the merged record becomes the next revision.
+Cloud conflict handling preserves independently added water, care, concern and outcome records from multiple devices. When the same record ID is edited twice, the newest explicit update wins while independently added concern outcomes remain preserved.
 
 ### Source map
 
@@ -166,9 +169,9 @@ Before release, run `npm run release:check`, use the [App Store checklist](APP_S
 
 ---
 
-## What 0.3.1 means
+## What 0.5.0 means
 
-Version 0.3.1 is a **testable cloud-enabled vertical slice plus governed product foundations**.
+Version 0.5.0 is a **testable cloud-enabled vertical slice with privacy-safe onboarding, account options and the first complete structured concern-safety loop**.
 
 It does not claim that every registered capability or P0 requirement is built. It does not claim that the physical early-warning hypothesis has been proven. And code alone cannot place a build in TestFlight: Supabase, Apple Developer, App Store Connect and Expo/EAS account-bound steps must be completed by the owner.
 

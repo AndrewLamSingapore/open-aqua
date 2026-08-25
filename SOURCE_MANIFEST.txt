@@ -1,5 +1,5 @@
-Open Aqua 0.3.1 Founding Tank source package
-Built: 2026-08-13
+Open Aqua 0.5.0 source tree
+Updated: 2026-08-25
 
 Included:
 - React Native / Expo application source
@@ -13,9 +13,13 @@ Included:
 - Expanded manual parameters and specific care-action capture
 - Cloud-compatible livestock, plant, equipment, photo and care-task contracts
 - Tank-context packet for future tank-aware guidance
-- Real Founding Tank dimensions, volume provenance, livestock groups and breeding history
+- Privacy-safe blank owner state and Singapore-first tank onboarding
+- Native Sign in with Apple plus independent email authentication
 - Conservative migration that never overwrites an owner-modified tank
-- 108 governed capabilities across 13 operating-system modules
+- Structured concern facts, bounded test estimates and deterministic safety priority
+- Tiered nitrite, progressive-wasting, serial-loss and breathing-emergency rules
+- Concern outcome history with conflict-safe two-device merging
+- Governed capabilities across 13 operating-system modules
 - Data export and server-side account deletion function
 - EAS/TestFlight configuration
 - Privacy, security, setup and App Store release documents
@@ -28,14 +32,11 @@ Intentionally excluded:
 - Supabase service-role keys
 - Expo or GitHub authentication tokens
 
-Verification at packaging:
-- TypeScript: passed
-- Automated tests: 22 passed across 8 test files
-- iOS JavaScript bundle export: passed
-- Capability delivery states: 26 working, 14 foundation, 54 planned, 14 deferred
-- Diff whitespace check: passed
-- iOS icon: 1024 x 1024 and fully opaque
-- Secret-pattern review: no live credential detected
+Verification source:
+- `npm run verify` for TypeScript and automated tests
+- `npm run release:check` for verification plus the iOS bundle export
+- `.github/workflows/quality.yml` for repository CI evidence
+- `src/os/capabilities.ts` for current delivery states
 
 Account-bound activation still required:
 - Create and configure the owner's Supabase project

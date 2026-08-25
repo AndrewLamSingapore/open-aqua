@@ -4,9 +4,9 @@ Open Aqua proves one trusted freshwater decision loop before adding breadth. Sta
 
 ## Current position
 
-Version 0.3.1 is a cloud-enabled vertical slice plus the Open Aqua OS foundation.
+Version 0.5.0 is a cloud-enabled vertical slice with privacy-safe new-owner onboarding, the first complete structured concern-safety loop and the Open Aqua OS foundation.
 
-It includes working manual capture, Aqua Now states, Tank Memory history, water-change preview, owner accounts, local-first document writes, private Supabase sync, merge handling, export, deletion and a governed capability registry. It does not represent the complete P0 product.
+It includes working tank onboarding, manual capture, bounded test uncertainty, tiered nitrite rules, livestock-decline and serial-loss triage, symptom-over-chemistry prioritisation, Aqua Now evidence groups, Tank Memory concern outcomes, water-change preview, owner accounts, local-first document writes, private Supabase sync, merge handling, export, deletion and a governed capability registry. It does not represent the complete P0 product or a disease-diagnosis system.
 
 Account-bound launch work remains outside the repository: the founder must activate production Supabase, Apple Developer, App Store Connect and Expo/EAS services. A source commit alone does not place Open Aqua in TestFlight.
 
@@ -24,17 +24,18 @@ Account-bound launch work remains outside the repository: the founder must activ
 
 ## Next implementation focus
 
-The next customer release should close the gap between the 0.3.1 vertical slice and the P0 contract:
+The next customer release should close the remaining gap between the 0.5.0 vertical slice and the P0 contract:
 
-1. complete onboarding and Sign in with Apple;
+1. complete account-bound Sign in with Apple, email recovery, deletion and cross-account validation on the production backend and real iPhones;
 2. move local records to a transactional outbox without losing existing acknowledged data;
-3. finish inventory correction, private photo storage and metadata stripping;
-4. complete one-action Aqua Now evidence and rule withdrawal;
-5. add Quiet Plan, outcome checks and immutable scenario records;
-6. build reviewed Singapore content operations and coverage measurement; and
-7. complete monitoring, restore, accessibility, privacy and App Store evidence.
+3. validate the structured concern and measurement-quality loop on real devices, then add owner correction and historical rule replay;
+4. add governed rule withdrawal and unsafe-guidance reporting without weakening the one-action Aqua Now hierarchy;
+5. add Quiet Plan with owner-approved filter, equipment and maintenance reminders;
+6. build reviewed Singapore content operations and the first transparent stocking-compatibility pre-check;
+7. finish inventory correction, then private photo storage and metadata stripping; and
+8. complete monitoring, restore, accessibility, privacy and App Store evidence.
 
-Camera-assisted strip reading, caretaker access, equipment depth and compatibility follow only after the core loop is proven. Android, owner-facing web, sensors, controllers and professional operations require later market evidence.
+Rules-based compatibility follows the trusted core loop and reviewed content; it comes before photo-based troubleshooting. Camera-assisted strip reading, disease-related features, a public social feed, caretaker access and deeper equipment comparison remain later or excluded. Android, owner-facing web, sensors, controllers and professional operations require later market evidence.
 
 ## Beta seed scenarios
 
@@ -46,6 +47,19 @@ Camera-assisted strip reading, caretaker access, equipment depth and compatibili
 | Fresh data with no supported concern | `All clear`; no intervention and a calm next update point. |
 | Unverified exotic occupant | Preserve the record, suppress species-specific guidance and invite verification. |
 | Missing source-water value in a scenario | Block the affected estimate or show the unknown; never assume Singapore tap-water values. |
+| One nitrate result at or above the screening trigger without method context | `More information needed`; repeat to the instructions and compare source water before a large change. |
+| Protocol-checked repeated high nitrate after a recorded water change | Investigate feeding, dosing, decay and method before another large change; preserve the event order. |
+| Low nitrate with healthy-looking plants | Do not infer deficiency, dose fertilizer or suggest adding livestock; observe the plant trend. |
+| Low nitrate with a plant concern | Ask for plant, light, CO2 and fertilizing context without declaring a deficiency. |
+| Fish gasping | Raise rapid welfare triage, request aeration, temperature, ammonia and nitrite checks, and state that this is not a diagnosis. |
+| Planted tank with possible 0.25 mg/L ammonia | Retest and verify; never use plants as reassurance. |
+| Nitrite colour plausibly 0.5–1.0 mg/L | Urgent conditioned partial water change, aeration, filter check and daily ammonia/nitrite recheck; escalate if symptomatic. |
+| Thin CPD with ammonia and nitrite at zero | Keep the concern unresolved; distinguish feeding access, temperature, bullying and possible internal process without diagnosis or medication advice. |
+| Seven of nine guppies lost over two weeks | Preserve the loss timeline and investigation branches; one survivable snapshot cannot close the case. |
+| Purple nitrite image under poor light | Store a bounded low-confidence estimate, choose the safety-biased path and request a controlled repeat. |
+| Tap nitrate above planted-tank nitrate | Keep samples separate; plant uptake is only a hypothesis and cannot create blanket reassurance. |
+| Cloudy water or increased algae | Request the smallest relevant test and recent-change context; do not guess a product cure. |
+| Cycling uncertainty with one apparently good test | Require a dated trend and known inputs; do not declare the tank ready from one result. |
 | Connection loss during photo and test save | Show local success and queued sync, then produce one cloud record after recovery. |
 | Rule withdrawn after an unsafe report | Stop new use immediately and preserve prior decisions for audit. |
 

@@ -18,10 +18,13 @@ const oldStarter: Tank = {
 };
 
 describe('starter tank migration', () => {
-  it('replaces only the untouched invented starter with the real Founding Tank', () => {
+  it('replaces only the untouched invented starter with a blank onboarding tank', () => {
     const result = migrateUntouchedLegacyStarter(oldStarter);
     expect(result.migrated).toBe(true);
-    expect(result.tank.id).toBe('open-aqua-founding-tank');
+    expect(result.tank.id).toBe('tank-sg-001');
+    expect(result.tank.name).toBe('');
+    expect(result.tank.readings).toEqual([]);
+    expect(result.tank.livestock).toEqual([]);
   });
 
   it('preserves the tank if the owner added even one real record', () => {

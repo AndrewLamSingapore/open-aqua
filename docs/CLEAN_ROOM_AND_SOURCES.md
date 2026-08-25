@@ -45,8 +45,12 @@ The following source classes informed the v2 boundary and validation plan. Exact
 | OWASP MASVS | Mobile security verification | Use as a baseline, not proof of security by itself |
 | W3C WCAG 2.2 and Apple accessibility guidance | Accessibility review | Combine automated and real-device manual testing |
 | Expo, React Native and Supabase official documentation | Implementation and platform behavior | Verify against the versions used in the repository |
+| Founder-supplied screenshots of a public hobbyist discussion, 15 Aug 2026 | Anonymized owner-problem discovery only | No source URL was supplied; retain no screenshot, name, profile image or copied comment in GitHub, and do not treat any claim as care evidence |
+| Founder-supplied review of public aquarium-app capability claims, 15 Aug 2026 | Abstract market and owner-job discovery | No copied product expression, rule, data, interface or parity obligation; validate claims in the controlled register before external use |
 
 Aquarium-care content needs its own evidence and reviewer record. A benchmark or platform source cannot substitute for animal-care review.
+
+Discovery screenshots without a reviewable URL may be summarized into anonymous owner problems, then discarded from repository work. They cannot support published factual guidance. See [Pain-Signal Register](PAIN_SIGNAL_REGISTER.md).
 
 ## Source-record fields
 

@@ -7,8 +7,9 @@ export const openAquaModules = [
     purpose: 'Turn the current twin into one calm, prioritised owner decision.',
     capabilities: [
       { id: 'now.current-state', title: 'Current tank state', ownerValue: 'Shows All clear, Needs attention or More information needed.', status: 'working', audience: 'owner', route: 'now', evidence: ['src/domain/decisionEngine.ts'] },
+      { id: 'now.concern-triage', title: 'Concern triage', ownerValue: 'Prioritises uncertain tests, nitrite, wasting, serial losses and breathing concerns without diagnosing disease.', status: 'working', audience: 'owner', route: 'now', evidence: ['src/domain/concernEngine.ts', 'OA-CONCERN-1.0.0'] },
       { id: 'now.stale-critical-tests', title: 'Stale-test detection', ownerValue: 'Refuses to give false reassurance from old nitrogen-cycle tests.', status: 'working', audience: 'owner', route: 'now', evidence: ['OA-FW-001'] },
-      { id: 'now.explanation', title: 'Evidence and explanation', ownerValue: 'Shows why a state was chosen and how strong the support is.', status: 'working', audience: 'owner', route: 'now', evidence: ['Recommendation.evidence', 'Recommendation.confidence'] },
+      { id: 'now.explanation', title: 'Evidence and explanation', ownerValue: 'Separates observed facts, measurements, possible causes and unknowns behind one primary action.', status: 'working', audience: 'owner', route: 'now', evidence: ['Recommendation.evidenceGroups', 'Recommendation.confidence'] },
       { id: 'now.care-priorities', title: 'Prioritised care queue', ownerValue: 'Ranks due care, warnings and missing information by urgency.', status: 'planned', audience: 'owner', dependsOn: ['care.schedules'] },
       { id: 'now.multi-tank', title: 'Multi-tank overview', ownerValue: 'Surfaces which aquarium needs the owner first.', status: 'planned', audience: 'owner', dependsOn: ['twin.multiple-tanks'] },
       { id: 'now.smart-alerts', title: 'Smart alerts', ownerValue: 'Notifies only when the latest tank context makes an alert useful.', status: 'planned', audience: 'owner', dependsOn: ['care.schedules', 'platform.push'] }
@@ -19,16 +20,17 @@ export const openAquaModules = [
     title: 'Freshwater Digital Twin',
     purpose: 'Maintain a living, time-ordered model of the real aquarium.',
     capabilities: [
-      { id: 'twin.primary-tank', title: 'Primary tank profile', ownerValue: 'Keeps volume, style, location and source-water context together.', status: 'working', audience: 'owner', route: 'memory', evidence: ['Tank'] },
+      { id: 'twin.primary-tank', title: 'Primary tank profile', ownerValue: 'Keeps volume, style, location and source-water context together.', status: 'working', audience: 'owner', route: 'memory', evidence: ['Tank', 'src/onboarding/TankOnboarding.tsx'] },
       { id: 'twin.multiple-tanks', title: 'Multiple aquariums', ownerValue: 'Keeps separate histories and care plans for every tank.', status: 'planned', audience: 'owner' },
       { id: 'twin.water-ledger', title: 'Water history', ownerValue: 'Preserves manual readings as a readable timeline.', status: 'working', audience: 'owner', route: 'memory', evidence: ['Tank.readings'] },
       { id: 'twin.care-ledger', title: 'Care history', ownerValue: 'Preserves water changes, feeding, maintenance and observations.', status: 'working', audience: 'owner', route: 'memory', evidence: ['Tank.activities'] },
+      { id: 'twin.concern-ledger', title: 'Concern and outcome history', ownerValue: 'Preserves structured concern facts, hypotheses, unknowns, rule decisions and outcome checks.', status: 'working', audience: 'owner', route: 'memory', evidence: ['Tank.concerns', 'ConcernRecord.outcomes', 'src/sync/merge.ts'] },
       { id: 'twin.livestock-ledger', title: 'Livestock records', ownerValue: 'Tracks species, local names, quantity, life stage and status.', status: 'foundation', audience: 'owner', asiaFirst: true, evidence: ['LivestockRecord'] },
       { id: 'twin.plant-ledger', title: 'Plant records', ownerValue: 'Tracks plant identity, placement, light and carbon needs.', status: 'foundation', audience: 'owner', asiaFirst: true, evidence: ['PlantRecord'] },
       { id: 'twin.equipment-ledger', title: 'Equipment records', ownerValue: 'Keeps filters, lights, chillers, air and service context with the tank.', status: 'foundation', audience: 'owner', evidence: ['EquipmentRecord'] },
       { id: 'twin.photo-timeline', title: 'Photo timeline', ownerValue: 'Connects visual change to tests and care events without treating a photo as a test.', status: 'foundation', audience: 'owner', evidence: ['PhotoRecord'] },
       { id: 'twin.build-history', title: 'Tank build history', ownerValue: 'Records substrate, hardscape, filtration and major rebuilds over time.', status: 'planned', audience: 'owner' },
-      { id: 'twin.source-water-profiles', title: 'Source-water profiles', ownerValue: 'Compares tank water with tap, conditioned, rain or remineralised water.', status: 'planned', audience: 'owner', asiaFirst: true }
+      { id: 'twin.source-water-profiles', title: 'Source-water profiles', ownerValue: 'Keeps tap, filtered, RO or remineralised water separate from tank-water results.', status: 'working', audience: 'owner', route: 'memory', asiaFirst: true, evidence: ['SourceWaterProfile', 'src/onboarding/TankOnboarding.tsx', 'QuickUpdate'] }
     ]
   },
   {
@@ -37,7 +39,10 @@ export const openAquaModules = [
     purpose: 'Make accurate logging possible in seconds at the aquarium.',
     capabilities: [
       { id: 'capture.manual-water', title: 'Manual water tests', ownerValue: 'Records owner-entered test results with time, method and unit.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['QuickUpdate'] },
+      { id: 'capture.test-quality', title: 'Test-quality context', ownerValue: 'Records test method, instruction check, repeat confirmation and storage concerns.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['Reading.testMethod', 'Reading.protocolConfirmed', 'Reading.repeatConfirmed', 'Reading.storageConcern'] },
+      { id: 'capture.source-water-nitrate', title: 'Source-water nitrate', ownerValue: 'Records a source-water nitrate sample separately from the aquarium result.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['SourceWaterProfile', 'QuickUpdate'] },
       { id: 'capture.observation', title: 'Owner observations', ownerValue: 'Records behaviour, appearance and tank notes without pretending they are measurements.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['Activity.observation'] },
+      { id: 'capture.structured-concern', title: 'Structured concern capture', ownerValue: 'Records test uncertainty, sample source, confidence, fish decline, loss timelines and red flags without flattening them into diagnoses.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['ConcernRecord', 'createConcernRecord', 'QuickUpdate'] },
       { id: 'capture.care-actions', title: 'Specific care actions', ownerValue: 'Records water changes, feeding, dosing, cleaning, filter, plant and equipment work.', status: 'working', audience: 'owner', route: 'quick_update', evidence: ['Activity.type', 'QuickUpdate'] },
       { id: 'capture.expanded-parameters', title: 'Expanded freshwater parameters', ownerValue: 'Supports hardness, conductivity, oxygen and planted-tank nutrients.', status: 'working', audience: 'owner', route: 'quick_update', asiaFirst: true, evidence: ['WaterParameter', 'parameterUnits'] },
       { id: 'capture.photos', title: 'Photo capture', ownerValue: 'Adds compressed tank, animal, plant, equipment and test photos.', status: 'planned', audience: 'owner', dependsOn: ['platform.media-storage'] },
@@ -51,12 +56,12 @@ export const openAquaModules = [
     title: 'Freshwater Intelligence',
     purpose: 'Interpret readings through time, tank context and transparent freshwater rules.',
     capabilities: [
-      { id: 'water.nitrogen-rules', title: 'Nitrogen-cycle rules', ownerValue: 'Checks ammonia, nitrite and nitrate using recent confirmed readings.', status: 'working', audience: 'owner', route: 'now', evidence: ['OA-FW-URG-001', 'OA-FW-NO3-001'] },
+      { id: 'water.nitrogen-rules', title: 'Nitrogen-cycle rules', ownerValue: 'Checks ammonia, tiered nitrite urgency and nitrate using freshness, confidence, source water, symptoms and recent care.', status: 'working', audience: 'owner', route: 'now', evidence: ['OA-CONCERN-1.0.0', 'OA-FW-NO3-001', 'OA-FW-NO3-002', 'OA-TEST-001'] },
       { id: 'water.custom-parameters', title: 'Custom parameters and units', ownerValue: 'Lets specialist owners track values beyond the standard freshwater set.', status: 'planned', audience: 'owner' },
       { id: 'water.trends', title: 'Trends and charts', ownerValue: 'Shows direction, variation and links between tests and care actions.', status: 'planned', audience: 'owner' },
       { id: 'water.freshness-windows', title: 'Contextual freshness windows', ownerValue: 'Uses different stale limits for cycling, stable, quarantine and high-bioload tanks.', status: 'planned', audience: 'owner' },
-      { id: 'water.source-comparison', title: 'Source-water comparison', ownerValue: 'Explains how replacement water changes the likely result.', status: 'planned', audience: 'owner', asiaFirst: true },
-      { id: 'water.planted-balance', title: 'Planted-tank balance', ownerValue: 'Connects light, carbon, nutrients and plant observations without false precision.', status: 'planned', audience: 'owner', asiaFirst: true },
+      { id: 'water.source-comparison', title: 'Source-water comparison', ownerValue: 'Explains how replacement water changes the likely result.', status: 'working', audience: 'owner', route: 'plan', asiaFirst: true, evidence: ['SourceWaterProfile', 'OA-FW-NO3-001', 'previewWaterChange'] },
+      { id: 'water.planted-balance', title: 'Planted-tank balance', ownerValue: 'Connects light, carbon, nutrients and plant observations without false precision.', status: 'foundation', audience: 'owner', asiaFirst: true, evidence: ['OA-PLANT-001', 'OA-PLANT-002'] },
       { id: 'water.heat-context', title: 'Tropical heat context', ownerValue: 'Raises oxygen and temperature context during sustained hot indoor conditions.', status: 'planned', audience: 'owner', asiaFirst: true, dependsOn: ['environment.weather'] }
     ]
   },
@@ -86,7 +91,7 @@ export const openAquaModules = [
       { id: 'guide.action-draft', title: 'Answer-to-action draft', ownerValue: 'Turns guidance into a proposed log, task or simulation that the owner must approve.', status: 'planned', audience: 'owner', dependsOn: ['guide.ask-tank'] },
       { id: 'guide.curated-questions', title: 'Curated question paths', ownerValue: 'Helps owners ask useful questions about water, behaviour, plants, stocking and equipment.', status: 'planned', audience: 'owner', asiaFirst: true },
       { id: 'guide.confidence', title: 'Confidence and missing-data disclosure', ownerValue: 'Says when the tank record cannot support a strong answer.', status: 'working', audience: 'owner', route: 'now', evidence: ['Recommendation.confidence'] },
-      { id: 'guide.safety-gate', title: 'Safety and diagnosis gate', ownerValue: 'Stops diagnostic certainty and directs urgent welfare concerns to qualified help.', status: 'foundation', audience: 'platform', evidence: ['Open Aqua OS boundaries'] }
+      { id: 'guide.safety-gate', title: 'Safety and diagnosis gate', ownerValue: 'Lets severe symptoms override reassuring chemistry, stops diagnostic certainty and directs urgent decline to qualified help.', status: 'working', audience: 'platform', evidence: ['Open Aqua OS boundaries', 'OA-CONCERN-1.0.0', 'src/os/tankContext.ts'] }
     ]
   },
   {
@@ -179,7 +184,7 @@ export const openAquaModules = [
     title: 'Platform, Privacy and Reliability',
     purpose: 'Keep tank history private, recoverable and available across approved devices.',
     capabilities: [
-      { id: 'platform.accounts', title: 'Owner accounts', ownerValue: 'Provides email confirmation, sign-in and password recovery.', status: 'working', audience: 'platform', route: 'account', evidence: ['Supabase Auth'] },
+      { id: 'platform.accounts', title: 'Owner accounts', ownerValue: 'Provides native Apple sign-in plus independent email confirmation, sign-in and password recovery.', status: 'working', audience: 'platform', route: 'account', evidence: ['Supabase Auth', 'expo-apple-authentication', 'appleSignIn tests'] },
       { id: 'platform.secure-session', title: 'Encrypted device session', ownerValue: 'Stores session chunks in the operating system secure store.', status: 'working', audience: 'platform', route: 'account', evidence: ['Expo SecureStore'] },
       { id: 'platform.local-first', title: 'Local-first records', ownerValue: 'Saves a tank update on the phone before starting a network request.', status: 'working', audience: 'platform', evidence: ['AsyncStorage', 'markTankChanged'] },
       { id: 'platform.cloud-sync', title: 'Private cloud synchronisation', ownerValue: 'Synchronises the owner’s tank document through Supabase.', status: 'working', audience: 'platform', evidence: ['tank_documents', 'RLS'] },
