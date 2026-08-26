@@ -1,15 +1,15 @@
-# Put Open Aqua 0.3 on your iPhone
+# Put VELYQUA 0.3 on your iPhone
 
 This is the shortest safe route. You do not need to install GitHub CLI.
 
 ## Part 1 — Make the private cloud database
 
-1. Open **https://supabase.com/dashboard** and create a project named `open-aqua`.
+1. Open **https://supabase.com/dashboard** and create a project named `velyqua`.
 2. Open **SQL Editor** in that project.
-3. Open this source file: `supabase/migrations/202608130001_open_aqua_cloud.sql`.
+3. Open this source file: `supabase/migrations/202608130001_velyqua_cloud.sql`.
 4. Copy all of it into the Supabase SQL Editor and click **Run** once.
 5. Open **Authentication → URL Configuration**.
-6. Add this redirect URL: `openaqua://**`.
+6. Add this redirect URL: `velyqua://**`.
 7. Open **Project Settings → API** and copy:
    - Project URL
    - Publishable key (an anon key also works during Supabase's key transition)
@@ -18,7 +18,7 @@ Do **not** copy the service-role key into the app or send it to anyone.
 
 ## Part 2 — Turn on permanent in-app account deletion
 
-From the terminal inside the `open-aqua` folder (the first command downloads the official Supabase CLI for this task):
+From the terminal inside the `velyqua` folder (the first command downloads the official Supabase CLI for this task):
 
 ```bash
 npx supabase login
@@ -32,7 +32,7 @@ Supabase supplies the protected service-role key to the deployed function. It ne
 
 1. Install Node.js 22 LTS from **https://nodejs.org**.
 2. Unzip this source package.
-3. Open a terminal inside the `open-aqua` folder.
+3. Open a terminal inside the `velyqua` folder.
 4. Copy `.env.example` to a new file named `.env`.
 5. Put your Project URL and Publishable key into `.env`.
 6. Run:
@@ -48,7 +48,7 @@ Use Expo Go on an iPhone to open the QR code for a first functional check. The p
 ## Part 4 — Create the Apple and Expo records
 
 1. Join the Apple Developer Program at **https://developer.apple.com/programs/**.
-2. In App Store Connect, create an app named **Open Aqua** with bundle ID `com.andrewlamsingapore.openaqua`.
+2. In App Store Connect, create an app named **VELYQUA** with bundle ID `com.andrewlamsingapore.velyqua`.
 3. Create an Expo account at **https://expo.dev**.
 4. In the same terminal, run:
 
@@ -78,12 +78,12 @@ eas build --platform ios --profile production
 eas submit --platform ios --latest
 ```
 
-Follow the prompts to sign into the Apple account that owns Open Aqua. When Apple finishes processing the build:
+Follow the prompts to sign into the Apple account that owns VELYQUA. When Apple finishes processing the build:
 
-1. Open **App Store Connect → Open Aqua → TestFlight**.
+1. Open **App Store Connect → VELYQUA → TestFlight**.
 2. Add yourself as an internal tester.
 3. Install Apple's TestFlight app on the iPhone.
-4. Open the invitation and install Open Aqua.
+4. Open the invitation and install VELYQUA.
 
 ## Before inviting anyone else
 

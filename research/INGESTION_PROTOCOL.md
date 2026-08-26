@@ -6,7 +6,7 @@ Turn a small number of decision-relevant sources into traceable experiments and 
 
 ## Intake sequence
 
-1. **Identify the decision.** State which Open Aqua hypothesis, experiment or product decision could change.
+1. **Identify the decision.** State which VELYQUA hypothesis, experiment or product decision could change.
 2. **Classify the source.** Scientific report, official standard, commercial claim, commercial observation, community signal or open dataset.
 3. **Capture provenance.** Stable ID, title, publisher, date, URL/DOI, access date and status.
 4. **Paraphrase the signal.** Record only the relevant claim within its actual scope.
@@ -14,7 +14,7 @@ Turn a small number of decision-relevant sources into traceable experiments and 
 6. **Deduplicate.** Update an existing record when the source is the same; link a new record when it independently contributes evidence.
 7. **Map the opportunity.** Connect the source to a canonical OA-OPP ID or reject it as non-decision-relevant.
 8. **Choose an action.** Ignore, monitor, narrow a hypothesis, change a protocol, design an experiment or propose controlled product change.
-9. **Review the promotion gate.** External evidence never advances Open Aqua experimental maturity by itself.
+9. **Review the promotion gate.** External evidence never advances VELYQUA experimental maturity by itself.
 10. **Retain correction history.** Mark corrected, retracted, superseded or rejected records; do not silently erase them.
 
 ## Source-quality questions

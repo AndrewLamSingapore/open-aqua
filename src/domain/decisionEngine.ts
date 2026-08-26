@@ -18,7 +18,7 @@ export function evaluateTank(tank: Tank): Recommendation {
     return result('more_information_needed', {
       title: 'One water test will make this clearer',
       action: 'Record ammonia, nitrite and nitrate',
-      reason: 'Open Aqua will not claim the tank is clear while a decision-critical reading is missing.',
+      reason: 'VELYQUA will not claim the tank is clear while a decision-critical reading is missing.',
       confidence: 'limited', estimatedMinutes: 5,
       evidence: ['Missing nitrogen-cycle reading']
     });
@@ -48,7 +48,7 @@ export function evaluateTank(tank: Tank): Recommendation {
     return result('needs_attention', {
       title: 'Nitrate is worth reducing',
       action: 'Preview a modest water change',
-      reason: `The latest nitrate reading is ${nitrate.value} mg/L. Open Aqua recommends comparing small changes before acting.`,
+      reason: `The latest nitrate reading is ${nitrate.value} mg/L. VELYQUA recommends comparing small changes before acting.`,
       confidence: 'strong', estimatedMinutes: 5,
       evidence: ['Latest nitrate reading', 'Rule OA-FW-NO3-001']
     });

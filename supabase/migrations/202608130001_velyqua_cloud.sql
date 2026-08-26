@@ -1,4 +1,4 @@
--- Open Aqua 0.2: private, cloud-synchronised tank documents.
+-- VELYQUA 0.2: private, cloud-synchronised tank documents.
 -- Run this once in a new Supabase project's SQL editor.
 
 create table if not exists public.tank_documents (
@@ -21,7 +21,7 @@ create table if not exists public.tank_documents (
 create index if not exists tank_documents_user_updated_idx
   on public.tank_documents (user_id, updated_at desc);
 
-create or replace function public.set_open_aqua_updated_at()
+create or replace function public.set_velyqua_updated_at()
 returns trigger
 language plpgsql
 security invoker
@@ -36,7 +36,7 @@ $$;
 drop trigger if exists tank_documents_set_updated_at on public.tank_documents;
 create trigger tank_documents_set_updated_at
 before update on public.tank_documents
-for each row execute function public.set_open_aqua_updated_at();
+for each row execute function public.set_velyqua_updated_at();
 
 alter table public.tank_documents enable row level security;
 alter table public.tank_documents force row level security;

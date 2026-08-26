@@ -1,4 +1,4 @@
-Open Aqua 0.3.1 Founding Tank source package
+VELYQUA 0.3.1 Founding Tank source package
 Built: 2026-08-13
 
 Included:
@@ -8,7 +8,7 @@ Included:
 - Local-first, account-scoped tank storage
 - Supabase migration and owner-only Row Level Security
 - Cloud sync, realtime refresh, retry and conflict merge
-- Open Aqua OS constitution, module registry and capability governance
+- VELYQUA OS constitution, module registry and capability governance
 - Asia-first freshwater product modules and hard product boundaries
 - Expanded manual parameters and specific care-action capture
 - Cloud-compatible livestock, plant, equipment, photo and care-task contracts

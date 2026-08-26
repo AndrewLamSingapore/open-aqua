@@ -3,9 +3,9 @@ import { createSampleTank } from '../domain/sample';
 import { migrateUntouchedLegacyStarter } from '../domain/starterMigration';
 import { Tank } from '../domain/types';
 
-const LEGACY_KEY = '@open-aqua/tank/v1';
-const MIGRATION_OWNER_KEY = '@open-aqua/migration/v2-owner';
-const keyFor = (userId: string) => `@open-aqua/user/${userId}/primary-tank/v2`;
+const LEGACY_KEY = '@velyqua/tank/v1';
+const MIGRATION_OWNER_KEY = '@velyqua/migration/v2-owner';
+const keyFor = (userId: string) => `@velyqua/user/${userId}/primary-tank/v2`;
 
 export type LocalTankRecord = {
   schemaVersion: 2;

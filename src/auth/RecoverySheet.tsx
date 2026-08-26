@@ -22,7 +22,7 @@ export function RecoverySheet({ client, onDone }: { client: SupabaseClient; onDo
 
   return <View style={styles.overlay}><View style={styles.sheet}>
     <Text style={styles.title}>Choose a new password</Text>
-    <Text style={styles.copy}>Your secure email link opened Open Aqua. Enter the new password below.</Text>
+    <Text style={styles.copy}>Your secure email link opened VELYQUA. Enter the new password below.</Text>
     <TextInput value={password} onChangeText={setPassword} secureTextEntry autoComplete="new-password" placeholder="New password" style={styles.input} />
     <TextInput value={confirm} onChangeText={setConfirm} secureTextEntry autoComplete="new-password" placeholder="Repeat new password" style={styles.input} />
     <Button label={busy ? 'Updating…' : 'Update password'} onPress={update} disabled={busy} />

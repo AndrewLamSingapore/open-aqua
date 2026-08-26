@@ -1,8 +1,8 @@
-# Open Aqua Product Documentation
+# VELYQUA Product Documentation
 
-This directory contains the active, reviewable product definition for Open Aqua. Repository-wide authority and precedence are defined by [`../SSOT.md`](../SSOT.md).
+This directory contains the active, reviewable product definition for VELYQUA. Repository-wide authority and precedence are defined by [`../SSOT.md`](../SSOT.md).
 
-The 12 August 2026 Open Aqua 2.0 blueprint established the baseline. It no longer independently overrides GitHub; stable decisions and subsequent approved changes are governed here.
+The 12 August 2026 VELYQUA 2.0 blueprint established the baseline. It no longer independently overrides GitHub; stable decisions and subsequent approved changes are governed here.
 
 ## Document map
 

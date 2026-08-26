@@ -1,7 +1,9 @@
-export const openAquaOS = {
-  product: 'Open Aqua',
+export const velyquaOS = {
+  product: 'VELYQUA',
+  chineseName: '维澜',
+  tagline: '洞察微澜，守护水境。',
   release: '0.3.1',
-  operatingSystem: 'Open Aqua OS',
+  operatingSystem: 'VELYQUA OS',
   mission: 'Protect the owner’s time while helping them make calmer, safer freshwater aquarium decisions.',
   market: 'Freshwater aquarium owners in Singapore and Asia, expanding globally through region packs.',
   inputPolicy: 'Manual-first. Sensors and controllers remain optional adapters, never a requirement.',

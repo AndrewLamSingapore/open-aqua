@@ -1,12 +1,12 @@
-# Open Aqua Clean-Room and Source Policy
+# VELYQUA Clean-Room and Source Policy
 
-Open Aqua is an independent product. Publicly observable capabilities may be translated into abstract owner needs. Competitor expression must not enter the product.
+VELYQUA is an independent product. Publicly observable capabilities may be translated into abstract owner needs. Competitor expression must not enter the product.
 
 This policy supports product and engineering discipline. It is not legal advice. Obtain Singapore counsel for name clearance, contracts, copyright, database rights, privacy and market-specific claims.
 
 ## Required conduct
 
-- Record each public URL, access date, abstract capability and Open Aqua decision in the discovery source register.
+- Record each public URL, access date, abstract capability and VELYQUA decision in the discovery source register.
 - Rewrite a capability as an owner job before design begins.
 - Create original labels, navigation, hierarchy, copy, illustrations, icons, colors and interactions.
 - Create aquarium rules from documented evidence and qualified review.
@@ -19,11 +19,11 @@ This policy supports product and engineering discipline. It is not legal advice.
 Do not:
 
 - copy code, copy, screenshots, visual hierarchy, catalog data, taxonomies, rules, prompts, data structures or interface details from a competitor;
-- place competitor screenshots or traced layouts in Open Aqua design files;
+- place competitor screenshots or traced layouts in VELYQUA design files;
 - scrape catalogs, decompile software, intercept traffic, bypass controls or use private endpoints;
 - import competitor binaries, response payloads, proprietary datasets or prompt systems into the repository;
 - create accounts or gather data contrary to published terms; or
-- treat a public feature claim as evidence that Open Aqua may copy its implementation.
+- treat a public feature claim as evidence that VELYQUA may copy its implementation.
 
 ## Public source register
 
@@ -32,7 +32,7 @@ The following source classes informed the v2 boundary and validation plan. Exact
 | Source | Purpose | Use boundary |
 |---|---|---|
 | TankForge public product website | Public capability and platform claims | Capability benchmark only; no copied expression or data |
-| TankForge public methodology | Published statements about facts, rules, heuristics, confidence and limits | Trust benchmark only; Open Aqua rules remain original and reviewed |
+| TankForge public methodology | Published statements about facts, rules, heuristics, confidence and limits | Trust benchmark only; VELYQUA rules remain original and reviewed |
 | TankForge public Pro information | Public packaging and workflow claims | Market context only; no pricing or feature-copy obligation |
 | TankForge App Store listing | Public iOS capability and release claims | Platform benchmark only |
 | Apple App Review Guidelines | Completeness, privacy, safety and copycat review context | Review against the current official version before submission |
@@ -57,7 +57,7 @@ Each controlled source record must contain:
 - access or publication date;
 - source type and jurisdiction;
 - abstract owner need or factual claim supported;
-- Open Aqua decision;
+- VELYQUA decision;
 - license and attribution status;
 - reviewer and review date;
 - expiry or recheck date where facts may change; and

@@ -1,4 +1,9 @@
-# Open Aqua
+# VELYQUA
+
+### 维澜
+
+> **洞察微澜，守护水境。**
+> *Detect subtle change. Safeguard the water environment.*
 
 > **Reconstruction branch notice:** This branch is a clean-room 0.6 capability reconstruction from `main@8ed08da`. It is not the missing original `9c224ec` checkpoint and is not a release candidate. See [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md).
 
@@ -6,7 +11,7 @@
 
 **Current release: 0.3.1 · iPhone-first · freshwater-only · local-first**
 
-Open Aqua is built around one question:
+VELYQUA is built around one question:
 
 > **Can inexpensive continuous signals detect developing aquarium risk earlier or more meaningfully than periodic testing alone?**
 
@@ -69,13 +74,13 @@ Continuous ammonia hardware is deliberately deferred unless evidence shows it is
 - GitHub Actions quality checks
 - EAS production configuration for TestFlight
 - Original app icon and launch artwork
-- Governed Open Aqua OS capability registry
+- Governed VELYQUA OS capability registry
 
 ---
 
 ## Safety boundaries
 
-Open Aqua is designed to become less confident when the evidence becomes weaker.
+VELYQUA is designed to become less confident when the evidence becomes weaker.
 
 - It does **not** diagnose disease.
 - Photographs are not treated as laboratory measurements.
@@ -87,7 +92,7 @@ Open Aqua is designed to become less confident when the evidence becomes weaker.
 
 ---
 
-## Open Aqua OS
+## VELYQUA OS
 
 The product uses a governed operating-system model. Every registered capability has a stable identifier, owner benefit, delivery state and dependencies. Working capabilities also require implementation evidence and a customer route.
 
@@ -103,7 +108,7 @@ Delivery states have strict meanings:
 The app does not expose unfinished roadmap pages as finished customer capability.
 
 Source of truth: `src/os/capabilities.ts`  
-Human-readable matrix: [`OPEN_AQUA_OS.md`](OPEN_AQUA_OS.md)
+Human-readable matrix: [`VELYQUA_OS.md`](VELYQUA_OS.md)
 
 ---
 
@@ -186,4 +191,4 @@ That distinction is part of the project:
 
 ---
 
-Open Aqua is the flagship BUILD project in [Andrew Lam's operations-intelligence portfolio](https://github.com/AndrewLamSingapore).
+VELYQUA is the flagship BUILD project in [Andrew Lam's operations-intelligence portfolio](https://github.com/AndrewLamSingapore).

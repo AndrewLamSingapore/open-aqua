@@ -1,13 +1,13 @@
-# Open Aqua Research Intelligence
+# VELYQUA Research Intelligence
 
 **Status:** Operating research architecture; manually curated; no automated ingestion
 **Effective:** 26 August 2026
 
-This directory connects external scientific evidence, commercial signals, Open Aqua hypotheses, experiments and product decisions without collapsing them into one claim.
+This directory connects external scientific evidence, commercial signals, VELYQUA hypotheses, experiments and product decisions without collapsing them into one claim.
 
 The governing rule is:
 
-> External evidence may motivate an Open Aqua experiment. It cannot validate Open Aqua.
+> External evidence may motivate an VELYQUA experiment. It cannot validate VELYQUA.
 
 ## What exists now
 
@@ -29,9 +29,9 @@ This is a documentation and decision-support layer. It does **not** implement li
 | `schema/` | Machine-readable contracts for source and opportunity records |
 | `registry/sources.json` | Seeded scientific and commercial source records |
 | `registry/opportunities.json` | Canonical opportunity hypotheses and status |
-| `radars/FISHES_MDPI.md` | Scientific landscape translated into falsifiable Open Aqua questions |
+| `radars/FISHES_MDPI.md` | Scientific landscape translated into falsifiable VELYQUA questions |
 | `radars/OCEANSTAR.md` | Public commercial claims, verified boundaries and competitive implications |
-| `OPPORTUNITY_MATRIX.md` | Scientific signal → commercial attempt → Open Aqua hypothesis → proof gate |
+| `OPPORTUNITY_MATRIX.md` | Scientific signal → commercial attempt → VELYQUA hypothesis → proof gate |
 | `MARKET_GAPS.md` | Ranked gaps and the safest evidence-producing next move |
 | `INGESTION_PROTOCOL.md` | Source admission, deduplication, review, expiry and correction workflow |
 | `templates/EXPERIMENT_RECORD.md` | Minimum experimental record for promotion decisions |
@@ -44,7 +44,7 @@ peer-reviewed report             public vendor claim
         |                               |
         +---------- assessed -----------+
                          |
-                 OPEN AQUA LANE
+                 VELYQUA LANE
              hypothesis -> experiment
                          |
                comparative evidence
@@ -52,7 +52,7 @@ peer-reviewed report             public vendor claim
             validated product decision
 ```
 
-The lanes remain separate in the registry. A peer-reviewed result is evidence about its reported context. A vendor page is evidence that the vendor made a public claim. Neither is proof that Open Aqua works.
+The lanes remain separate in the registry. A peer-reviewed result is evidence about its reported context. A vendor page is evidence that the vendor made a public claim. Neither is proof that VELYQUA works.
 
 ## Immediate operating rule
 
@@ -73,6 +73,6 @@ This layer succeeds when it causes one of four auditable outcomes:
 1. a better-defined experiment;
 2. a rejected or narrowed hypothesis;
 3. a justified change in sequencing; or
-4. a product decision supported by Open Aqua's own evidence.
+4. a product decision supported by VELYQUA's own evidence.
 
 Source count is not a success metric.

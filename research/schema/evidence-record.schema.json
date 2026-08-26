@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/AndrewLamSingapore/open-aqua/research/schema/evidence-record.schema.json",
-  "title": "Open Aqua external evidence record",
+  "$id": "https://github.com/AndrewLamSingapore/velyqua/research/schema/evidence-record.schema.json",
+  "title": "VELYQUA external evidence record",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,7 +14,7 @@
     "evidence_class",
     "domain",
     "signal",
-    "open_aqua_relevance",
+    "velyqua_relevance",
     "limitations",
     "status"
   ],
@@ -31,7 +31,7 @@
     },
     "domain": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
     "signal": { "type": "string", "minLength": 1 },
-    "open_aqua_relevance": { "type": "string", "minLength": 1 },
+    "velyqua_relevance": { "type": "string", "minLength": 1 },
     "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } },
     "status": { "enum": ["active", "expired", "corrected", "retracted", "superseded", "rejected"] },
     "review_due_at": { "type": ["string", "null"], "format": "date" },

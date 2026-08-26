@@ -1,6 +1,6 @@
 import { OSModule } from './types';
 
-export const openAquaModules = [
+export const velyquaModules = [
   {
     id: 'aqua-now',
     title: 'Aqua Now',
@@ -71,7 +71,7 @@ export const openAquaModules = [
       { id: 'care.reminders', title: 'Calm reminders', ownerValue: 'Reminds once, explains why and avoids notification noise.', status: 'planned', audience: 'owner', dependsOn: ['platform.push'] },
       { id: 'care.cycling', title: 'Cycling workflow', ownerValue: 'Guides testing and records progress without declaring a tank ready from one value.', status: 'planned', audience: 'owner' },
       { id: 'care.quarantine', title: 'Quarantine workflow', ownerValue: 'Keeps observation, tests and treatment records separate from the main tank.', status: 'planned', audience: 'owner' },
-      { id: 'care.treatment-record', title: 'Treatment record', ownerValue: 'Records what the owner did while keeping diagnosis outside Open Aqua.', status: 'foundation', audience: 'owner', evidence: ['Activity.treatment'] },
+      { id: 'care.treatment-record', title: 'Treatment record', ownerValue: 'Records what the owner did while keeping diagnosis outside VELYQUA.', status: 'foundation', audience: 'owner', evidence: ['Activity.treatment'] },
       { id: 'care.power-outage', title: 'Power-outage plan', ownerValue: 'Shows the owner’s saved aeration, temperature and contact plan during an outage.', status: 'planned', audience: 'owner', asiaFirst: true }
     ]
   },
@@ -86,7 +86,7 @@ export const openAquaModules = [
       { id: 'guide.action-draft', title: 'Answer-to-action draft', ownerValue: 'Turns guidance into a proposed log, task or simulation that the owner must approve.', status: 'planned', audience: 'owner', dependsOn: ['guide.ask-tank'] },
       { id: 'guide.curated-questions', title: 'Curated question paths', ownerValue: 'Helps owners ask useful questions about water, behaviour, plants, stocking and equipment.', status: 'planned', audience: 'owner', asiaFirst: true },
       { id: 'guide.confidence', title: 'Confidence and missing-data disclosure', ownerValue: 'Says when the tank record cannot support a strong answer.', status: 'working', audience: 'owner', route: 'now', evidence: ['Recommendation.confidence'] },
-      { id: 'guide.safety-gate', title: 'Safety and diagnosis gate', ownerValue: 'Stops diagnostic certainty and directs urgent welfare concerns to qualified help.', status: 'foundation', audience: 'platform', evidence: ['Open Aqua OS boundaries'] }
+      { id: 'guide.safety-gate', title: 'Safety and diagnosis gate', ownerValue: 'Stops diagnostic certainty and directs urgent welfare concerns to qualified help.', status: 'foundation', audience: 'platform', evidence: ['VELYQUA OS boundaries'] }
     ]
   },
   {
@@ -202,7 +202,7 @@ export const openAquaModules = [
   }
 ] as const satisfies readonly OSModule[];
 
-export const allCapabilities = openAquaModules.flatMap((module) =>
+export const allCapabilities = velyquaModules.flatMap((module) =>
   module.capabilities.map((capability) => ({ ...capability, moduleId: module.id, moduleTitle: module.title }))
 );
 

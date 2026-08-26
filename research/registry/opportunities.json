@@ -107,7 +107,7 @@
     "maturity": "hypothesis",
     "horizon": "future_research",
     "priority": "P3",
-    "first_experiment": "Map fields and failure semantics only; do not build an integration before Open Aqua has real V0 data.",
+    "first_experiment": "Map fields and failure semantics only; do not build an integration before VELYQUA has real V0 data.",
     "safety_boundary": "Industrial automation rules never inherit into home control authority.",
     "source_ids": ["OA-SRC-0009", "OA-SRC-0010", "OA-SRC-0011"]
   },

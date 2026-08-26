@@ -1,22 +1,22 @@
 {
   "expo": {
-    "name": "Open Aqua",
-    "slug": "open-aqua",
+    "name": "VELYQUA",
+    "slug": "velyqua",
     "version": "0.3.1",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "scheme": "openaqua",
+    "scheme": "velyqua",
     "icon": "./assets/icon.png",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.andrewlamsingapore.openaqua",
+      "bundleIdentifier": "com.andrewlamsingapore.velyqua",
       "buildNumber": "1",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "com.andrewlamsingapore.openaqua",
+      "package": "com.andrewlamsingapore.velyqua",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B2748"

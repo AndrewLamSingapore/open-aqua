@@ -8,7 +8,7 @@
 
 > **One fact class → one canonical authority → many consumers → immutable provenance.**
 
-The ecosystem uses a **federated Single Source of Truth (SSOT)**. There is deliberately no universal master database containing every fact from Prime, Open Aqua, The Portal, the Career Website, GitHub and Open Aqua Edge.
+The ecosystem uses a **federated Single Source of Truth (SSOT)**. There is deliberately no universal master database containing every fact from Prime, VELYQUA, The Portal, the Career Website, GitHub and VELYQUA Edge.
 
 A fact must have one canonical owner. Other systems may reference, cache, transform, summarize or display it, but must not silently create a competing editable truth.
 
@@ -16,11 +16,11 @@ A fact must have one canonical owner. Other systems may reference, cache, transf
 
 | Fact class | Canonical authority | Consumers/examples |
 |---|---|---|
-| Aquarium state/history | Open Aqua | Prime, Portal, reports |
-| Aquarium biological interpretation | Open Aqua | Prime, Portal |
-| Aquarium observations accepted into domain record | Open Aqua | Prime, Portal, research |
-| Raw device acquisition before domain acceptance | Open Aqua Edge | Open Aqua |
-| Device health / acquisition telemetry | Open Aqua Edge | Open Aqua, Portal |
+| Aquarium state/history | VELYQUA | Prime, Portal, reports |
+| Aquarium biological interpretation | VELYQUA | Prime, Portal |
+| Aquarium observations accepted into domain record | VELYQUA | Prime, Portal, research |
+| Raw device acquisition before domain acceptance | VELYQUA Edge | VELYQUA |
+| Device health / acquisition telemetry | VELYQUA Edge | VELYQUA, Portal |
 | Generic objectives/portfolios/projects | Prime | Portal, domain views |
 | Agent jobs, verification, approvals, orchestration | Prime | Portal |
 | Prime internal memory/context | Prime | Prime; Portal only when explicitly exposed |
@@ -53,7 +53,7 @@ Recommended envelope:
 
 ```json
 {
-  "source_system": "open-aqua",
+  "source_system": "velyqua",
   "fact_class": "aquarium_observation",
   "source_id": "<canonical-id>",
   "source_version": "<version-or-revision>",
@@ -74,8 +74,8 @@ Not every fact requires every field, but canonical source system + source ID + r
 2. A derived artifact must identify its material source inputs.
 3. Prime must distinguish supplied/retrieved evidence from its own inference.
 4. The Career Website must not present a private/internal inference as demonstrated fact without supporting evidence and publication approval.
-5. GitHub artifacts should preserve evidence maturity and source provenance rather than collapsing hypothesis, external evidence and Open Aqua validation into one status.
-6. Manual observations, sensor observations, scientific literature, competitor claims and Open Aqua experiments remain distinguishable source classes.
+5. GitHub artifacts should preserve evidence maturity and source provenance rather than collapsing hypothesis, external evidence and VELYQUA validation into one status.
+6. Manual observations, sensor observations, scientific literature, competitor claims and VELYQUA experiments remain distinguishable source classes.
 
 ## Cache and staleness contract
 
@@ -120,9 +120,9 @@ A correction should preserve:
 
 This is especially important for research evidence, calibration records, public claims and experimentally significant aquarium observations.
 
-## Open Aqua Edge → Open Aqua
+## VELYQUA Edge → VELYQUA
 
-Edge is the acquisition origin for sensor/device observations, but Open Aqua becomes canonical for aquarium observations accepted into the domain record.
+Edge is the acquisition origin for sensor/device observations, but VELYQUA becomes canonical for aquarium observations accepted into the domain record.
 
 Example:
 
@@ -131,19 +131,19 @@ Probe → interface → ESP32/Edge
                     │
               raw acquisition
                     ↓
-                Open Aqua
+                VELYQUA
           validation / provenance
                     ↓
        canonical aquarium observation
 ```
 
-Prime must reference the Open Aqua canonical observation for aquarium reasoning rather than maintaining an independently editable pH history.
+Prime must reference the VELYQUA canonical observation for aquarium reasoning rather than maintaining an independently editable pH history.
 
-## Open Aqua → Prime
+## VELYQUA → Prime
 
 Prime receives explicit evidence packets. It may reason, summarize, route, compare and plan over them.
 
-Prime-derived statements should retain references to the Open Aqua inputs that materially support them.
+Prime-derived statements should retain references to the VELYQUA inputs that materially support them.
 
 Prime does **not** become canonical for aquarium state merely because it has cached the observation in memory or an artifact.
 
@@ -163,7 +163,7 @@ It may aggregate domain state, but each displayed object should remain traceable
 
 GitHub is canonical for version-controlled code and architecture artifacts. It can also preserve research/experiment evidence artifacts, but it is not automatically canonical for live runtime state.
 
-A Markdown snapshot of an aquarium reading does not supersede Open Aqua's live domain record. A Portal screenshot does not supersede Prime's project state.
+A Markdown snapshot of an aquarium reading does not supersede VELYQUA's live domain record. A Portal screenshot does not supersede Prime's project state.
 
 ## Evidence → Career Website
 
@@ -185,7 +185,7 @@ The Career Website is canonical for **what is currently published**, not for the
 
 ## No automatic private → public propagation
 
-No Prime memory, Portal data, Open Aqua private record, GitHub private artifact or unvalidated hypothesis becomes public merely because another system can access it.
+No Prime memory, Portal data, VELYQUA private record, GitHub private artifact or unvalidated hypothesis becomes public merely because another system can access it.
 
 Publication requires a deliberate policy/approval step and must respect privacy, secrets, intellectual-property boundaries and evidence maturity.
 
@@ -222,7 +222,7 @@ Where applicable, preserve maturity states rather than using a binary true/false
 
 `Hypothesis → Planned → Instrumented → Collecting Data → Experimentally Supported → Validated → Productized`
 
-and Open Aqua product delivery states:
+and VELYQUA product delivery states:
 
 `Working / Foundation / Planned / Deferred`
 
@@ -261,7 +261,7 @@ Do not build:
 - editable duplicate aquarium state inside Prime;
 - editable duplicate Prime project state inside The Portal;
 - automatic GitHub-to-public publishing without approval;
-- duplicated biological logic in Edge firmware and Open Aqua with no declared authority;
+- duplicated biological logic in Edge firmware and VELYQUA with no declared authority;
 - copies of facts with no canonical source ID;
 - AI-generated claims whose supporting evidence cannot be traced.
 

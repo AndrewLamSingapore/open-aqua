@@ -1,15 +1,15 @@
-# Open Aqua Single Source of Truth
+# VELYQUA Single Source of Truth
 
 **Status:** Authoritative governance index
 **Effective:** 21 August 2026
 
-GitHub repository `AndrewLamSingapore/open-aqua` is the authoritative Open Aqua single source of truth. Conversation history, PDFs, DOCX files, investor decks, social posts and external notes are inputs or derived artifacts only. They do not override this repository.
+GitHub repository `AndrewLamSingapore/velyqua` is the authoritative VELYQUA single source of truth. Conversation history, PDFs, DOCX files, investor decks, social posts and external notes are inputs or derived artifacts only. They do not override this repository.
 
 ## Prototype North Star — LOCKED
 
 > **Build the cheapest experimental instrument capable of proving that sensor fusion predicts aquarium risk better than periodic testing alone.**
 
-This is the governing objective for the Open Aqua physical prototype programme.
+This is the governing objective for the VELYQUA physical prototype programme.
 
 The prototype is **not** a miniature finished consumer product and is **not** an exercise in maximizing the number of sensors. Every component, sensor, interface and compute resource must earn its place by improving the ability to test the predictive hypothesis at the lowest sensible total experimental cost.
 
@@ -27,7 +27,7 @@ The prototype is **not** a miniature finished consumer product and is **not** an
 
 ### Relational sensor-fusion principle — LOCKED
 
-Open Aqua does not treat individual measurements as independent declarations of aquarium state. **Individual measurements are evidence; relationships among measurements, their trajectories through time, tank context and reference chemistry are the primary material for inference.**
+VELYQUA does not treat individual measurements as independent declarations of aquarium state. **Individual measurements are evidence; relationships among measurements, their trajectories through time, tank context and reference chemistry are the primary material for inference.**
 
 Prototype analysis therefore prioritizes:
 
@@ -90,7 +90,7 @@ The Prototype North Star above governs prototype optimization within these produ
 
 ## Normative truth vs delivery truth
 
-Normative truth says what Open Aqua is allowed or required to be. Delivery truth says what is implemented. A planned requirement is not shipped because it is documented; working code does not become approved scope merely because it exists.
+Normative truth says what VELYQUA is allowed or required to be. Delivery truth says what is implemented. A planned requirement is not shipped because it is documented; working code does not become approved scope merely because it exists.
 
 ## Locked baseline
 
@@ -123,7 +123,7 @@ A material change is not normalized until all affected layers agree: governing d
 
 ## AI / collaborator instruction
 
-Before material Open Aqua work: read this file, Product Constitution, latest relevant Decision Log entries, affected requirements/architecture/domain specs, and `src/os/capabilities.ts` before claiming something is shipped. Preserve hard exclusions unless explicit controlled change supersedes them.
+Before material VELYQUA work: read this file, Product Constitution, latest relevant Decision Log entries, affected requirements/architecture/domain specs, and `src/os/capabilities.ts` before claiming something is shipped. Preserve hard exclusions unless explicit controlled change supersedes them.
 
 For prototype work, begin with the Prototype North Star. Challenge every proposed component with: **What predictive information does this add, and is there a cheaper trustworthy way to obtain or infer it?**
 

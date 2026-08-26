@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/AndrewLamSingapore/open-aqua/research/schema/opportunity-record.schema.json",
-  "title": "Open Aqua opportunity record",
+  "$id": "https://github.com/AndrewLamSingapore/velyqua/research/schema/opportunity-record.schema.json",
+  "title": "VELYQUA opportunity record",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -5,11 +5,11 @@
 
 ## Purpose
 
-This radar translates relevant research themes in the journal *Fishes* into Open Aqua questions. It does not import rules, datasets or conclusions into the product, and it does not treat publication as proof of transfer to a home freshwater aquarium.
+This radar translates relevant research themes in the journal *Fishes* into VELYQUA questions. It does not import rules, datasets or conclusions into the product, and it does not treat publication as proof of transfer to a home freshwater aquarium.
 
 ## Landscape map
 
-| Research theme | Seed records | Scientific signal | Open Aqua question | Current decision |
+| Research theme | Seed records | Scientific signal | VELYQUA question | Current decision |
 |---|---|---|---|---|
 | Digital twins | OA-SRC-0001, 0011 | Environmental, biological and equipment state can be coupled into evolving system models | What is the smallest state representation that improves one real owner decision? | Keep a compact event/time-series twin; avoid simulation theater |
 | AI-enabled safety | OA-SRC-0002 | AI and computer vision are being applied to recognition and health-monitoring problems | Can early evidence be ranked without diagnosis or hidden actuation? | Human verification and deterministic safety remain mandatory |
@@ -23,15 +23,15 @@ This radar translates relevant research themes in the journal *Fishes* into Open
 
 ### 1. The strongest opening is not “AI fish recognition”
 
-Recognition methods are visible and compelling, but Open Aqua's nearer defensible problem is trust: when to believe a signal, when to combine it with another signal, and when to abstain. A beautiful classifier does not solve bad timestamps, sensor drift, missing context or weak event labels.
+Recognition methods are visible and compelling, but VELYQUA's nearer defensible problem is trust: when to believe a signal, when to combine it with another signal, and when to abstain. A beautiful classifier does not solve bad timestamps, sensor drift, missing context or weak event labels.
 
 ### 2. The moat candidate is an evidence relationship, not a sensor catalog
 
-Across digital-twin, behavior and monitoring research, value comes from relationships through time. Open Aqua should therefore retain raw evidence, provenance, interventions and outcomes rather than reducing the system to the latest values.
+Across digital-twin, behavior and monitoring research, value comes from relationships through time. VELYQUA should therefore retain raw evidence, provenance, interventions and outcomes rather than reducing the system to the latest values.
 
 ### 3. Home aquariums create a distinct small-data problem
 
-Aquaculture studies often have repeated production cohorts, controlled infrastructure or species-specific datasets. A mixed ornamental home aquarium has fewer labelled events, more owner-mediated context and more hardware variability. Open Aqua should prefer interpretable within-tank baselines and controlled comparisons before high-capacity ML.
+Aquaculture studies often have repeated production cohorts, controlled infrastructure or species-specific datasets. A mixed ornamental home aquarium has fewer labelled events, more owner-mediated context and more hardware variability. VELYQUA should prefer interpretable within-tank baselines and controlled comparisons before high-capacity ML.
 
 ### 4. Behavior should be a corroborating channel
 
@@ -52,7 +52,7 @@ Before promotion, record species, water system, sensor/camera setup, sampling ca
 
 ## Exclusions
 
-- No paper becomes an Open Aqua rule without controlled promotion and qualified review.
+- No paper becomes an VELYQUA rule without controlled promotion and qualified review.
 - No copyrighted figures, tables, taxonomies or datasets are copied into the repository.
 - Citation counts do not determine priority.
 - Marine, farm and single-species results are not silently generalized to Singapore home freshwater tanks.

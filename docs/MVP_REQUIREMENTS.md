@@ -1,6 +1,6 @@
-# Open Aqua MVP Requirements
+# VELYQUA MVP Requirements
 
-**Baseline:** Open Aqua 2.0 + Ammonia Toxicity Fusion V1 (21 August 2026)
+**Baseline:** VELYQUA 2.0 + Ammonia Toxicity Fusion V1 (21 August 2026)
 
 **Priority:** Every requirement in this document is P0 and release-blocking unless an approved decision record changes it.
 

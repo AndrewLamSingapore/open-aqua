@@ -2,20 +2,20 @@
 
 ## Purpose
 
-Open Aqua needs two different vocabularies: one for what an external source says, and another for what Open Aqua has demonstrated. Mixing them creates false confidence.
+VELYQUA needs two different vocabularies: one for what an external source says, and another for what VELYQUA has demonstrated. Mixing them creates false confidence.
 
 ## External evidence classes
 
 | Class | Meaning | What it can support | What it cannot support |
 |---|---|---|---|
-| `scientific_report` | Peer-reviewed paper or review describing methods, results or a research landscape | mechanism, method, dataset, limitation or experiment candidate | an Open Aqua performance or product claim |
+| `scientific_report` | Peer-reviewed paper or review describing methods, results or a research landscape | mechanism, method, dataset, limitation or experiment candidate | an VELYQUA performance or product claim |
 | `official_standard` | Current official standard, regulator or platform requirement | compliance/review requirement within its scope | biological efficacy by itself |
 | `commercial_claim` | Vendor-controlled public description, specification, metric or case claim | existence of the public claim and a market/feature signal | independent performance, deployment or customer proof |
 | `commercial_observation` | Independently inspectable public product behavior | observed interface or workflow fact | internal implementation, unobserved reliability or scientific validity |
 | `community_signal` | User discussion, request or anecdote | problem discovery and interview questions | prevalence, causality, safety or willingness to pay |
 | `open_dataset` | Public dataset with documented collection and license | reproducible analysis in the dataset's scope | generalization beyond the sampled population/context |
 
-## Open Aqua maturity states
+## VELYQUA maturity states
 
 | State | Minimum requirement |
 |---|---|
@@ -34,7 +34,7 @@ State movement is not automatically one-way. Drift, failed replication, correcti
 
 Every meaningful statement should identify:
 
-- **subject:** paper, vendor, dataset, Open Aqua experiment or product;
+- **subject:** paper, vendor, dataset, VELYQUA experiment or product;
 - **verb:** reports, claims, observes, hypothesizes, supports, validates or implements;
 - **scope:** species, system, hardware, geography, dataset and time window;
 - **confidence:** what is known, inferred or unknown; and
@@ -42,11 +42,11 @@ Every meaningful statement should identify:
 
 Preferred example:
 
-> OceanStar publicly claims 30-second monitoring and cross-parameter ML for commercial RAS; Open Aqua has not independently verified those performance claims.
+> OceanStar publicly claims 30-second monitoring and cross-parameter ML for commercial RAS; VELYQUA has not independently verified those performance claims.
 
 Prohibited example:
 
-> OceanStar proves that Open Aqua's predictive model will work.
+> OceanStar proves that VELYQUA's predictive model will work.
 
 ## Promotion gates
 
@@ -58,7 +58,7 @@ Prohibited example:
 - limitations and conflicts are recorded; and
 - clean-room and licensing boundaries are satisfied.
 
-### Assessed signal → Open Aqua hypothesis
+### Assessed signal → VELYQUA hypothesis
 
 - the owner problem is independently stated;
 - the hypothesis is falsifiable;

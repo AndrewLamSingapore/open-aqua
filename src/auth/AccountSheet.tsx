@@ -41,7 +41,7 @@ export function AccountSheet({
       if (error) throw error;
       await removeUserTankDataSqlite(session.user.id);
       await client.auth.signOut({ scope: 'local' });
-      Alert.alert('Account deleted', 'Your Open Aqua account and cloud tank records have been removed.');
+      Alert.alert('Account deleted', 'Your VELYQUA account and cloud tank records have been removed.');
     } catch (error) {
       Alert.alert('Could not delete account', messageFor(error));
     } finally {
@@ -54,7 +54,7 @@ export function AccountSheet({
     try {
       const local = await loadTankRecordSqlite(session.user.id);
       if (!(await Sharing.isAvailableAsync())) throw new Error('Sharing is not available on this device.');
-      const file = new File(Paths.cache, `open-aqua-export-${new Date().toISOString().slice(0, 10)}.json`);
+      const file = new File(Paths.cache, `velyqua-export-${new Date().toISOString().slice(0, 10)}.json`);
       if (file.exists) file.delete();
       file.create();
       file.write(JSON.stringify({
@@ -67,7 +67,7 @@ export function AccountSheet({
           lastCloudRevision: local.lastCloudRevision
         }
       }, null, 2));
-      await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Export Open Aqua data' });
+      await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Export VELYQUA data' });
     } catch (error) {
       Alert.alert('Could not export data', messageFor(error));
     } finally {

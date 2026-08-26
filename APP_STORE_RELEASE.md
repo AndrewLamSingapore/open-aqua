@@ -1,4 +1,4 @@
-# Open Aqua 0.3 — TestFlight and App Store release checklist
+# VELYQUA 0.3 — TestFlight and App Store release checklist
 
 The source is release-candidate ready when `npm run release:check` passes. A real TestFlight build still requires the owner-controlled Supabase, Expo and Apple accounts described in `SETUP_SIMPLE.md`.
 
@@ -7,11 +7,11 @@ The source is release-candidate ready when `npm run release:check` passes. A rea
 - [ ] Supabase production project created in the owner's account
 - [ ] SQL migration run once without errors
 - [ ] `delete-account` Edge Function deployed and tested
-- [ ] `openaqua://**` allowed as an authentication redirect
+- [ ] `velyqua://**` allowed as an authentication redirect
 - [ ] Expo project created in the owner's account with `eas init`
 - [ ] Production Supabase URL and publishable key stored as EAS environment variables
 - [ ] Apple Developer membership active
-- [ ] App Store Connect record owns bundle ID `com.andrewlamsingapore.openaqua`
+- [ ] App Store Connect record owns bundle ID `com.andrewlamsingapore.velyqua`
 - [ ] Agreements, tax and banking sections completed if Apple requests them
 
 ## Real-device acceptance test
@@ -33,12 +33,12 @@ Create a dedicated reviewer account in the production Supabase project. Do not r
 
 Suggested review notes:
 
-> Open Aqua is a compiled React Native iOS app for manually maintaining a private freshwater aquarium history. An account is required because private cloud synchronisation between devices is a core feature. The supplied review account contains a realistic sample aquarium. To test offline-first storage, disable connectivity, add a water test through Quick Update, then reconnect; the header changes from “Offline · safe on this phone” to “Saved on phone + cloud.” Permanent account deletion and JSON export are under Owner account. Open Aqua provides decision support, does not diagnose disease and labels simulations as estimates.
+> VELYQUA is a compiled React Native iOS app for manually maintaining a private freshwater aquarium history. An account is required because private cloud synchronisation between devices is a core feature. The supplied review account contains a realistic sample aquarium. To test offline-first storage, disable connectivity, add a water test through Quick Update, then reconnect; the header changes from “Offline · safe on this phone” to “Saved on phone + cloud.” Permanent account deletion and JSON export are under Owner account. VELYQUA provides decision support, does not diagnose disease and labels simulations as estimates.
 
 ## App Store Connect metadata
 
-- **Privacy policy URL:** `https://github.com/AndrewLamSingapore/open-aqua/blob/main/PRIVACY.md`
-- **Support URL:** `https://github.com/AndrewLamSingapore/open-aqua`
+- **Privacy policy URL:** `https://github.com/AndrewLamSingapore/velyqua/blob/main/PRIVACY.md`
+- **Support URL:** `https://github.com/AndrewLamSingapore/velyqua`
 - Complete Apple's App Privacy answers from the production configuration; do not guess.
 - Upload screenshots captured from the actual release build, not design mock-ups.
 - Explain any authentication email delay or regional limitation in Review Notes.

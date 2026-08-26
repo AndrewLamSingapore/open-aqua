@@ -1,6 +1,6 @@
-# Open Aqua Founding Tank
+# VELYQUA Founding Tank
 
-This is the first real aquarium used to shape and test Open Aqua. It belongs to Open Aqua's founder in Singapore.
+This is the first real aquarium used to shape and test VELYQUA. It belongs to VELYQUA's founder in Singapore.
 
 ## Confirmed baseline — 13 August 2026
 
@@ -12,7 +12,7 @@ This is the first real aquarium used to shape and test Open Aqua. It belongs to 
   - Height: 41 cm
 - Geometric gross estimate: `85 × 40 × 41 ÷ 1,000 = 139.4 litres`
 
-The 139.4-litre figure is **not** the actual water volume. Glass thickness, the water line, substrate, plants, hardscape and equipment reduce the amount of water. Open Aqua must not use this gross estimate for dosing until the working water volume is confirmed.
+The 139.4-litre figure is **not** the actual water volume. Glass thickness, the water line, substrate, plants, hardscape and equipment reduce the amount of water. VELYQUA must not use this gross estimate for dosing until the working water volume is confirmed.
 
 ## Confirmed livestock groups
 
@@ -23,7 +23,7 @@ The 139.4-litre figure is **not** the actual water volume. Glass thickness, the 
 - Killifishes — exact species and quantity pending
 - Baby guppies — recently bred in this tank; quantity pending
 
-Open Aqua stores unknown quantities as unknown. It does not convert a visible school in a photograph into a false count.
+VELYQUA stores unknown quantities as unknown. It does not convert a visible school in a photograph into a false count.
 
 ## Still needed from the owner
 

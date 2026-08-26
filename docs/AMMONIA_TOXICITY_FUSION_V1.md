@@ -2,13 +2,13 @@
 
 **Status:** Integrated V1 technical direction
 **Date:** 21 August 2026
-**Scope:** Singapore-first freshwater Open Aqua product
+**Scope:** Singapore-first freshwater VELYQUA product
 
 ## Purpose
 
 Turn a reference total-ammonia observation into a more biologically meaningful, time-aware risk assessment by combining it with contemporaneous pH and temperature while preserving provenance, freshness, uncertainty and deterministic safety governance.
 
-Open Aqua does **not** need to wait for a cheap, maintenance-free continuous NH3 sensor before delivering useful ammonia intelligence.
+VELYQUA does **not** need to wait for a cheap, maintenance-free continuous NH3 sensor before delivering useful ammonia intelligence.
 
 ## Core model
 
@@ -37,7 +37,7 @@ An old ammonia result is not a current ammonia measurement.
 
 - Ammonia-state confidence decays with measurement age.
 - Material pH or temperature movement after the reference test may change the estimated NH3 risk even before another total-ammonia test is available.
-- When evidence becomes too stale, incomplete, contradictory or low-confidence, the correct Open Aqua result is `More information needed` with the smallest decision-changing request, commonly `Re-test ammonia now`.
+- When evidence becomes too stale, incomplete, contradictory or low-confidence, the correct VELYQUA result is `More information needed` with the smallest decision-changing request, commonly `Re-test ammonia now`.
 - The system must never silently extrapolate a stale total-ammonia concentration as a confirmed current fact.
 
 ## Product behavior
@@ -62,7 +62,7 @@ Where hardware is later connected, the edge layer owns:
 - local buffering;
 - deterministic elementary hazard rules that must remain available offline.
 
-### Higher-level Open Aqua logic
+### Higher-level VELYQUA logic
 
 The application/service layer owns:
 
@@ -78,7 +78,7 @@ The manual-first MVP remains complete without sensors. Sensor ingestion is addit
 
 ## Cross-parameter inference direction
 
-Ammonia fusion is the first flagship example of a broader requirement: Open Aqua interprets interacting variables rather than independent dashboard thresholds.
+Ammonia fusion is the first flagship example of a broader requirement: VELYQUA interprets interacting variables rather than independent dashboard thresholds.
 
 Candidate relationships include:
 
@@ -130,4 +130,4 @@ Do not intentionally expose livestock to harmful ammonia to create training data
 
 ## Product boundary
 
-This module does not introduce autonomous dosing, automatic equipment control, disease diagnosis or medication guidance. It strengthens the existing manual-first, deterministic and auditable Open Aqua decision system.
+This module does not introduce autonomous dosing, automatic equipment control, disease diagnosis or medication guidance. It strengthens the existing manual-first, deterministic and auditable VELYQUA decision system.

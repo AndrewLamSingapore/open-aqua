@@ -177,7 +177,7 @@ describe('SQLite account store reconstruction', () => {
   it('does not import one unscoped legacy source into two accounts', async () => {
     const db = new FakeSqlite();
     const store = new AccountSqliteStore(db);
-    const source = '@open-aqua/tank/v1';
+    const source = '@velyqua/tank/v1';
     const first = await store.importInitial('owner-a', accountRecord('owner-a'), source);
     const second = await store.importInitial('owner-b', accountRecord('owner-a'), source);
     expect(first.tank.name).toBe('owner-a tank');

@@ -208,7 +208,7 @@ function TankApp({ session }: { session: Session }) {
       setTimeout(() => { void sync(); }, 0);
     }).catch((error) => {
       if (!cancelled) {
-        const message = error instanceof Error ? error.message : 'Please restart Open Aqua.';
+        const message = error instanceof Error ? error.message : 'Please restart VELYQUA.';
         setLoadError(message);
         Alert.alert('Tank history could not be opened safely', message);
       }
@@ -263,7 +263,7 @@ function TankApp({ session }: { session: Session }) {
   return <SafeAreaView style={styles.safe}>
     <StatusBar style="dark" />
     <View style={styles.header}>
-      <View style={styles.headerCopy}><Text style={styles.brand}>OPEN AQUA</Text><Text style={styles.tankName}>{tank.name}</Text></View>
+      <View style={styles.headerCopy}><Text style={styles.brand}>VELYQUA · 维澜</Text><Text style={styles.tankName}>{tank.name}</Text></View>
       <Pressable onPress={() => setAccount(true)} accessibilityLabel="Owner account" style={styles.ownerButton}>
         <Text style={styles.ownerInitial}>{(session.user.email?.[0] ?? 'O').toUpperCase()}</Text>
         <Text numberOfLines={2} style={[styles.saved, syncState === 'error' && styles.savedError]}>{syncLabels[syncState]}</Text>
@@ -302,9 +302,9 @@ function AquaNow({ tank, onPreview }: { tank: Tank; onPreview: () => void }) {
       <View style={styles.metaRow}><Text style={styles.meta}>{rec.estimatedMinutes} min</Text><Text style={styles.meta}>{rec.confidence} support</Text></View>
       {rec.state !== 'all_clear' && <Button label="Try a change" onPress={onPreview} />}
     </Card>
-    <SectionTitle>Why Open Aqua says this</SectionTitle>
+    <SectionTitle>Why VELYQUA says this</SectionTitle>
     <Card>{rec.evidence.map((item) => <Text key={item} style={styles.list}>• {item}</Text>)}</Card>
-    <Text style={styles.calm}>No streaks. No attention traps. If nothing needs doing, Open Aqua will say so.</Text>
+    <Text style={styles.calm}>No streaks. No attention traps. If nothing needs doing, VELYQUA will say so.</Text>
   </>;
 }
 

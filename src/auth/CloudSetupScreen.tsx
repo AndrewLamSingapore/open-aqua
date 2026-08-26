@@ -6,7 +6,7 @@ import { colors } from '../theme';
 export function CloudSetupScreen({ missing }: { missing: string[] }) {
   return <SafeAreaView style={styles.safe}>
     <View style={styles.wrap}>
-      <Text style={styles.brand}>OPEN AQUA</Text>
+      <Text style={styles.brand}>VELYQUA · 维澜</Text>
       <Text style={styles.hero}>Cloud setup is required.</Text>
       <Card>
         <Text style={styles.title}>The app is safe, but not connected yet</Text>

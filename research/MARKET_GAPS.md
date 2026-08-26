@@ -1,10 +1,10 @@
-# Open Aqua Market-Gap Map
+# VELYQUA Market-Gap Map
 
 ## Scoring method
 
 This is strategic prioritization, not a market-size or revenue forecast. Each gap is scored 1–5 on:
 
-- **fit:** alignment with the locked Open Aqua thesis;
+- **fit:** alignment with the locked VELYQUA thesis;
 - **testability:** ability to generate decision-changing evidence with the V0 path;
 - **compounding:** value of the evidence/data accumulated over time;
 - **safety:** reversibility and compatibility with current boundaries; and
@@ -27,7 +27,7 @@ Total is unweighted out of 25. A high score admits an experiment; it does not pr
 
 ## Gap 1 — Measurement trust before intelligence
 
-The market is crowded with values, charts and alerts. The unresolved decision is whether the value should be believed now. Open Aqua can build defensible evidence around calibration, drift, contradictions, stale data and abstention.
+The market is crowded with values, charts and alerts. The unresolved decision is whether the value should be believed now. VELYQUA can build defensible evidence around calibration, drift, contradictions, stale data and abstention.
 
 **First proof:** bench characterization with a trusted reference, recorded residuals, drift, dropout and maintenance time.
 
@@ -45,7 +45,7 @@ Consumer affordability does not require pretending that cheap probes directly me
 
 ## Gap 4 — Lifecycle cost per useful inference
 
-Hardware comparisons usually privilege purchase price or specification count. Open Aqua should measure calibration, cleaning, replacement, downtime, data loss and owner effort against incremental decision value.
+Hardware comparisons usually privilege purchase price or specification count. VELYQUA should measure calibration, cleaning, replacement, downtime, data loss and owner effort against incremental decision value.
 
 **First proof:** a V0 lifecycle ledger tied to information-gain ablations.
 
@@ -69,10 +69,10 @@ The long-term moat is knowing what minimum evidence is sufficient for a specific
 - treating ESP32, pH, conductivity or a dashboard as a moat;
 - diagnosing disease from behavior or images;
 - automatic dosing/control before measurement, model and safety qualification; and
-- building a large ingestion platform before the first real Open Aqua dataset.
+- building a large ingestion platform before the first real VELYQUA dataset.
 
 ## Strongest current wedge
 
-> **Open Aqua should become the evidence and trust layer that knows when inexpensive observations are sufficient for one safe freshwater decision—and when they are not.**
+> **VELYQUA should become the evidence and trust layer that knows when inexpensive observations are sufficient for one safe freshwater decision—and when they are not.**
 
 That wedge is narrower than “smart aquarium,” more testable than “AI ecosystem OS,” and more defensible than hardware resale.

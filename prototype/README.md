@@ -1,8 +1,8 @@
-# Open Aqua Prototype V0
+# VELYQUA Prototype V0
 
 > Build the cheapest experimental instrument capable of proving that sensor fusion predicts aquarium risk better than periodic testing alone.
 
-This directory turns the locked Open Aqua prototype strategy into an executable experimental blueprint. It does **not** redefine product scope or safety policy.
+This directory turns the locked VELYQUA prototype strategy into an executable experimental blueprint. It does **not** redefine product scope or safety policy.
 
 ## V0 hypothesis
 

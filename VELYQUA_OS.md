@@ -1,10 +1,10 @@
-# Open Aqua Operating System
+# VELYQUA Operating System
 
 ## The simplest explanation
 
-The aquarium is the real thing. Open Aqua keeps a private memory of it.
+The aquarium is the real thing. VELYQUA keeps a private memory of it.
 
-The owner taps in a test, care action or observation. Open Aqua saves the event first, updates the digital twin, checks whether the information is fresh enough, applies transparent freshwater rules, compares possible actions and explains the smallest useful next step.
+The owner taps in a test, care action or observation. VELYQUA saves the event first, updates the digital twin, checks whether the information is fresh enough, applies transparent freshwater rules, compares possible actions and explains the smallest useful next step.
 
 ```text
 Tap, type, speak or photograph
@@ -65,11 +65,11 @@ The full capability-level matrix is `src/os/capabilities.ts`. It contains more d
 
 ## Delivery truth
 
-Open Aqua OS separates product inclusion from present implementation:
+VELYQUA OS separates product inclusion from present implementation:
 
 1. **Working** means the current app has implementation evidence and a route the owner can use.
 2. **Foundation** means the type, service contract or safety boundary exists, but its complete customer workflow is not ready.
-3. **Planned** means the capability belongs in Open Aqua and has dependencies, but is not presented as a finished feature.
+3. **Planned** means the capability belongs in VELYQUA and has dependencies, but is not presented as a finished feature.
 4. **Deferred** means it is deliberately outside the current build sequence.
 
 This prevents an architecture document from being mistaken for a completed App Store product.

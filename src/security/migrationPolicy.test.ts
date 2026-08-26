@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-const sql = readFileSync(resolve(process.cwd(), 'supabase/migrations/202608130001_open_aqua_cloud.sql'), 'utf8');
+const sql = readFileSync(resolve(process.cwd(), 'supabase/migrations/202608130001_velyqua_cloud.sql'), 'utf8');
 
 describe('database security migration', () => {
   it('enables and forces RLS with owner checks', () => {

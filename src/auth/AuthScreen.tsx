@@ -25,11 +25,11 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
         const { data, error } = await client.auth.signUp({
           email: normalizedEmail,
           password,
-          options: { emailRedirectTo: 'openaqua://auth/callback' }
+          options: { emailRedirectTo: 'velyqua://auth/callback' }
         });
         if (error) throw error;
         if (!data.session) {
-          Alert.alert('Check your email', 'Open the confirmation email, then return to Open Aqua and sign in.');
+          Alert.alert('Check your email', 'Open the confirmation email, then return to VELYQUA and sign in.');
           setMode('sign_in');
         }
       } else {
@@ -49,7 +49,7 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
     setBusy(true);
     try {
       const { error } = await client.auth.resetPasswordForEmail(normalizedEmail, {
-        redirectTo: 'openaqua://auth/callback'
+        redirectTo: 'velyqua://auth/callback'
       });
       if (error) throw error;
       Alert.alert('Email sent', 'Use the secure link in your email to reset your password.');
@@ -63,7 +63,8 @@ export function AuthScreen({ client }: { client: SupabaseClient }) {
   return <SafeAreaView style={styles.safe}>
     <KeyboardAvoidingView style={styles.wrap} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={styles.intro}>
-        <Text style={styles.brand}>OPEN AQUA</Text>
+        <Text style={styles.brand}>VELYQUA · 维澜</Text>
+        <Text style={styles.tagline}>洞察微澜，守护水境。</Text>
         <Text style={styles.hero}>Your aquarium remembers.</Text>
         <Text style={styles.copy}>Quick manual logs stay on this phone first, then synchronise safely to your private account.</Text>
       </View>
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
   wrap: { flex: 1, justifyContent: 'center', padding: 22 },
   intro: { marginBottom: 20 },
   brand: { color: colors.teal, fontSize: 13, fontWeight: '900', letterSpacing: 2 },
+  tagline: { color: colors.muted, fontSize: 14, letterSpacing: 1, marginTop: 10 },
   hero: { color: colors.navy, fontSize: 35, lineHeight: 40, fontWeight: '900', marginTop: 10 },
   copy: { color: colors.muted, fontSize: 16, lineHeight: 23, marginTop: 10 },
   title: { color: colors.navy, fontSize: 21, fontWeight: '900', marginBottom: 5 },

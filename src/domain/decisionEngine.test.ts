@@ -11,7 +11,7 @@ const safeReadings: Reading[] = [
 ];
 const safeTank: Tank = { ...sampleTank, sourceWaterNitrate: 5, readings: safeReadings };
 
-describe('Open Aqua decision engine', () => {
+describe('VELYQUA decision engine', () => {
   it('returns all clear for a complete safe test fixture', () => {
     expect(evaluateTank(safeTank).state).toBe('all_clear');
   });

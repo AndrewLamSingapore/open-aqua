@@ -22,7 +22,7 @@
 
 ## 0.3.0 — 2026-08-13
 
-- Added Open Aqua OS: a complete, original freshwater capability registry with stable identifiers, delivery states, dependencies, evidence and product boundaries.
+- Added VELYQUA OS: a complete, original freshwater capability registry with stable identifiers, delivery states, dependencies, evidence and product boundaries.
 - Added Asia-first modules for regional fish and plants, local names, tropical heat, source water, blackwater, shrimp, large exotics and power-outage planning.
 - Expanded the tank twin contract with livestock, plants, equipment, photos and care tasks while keeping existing cloud documents compatible.
 - Expanded manual Quick Update with additional freshwater parameters and specific care-action types.

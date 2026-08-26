@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { sampleTank } from '../domain/sample';
 import { buildTankContext } from './tankContext';
 
-describe('Open Aqua tank context packet', () => {
+describe('VELYQUA tank context packet', () => {
   it('keeps the real Founding Tank incomplete until the owner enters tests', () => {
     const packet = buildTankContext(sampleTank, '2026-08-13T12:00:00.000Z');
     expect(packet.latestReadings.nitrate).toBeUndefined();

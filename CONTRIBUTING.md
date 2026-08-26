@@ -1,6 +1,6 @@
-# Contributing to Open Aqua
+# Contributing to VELYQUA
 
-Open Aqua is both working software and an experimental programme. Contributions must preserve that distinction.
+VELYQUA is both working software and an experimental programme. Contributions must preserve that distinction.
 
 ## Before changing code
 

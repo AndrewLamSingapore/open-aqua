@@ -21,7 +21,7 @@ describe('starter tank migration', () => {
   it('replaces only the untouched invented starter with the real Founding Tank', () => {
     const result = migrateUntouchedLegacyStarter(oldStarter);
     expect(result.migrated).toBe(true);
-    expect(result.tank.id).toBe('open-aqua-founding-tank');
+    expect(result.tank.id).toBe('velyqua-founding-tank');
   });
 
   it('preserves the tank if the owner added even one real record', () => {

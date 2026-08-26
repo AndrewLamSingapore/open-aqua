@@ -1,4 +1,4 @@
-# Open Aqua Edge Portability & Biological Observability Hypotheses
+# VELYQUA Edge Portability & Biological Observability Hypotheses
 
 **Status:** Planned / unvalidated research hypotheses
 **Effective:** 25 August 2026
@@ -8,17 +8,17 @@
 
 **Build narrowly. Record broadly. Claim conservatively.**
 
-These hypotheses preserve a potentially important Open Aqua moat without treating an untested idea as a working capability. The immediate V0 priority remains one tank producing trustworthy, timestamped evidence with the smallest useful sensor set.
+These hypotheses preserve a potentially important VELYQUA moat without treating an untested idea as a working capability. The immediate V0 priority remains one tank producing trustworthy, timestamped evidence with the smallest useful sensor set.
 
 ## H-OA-EDGE-001 — Capability-Aware Edge Portability
 
 ### Hypothesis
 
-Open Aqua sensing, inference and control intelligence can operate across heterogeneous low-cost, refurbished and purpose-built edge hardware **provided each device satisfies a defined capability envelope for its assigned sensing or control function**.
+VELYQUA sensing, inference and control intelligence can operate across heterogeneous low-cost, refurbished and purpose-built edge hardware **provided each device satisfies a defined capability envelope for its assigned sensing or control function**.
 
 ### Meaning
 
-Open Aqua should not ask only whether a device can run Open Aqua software. It should determine which Open Aqua roles the device can perform with adequate measurement quality, timing, reliability and safety.
+VELYQUA should not ask only whether a device can run VELYQUA software. It should determine which VELYQUA roles the device can perform with adequate measurement quality, timing, reliability and safety.
 
 Candidate capability dimensions include:
 
@@ -53,7 +53,7 @@ The hypothesis is weakened or rejected for a role when cheaper/repurposed hardwa
 
 ### Hypothesis
 
-For each aquarium variable, inference or control function, a measurable minimum combination of sensor precision, sampling frequency, timing stability, calibration confidence, connectivity and hardware reliability exists below which Open Aqua should degrade, disable or prohibit the associated inference or autonomous control function.
+For each aquarium variable, inference or control function, a measurable minimum combination of sensor precision, sampling frequency, timing stability, calibration confidence, connectivity and hardware reliability exists below which VELYQUA should degrade, disable or prohibit the associated inference or autonomous control function.
 
 ### Research question
 
@@ -65,7 +65,7 @@ The long-term target is not identical raw measurements across all hardware. It i
 
 `hardware + sensors + interfaces + sampling + calibration + provenance + model -> decision confidence`
 
-The accumulated evidence behind this mapping is a potential Open Aqua moat. It is a thesis to test, not a present product claim.
+The accumulated evidence behind this mapping is a potential VELYQUA moat. It is a thesis to test, not a present product claim.
 
 ## Evidence maturity
 
@@ -145,7 +145,7 @@ Prototype V0 continues to exclude autonomous dosing and equipment control.
 
 ## Future benchmark programme — not active V0 scope
 
-After V0 establishes useful inference and V0.5 improves repeatability, Open Aqua may compare low-cost/refurbished nodes with increasingly capable reference configurations.
+After V0 establishes useful inference and V0.5 improves repeatability, VELYQUA may compare low-cost/refurbished nodes with increasingly capable reference configurations.
 
 Candidate measurements include:
 
@@ -164,11 +164,11 @@ The objective is to identify a **minimum viable instrumentation frontier** for s
 
 ## External evidence boundary
 
-Scientific literature, commercial systems, competitive intelligence and Open Aqua experiments may eventually inform this programme, but external evidence must remain provenance-labelled and must not be confused with Open Aqua experimental validation.
+Scientific literature, commercial systems, competitive intelligence and VELYQUA experiments may eventually inform this programme, but external evidence must remain provenance-labelled and must not be confused with VELYQUA experimental validation.
 
 Specific commercial systems, including OceanStar, must not be classified as direct benchmarks or competitors until their relevant product, target market, capabilities and evidence are verified. They may instead be tracked as adjacent signals.
 
-## Relationship to the Open Aqua moat thesis
+## Relationship to the VELYQUA moat thesis
 
 The candidate moat is not an ESP32, a particular probe or a single model. It is the evidence-backed knowledge of:
 

@@ -7,8 +7,8 @@ const baselineCapturedAt = '2026-08-13T00:00:00.000Z';
  * manufacture safe readings, livestock counts, plant IDs or equipment data.
  */
 export const sampleTank: Tank = {
-  id: 'open-aqua-founding-tank',
-  name: 'Open Aqua Founding Tank',
+  id: 'velyqua-founding-tank',
+  name: 'VELYQUA Founding Tank',
   volumeLitres: 139.4,
   volumeBasis: 'gross_external_estimate',
   dimensions: {

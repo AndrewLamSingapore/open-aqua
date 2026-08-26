@@ -5,13 +5,13 @@
 
 ## Decision
 
-Open Aqua will maintain a separated scientific-research radar and commercial-intelligence radar connected through a canonical opportunity registry.
+VELYQUA will maintain a separated scientific-research radar and commercial-intelligence radar connected through a canonical opportunity registry.
 
 The architecture distinguishes:
 
-`scientifically reported → commercially claimed/observed → Open Aqua hypothesis → planned → instrumented → collecting → experimentally supported → validated → productized`
+`scientifically reported → commercially claimed/observed → VELYQUA hypothesis → planned → instrumented → collecting → experimentally supported → validated → productized`
 
-These are not automatic transitions. External evidence may motivate an experiment but cannot validate Open Aqua.
+These are not automatic transitions. External evidence may motivate an experiment but cannot validate VELYQUA.
 
 ## Initial radars
 
@@ -27,8 +27,8 @@ OceanStar is classified as an adjacent industrial-RAS signal, not a verified dir
 - No expansion of disease-diagnosis scope.
 - No autonomous equipment control.
 - No copying of competitor expression or proprietary information.
-- No claim that a scientific paper or vendor system validates Open Aqua.
-- No large-scale ingestion infrastructure before the first real Open Aqua telemetry evidence.
+- No claim that a scientific paper or vendor system validates VELYQUA.
+- No large-scale ingestion infrastructure before the first real VELYQUA telemetry evidence.
 
 ## Delivery impact
 

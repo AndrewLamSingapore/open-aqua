@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://open-aqua.local/schema/prototype-v0-telemetry.json",
-  "title": "Open Aqua Prototype V0 Telemetry",
+  "$id": "https://velyqua.local/schema/prototype-v0-telemetry.json",
+  "title": "VELYQUA Prototype V0 Telemetry",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "tank_id", "sensor_id", "observed_at", "parameter", "value", "unit", "quality"],

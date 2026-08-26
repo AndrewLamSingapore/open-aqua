@@ -1,7 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+  <title id="title">VELYQUA 维澜</title>
   <rect width="1024" height="1024" fill="#F4F8F8"/>
-  <circle cx="512" cy="450" r="220" fill="#007F86"/>
-  <path d="M326 450c101-126 232-160 372-100 39 17 74 42 104 74-32 34-69 60-111 77-141 57-271 24-365-101 58 5 108 27 149 67-42 35-92 50-149 45Z" fill="#EAF8F3"/>
-  <circle cx="451" cy="402" r="18" fill="#0B2748"/>
-  <text x="512" y="760" font-family="Arial, sans-serif" font-size="74" font-weight="800" text-anchor="middle" fill="#0B2748" letter-spacing="10">OPEN AQUA</text>
+  <g transform="translate(337 150) scale(.35)">
+    <path d="M164 258h184l164 394 164-394h184L594 804H430Z" fill="#062A4E"/>
+    <path d="M302 716c70-92 111-176 123-253 11-70 1-138-31-205h110c29 81 34 158 16 231-20 82-69 172-147 271Z" fill="#00BFC7"/>
+    <path d="M420 758c71-89 115-171 132-245 16-70 13-137-11-202h102c21 78 19 151-5 220-27 78-78 161-154 249Z" fill="#62DED9"/>
+    <circle cx="624" cy="212" r="52" fill="#A5E9E5"/>
+  </g>
+  <text x="512" y="610" font-family="Arial, sans-serif" font-size="76" font-weight="800" text-anchor="middle" fill="#062A4E" letter-spacing="11">VELYQUA</text>
+  <text x="512" y="690" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#477083" letter-spacing="3">SENSE CHANGE · SAFEGUARD WATER</text>
 </svg>

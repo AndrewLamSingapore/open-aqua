@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { allCapabilities, capabilityCounts, openAquaModules } from './capabilities';
-import { openAquaOS } from './manifest';
+import { allCapabilities, capabilityCounts, velyquaModules } from './capabilities';
+import { velyquaOS } from './manifest';
 
-describe('Open Aqua OS capability governance', () => {
+describe('VELYQUA OS capability governance', () => {
   it('uses unique module and capability identifiers', () => {
-    const moduleIds = openAquaModules.map((module) => module.id);
+    const moduleIds = velyquaModules.map((module) => module.id);
     const capabilityIds = allCapabilities.map((capability) => capability.id);
     expect(new Set(moduleIds).size).toBe(moduleIds.length);
     expect(new Set(capabilityIds).size).toBe(capabilityIds.length);
@@ -30,8 +30,8 @@ describe('Open Aqua OS capability governance', () => {
   });
 
   it('enforces the freshwater-only boundary and excludes ownership passports', () => {
-    const searchable = JSON.stringify({ openAquaOS, openAquaModules }).toLowerCase();
-    expect(openAquaOS.boundaries).toContain('Freshwater only.');
+    const searchable = JSON.stringify({ velyquaOS, velyquaModules }).toLowerCase();
+    expect(velyquaOS.boundaries).toContain('Freshwater only.');
     expect(searchable).not.toContain('fish passport');
     expect(searchable).not.toContain('saltwater');
     expect(searchable).not.toContain('reef');

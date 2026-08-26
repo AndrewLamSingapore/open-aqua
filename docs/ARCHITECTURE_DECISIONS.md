@@ -1,6 +1,6 @@
-# Open Aqua Architecture Decisions
+# VELYQUA Architecture Decisions
 
-**Status:** Active Open Aqua 2.0 direction + 21 August 2026 inference extension
+**Status:** Active VELYQUA 2.0 direction + 21 August 2026 inference extension
 
 This document separates current implementation from intended architecture. A target decision is not a claim that migration is complete. `SSOT.md` defines precedence; `src/os/capabilities.ts` defines current delivery status.
 
@@ -34,7 +34,7 @@ Every observation stores source, occurred/recorded time, method, original/canoni
 GitHub, Apple, Expo/EAS, Supabase, domain, design, monitoring and support accounts remain under founder control; collaborators receive least privilege.
 
 ### ADR-010: Cross-parameter biological inference
-Open Aqua may derive reviewed biological-risk interpretations from multiple observations when the relationship is scientifically defensible, versioned, testable, provenance-preserving and subordinate to deterministic safety governance.
+VELYQUA may derive reviewed biological-risk interpretations from multiple observations when the relationship is scientifically defensible, versioned, testable, provenance-preserving and subordinate to deterministic safety governance.
 
 First approved specification: `AMMONIA_TOXICITY_FUSION_V1.md`.
 

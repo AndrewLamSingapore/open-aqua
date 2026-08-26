@@ -23,28 +23,28 @@ No architecture diagram, roadmap, hypothesis, AI output, README, portfolio narra
 
 | System/capability | Present truth | Status |
 |---|---|---|
-| Open Aqua application/repository | Real freshwater application/project with governed architecture and product work | CURRENT / DEMONSTRATED |
-| Open Aqua OS architecture | Documented domain architecture with explicit delivery truth/maturity distinctions | CURRENT / DEMONSTRATED as architecture; not proof every capability is implemented |
+| VELYQUA application/repository | Real freshwater application/project with governed architecture and product work | CURRENT / DEMONSTRATED |
+| VELYQUA OS architecture | Documented domain architecture with explicit delivery truth/maturity distinctions | CURRENT / DEMONSTRATED as architecture; not proof every capability is implemented |
 | GitHub evidence/governance documents | Decision, source, experiment and architecture artifacts exist | CURRENT / DEMONSTRATED |
 | Research intelligence architecture | Evidence model, source/opportunity registries, ingestion protocol and experiment template exist | CURRENT / DEMONSTRATED as documentation; manually curated |
-| Fishes/MDPI scientific radar | Seeded research-theme map with 8 initial scientific records | CURRENT / DEMONSTRATED as a non-exhaustive radar; not an Open Aqua validation |
+| Fishes/MDPI scientific radar | Seeded research-theme map with 8 initial scientific records | CURRENT / DEMONSTRATED as a non-exhaustive radar; not an VELYQUA validation |
 | OceanStar commercial radar | Public vendor claims are recorded and separated from independent evidence | CURRENT / DEMONSTRATED as intelligence; OceanStar remains an adjacent signal, not a verified direct competitor |
 | Automated literature/competitor ingestion | No operating ingestion or monitoring pipeline exists | NOT STARTED / NO EVIDENCE |
 | Prime 7.3.1.1 Evidence Grounded | Existing private local FastAPI/Ollama multi-agent system with orchestration/governance code | CURRENT / DEMONSTRATED |
-| Prime ↔ Open Aqua integration | No native evidence bridge demonstrated | NOT STARTED / NO EVIDENCE |
-| Open Aqua Edge | Defined future physical telemetry/device layer | PLANNED / UNVALIDATED |
+| Prime ↔ VELYQUA integration | No native evidence bridge demonstrated | NOT STARTED / NO EVIDENCE |
+| VELYQUA Edge | Defined future physical telemetry/device layer | PLANNED / UNVALIDATED |
 | Refurbished/low-cost ESP32 portability | Research hypothesis only | PLANNED / UNVALIDATED |
 | H-OA-EDGE-001 | Capability-aware edge portability hypothesis | PLANNED / UNVALIDATED |
 | H-OA-EDGE-002 | Minimum Biological Observability Envelope hypothesis | PLANNED / UNVALIDATED |
 | ESP32 aquarium telemetry | No operating telemetry stream established in this architecture record | NOT STARTED / NO EVIDENCE |
-| Continuous Open Aqua sensor dataset | No qualifying V0 sensor dataset established in this architecture record | NOT STARTED / NO EVIDENCE |
+| Continuous VELYQUA sensor dataset | No qualifying V0 sensor dataset established in this architecture record | NOT STARTED / NO EVIDENCE |
 | Sensor-fusion predictive advantage | Prototype research target; not yet experimentally established | PLANNED / UNVALIDATED |
 | Autonomous aquarium control | Explicitly excluded from V0 | FUTURE / CONDITIONAL |
 | Prime-coordinated physical aquarium control | No implementation; requires multiple validation/safety gates | FUTURE / CONDITIONAL |
 | Federated SSOT contract | Governance contract exists | CURRENT / DEMONSTRATED as documentation; not machine-enforced ecosystem-wide |
 | Ecosystem architecture | Governing architecture exists | CURRENT / DEMONSTRATED as documentation |
-| Career Website | Separate public career surface/project | INDEPENDENT; no validated Open Aqua hardware evidence pipeline established |
-| Open Aqua validated-proof → Career Website pipeline | Architecture concept only | FUTURE / CONDITIONAL |
+| Career Website | Separate public career surface/project | INDEPENDENT; no validated VELYQUA hardware evidence pipeline established |
+| VELYQUA validated-proof → Career Website pipeline | Architecture concept only | FUTURE / CONDITIONAL |
 | The Portal | Separate existing project; current historical purpose must not be rewritten by this architecture | INDEPENDENT |
 | The Portal as ecosystem command surface | Candidate future role only; requires explicit product decision and implementation | FUTURE / CONDITIONAL |
 | Unified human control surface | Not demonstrated | NOT STARTED / NO EVIDENCE |
@@ -55,14 +55,14 @@ No architecture diagram, roadmap, hypothesis, AI output, README, portfolio narra
 ```text
                  CURRENT / DEMONSTRATED
 
-             Open Aqua application
+             VELYQUA application
                      │
                 GitHub repo
                      │
        architecture + hypotheses + governance
 
 Prime 7.3.1.1
-(existing independently; NOT integrated with Open Aqua)
+(existing independently; NOT integrated with VELYQUA)
 
 Career Website                 The Portal
 (existing separately)          (existing separately)
@@ -73,7 +73,7 @@ Career Website                 The Portal
 
                     PLANNED
 
-                Open Aqua Edge
+                VELYQUA Edge
                       ↓
                  ESP32 hardware
                       ↓
@@ -98,9 +98,9 @@ Arrows below the boundary express sequencing/dependency, not current integration
 
 ## Prime definition
 
-**Prime is an existing private, local, evidence-grounded multi-agent system for bounded planning, reasoning, verification and orchestration. It is not currently integrated with Open Aqua.**
+**Prime is an existing private, local, evidence-grounded multi-agent system for bounded planning, reasoning, verification and orchestration. It is not currently integrated with VELYQUA.**
 
-Prime's existence must not be confused with existence of an Open Aqua ↔ Prime connector.
+Prime's existence must not be confused with existence of an VELYQUA ↔ Prime connector.
 
 ## The Portal reality rule
 
@@ -112,7 +112,7 @@ Until then, architecture should refer to a generic **Human Control Surface (plan
 
 ## Career Website reality rule
 
-The Career Website may publish existing truthful professional evidence. It must not imply validated Open Aqua hardware, sensor-fusion or autonomous-aquarium results before such evidence exists.
+The Career Website may publish existing truthful professional evidence. It must not imply validated VELYQUA hardware, sensor-fusion or autonomous-aquarium results before such evidence exists.
 
 The future publication lineage is:
 

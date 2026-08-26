@@ -1,17 +1,17 @@
-# Open Aqua 0.6 Reconstruction Notice
+# VELYQUA 0.6 Reconstruction Notice
 
 **Classification:** Clean-room reconstruction candidate  
 **Created:** 26 August 2026  
-**Branch:** `reconstruction/open-aqua-0.6-from-main-2026-08-26`  
+**Branch:** `reconstruction/velyqua-0.6-from-main-2026-08-26`
 **Verified base:** `main@8ed08da243b3e45e214af0fb3f447a3443d62f1f`
 
 ## This is not the missing original
 
 This branch does not recover, reproduce or continue the Git history of the missing local checkpoint previously recorded as:
 
-- branch `agent/open-aqua-0.6-customer-safety`;
+- branch `agent/velyqua-0.6-customer-safety`;
 - commit `9c224ec1a1a2f0d6ec411c62acda6a4b2b96001c`; and
-- tag `open-aqua-0.6-safe-save`.
+- tag `velyqua-0.6-safe-save`.
 
 That commit was unavailable on GitHub and no local repository or bundle was available when this branch was created. The missing commit is not a parent, merge source, cherry-pick source or validation source for this reconstruction.
 

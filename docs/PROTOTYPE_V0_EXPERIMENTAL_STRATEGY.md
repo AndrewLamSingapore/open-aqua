@@ -1,4 +1,4 @@
-# Open Aqua Prototype V0 Experimental Strategy
+# VELYQUA Prototype V0 Experimental Strategy
 
 **Status:** Locked prototype direction
 **Effective:** 21 August 2026
@@ -124,4 +124,4 @@ Do not deliberately expose livestock to harmful ammonia, oxygen deprivation, uns
 
 ## Relationship to the product MVP
 
-This physical prototype programme does not make sensors mandatory for Open Aqua. The product MVP remains manual-first and complete without hardware. Prototype telemetry is an experimental evidence source and later optional read path. Automatic equipment control remains excluded.
+This physical prototype programme does not make sensors mandatory for VELYQUA. The product MVP remains manual-first and complete without hardware. Prototype telemetry is an experimental evidence source and later optional read path. Automatic equipment control remains excluded.

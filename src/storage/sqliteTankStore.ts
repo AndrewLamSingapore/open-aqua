@@ -3,10 +3,10 @@ import type { SQLiteDatabase } from 'expo-sqlite';
 import { Tank } from '../domain/types';
 import { createStarterRecord, LocalTankRecord } from './tankStore';
 
-const DATABASE_NAME = 'open-aqua-reconstruction-v06.db';
-const LEGACY_TANK_KEY = '@open-aqua/tank/v1';
-const LEGACY_MIGRATION_OWNER_KEY = '@open-aqua/migration/v2-owner';
-const legacyAccountKey = (accountId: string) => `@open-aqua/user/${accountId}/primary-tank/v2`;
+const DATABASE_NAME = 'velyqua-reconstruction-v06.db';
+const LEGACY_TANK_KEY = '@velyqua/tank/v1';
+const LEGACY_MIGRATION_OWNER_KEY = '@velyqua/migration/v2-owner';
+const legacyAccountKey = (accountId: string) => `@velyqua/user/${accountId}/primary-tank/v2`;
 
 type SqlValue = string | number | null;
 

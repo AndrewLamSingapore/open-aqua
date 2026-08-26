@@ -1,4 +1,4 @@
-# Open Aqua Product Constitution
+# VELYQUA Product Constitution
 
 **Status:** Authoritative product direction v2.0
 
@@ -6,11 +6,11 @@
 
 **Launch focus:** iPhone-first, English, Singapore, freshwater only
 
-**Working name:** Open Aqua, pending formal legal and App Store clearance
+**Working name:** VELYQUA, pending formal legal and App Store clearance
 
 ## Product thesis
 
-Open Aqua is a personal freshwater tank agent and human-updated digital twin. It asks for seconds, returns one justified decision and learns from the real outcome.
+VELYQUA is a personal freshwater tank agent and human-updated digital twin. It asks for seconds, returns one justified decision and learns from the real outcome.
 
 It is not a generic chatbot, social feed, autonomous controller, animal identity system or marketplace.
 
@@ -34,7 +34,7 @@ Initial supported profiles are:
 
 Tell it once. See what matters. Try before you act.
 
-The owner records tests, observations and care manually through taps, confirmed speech drafts and photographs. Open Aqua maintains a transparent Tank Memory, returns one action or a confident no-action result, previews bounded changes and follows up to compare the expected direction with the real outcome.
+The owner records tests, observations and care manually through taps, confirmed speech drafts and photographs. VELYQUA maintains a transparent Tank Memory, returns one action or a confident no-action result, previews bounded changes and follows up to compare the expected direction with the real outcome.
 
 Success means the owner spends less time managing aquarium information and more time enjoying a healthy tank.
 
@@ -50,7 +50,7 @@ Success means the owner spends less time managing aquarium information and more 
 ## Governing principles
 
 1. **Protect attention.** Every prompt must be justified by a decision it can change.
-2. **One action.** Open Aqua prioritizes; it does not transfer a backlog to the owner.
+2. **One action.** VELYQUA prioritizes; it does not transfer a backlog to the owner.
 3. **No action is valid.** “Nothing needs attention” is a successful result.
 4. **Fact before inference.** Raw owner records remain visible and are never silently replaced by estimates.
 5. **Unknown before false comfort.** Missing or stale information may produce `More information needed`, never an invented all-clear.
@@ -64,7 +64,7 @@ Success means the owner spends less time managing aquarium information and more 
 
 ## Product language
 
-| Concept | Open Aqua term | Contract |
+| Concept | VELYQUA term | Contract |
 |---|---|---|
 | Home | Aqua Now | One state, one primary action, why it matters and how long it should take |
 | Capture | Quick Update | Common logs without multi-screen navigation |
@@ -93,7 +93,7 @@ Generated language may explain an approved result. It may not invent measurement
 
 The complete MVP works without sensors. Manual entry is the authoritative launch path.
 
-The event model may accept validated sensor or controller readings later, but no hardware integration is required or promised in the MVP. Open Aqua never performs automatic physical control of heaters, feeders, pumps, lights, dosers or other equipment.
+The event model may accept validated sensor or controller readings later, but no hardware integration is required or promised in the MVP. VELYQUA never performs automatic physical control of heaters, feeders, pumps, lights, dosers or other equipment.
 
 ## Hard boundaries
 

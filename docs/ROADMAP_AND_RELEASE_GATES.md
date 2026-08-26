@@ -1,14 +1,14 @@
-# Open Aqua Roadmap and Release Gates
+# VELYQUA Roadmap and Release Gates
 
-Open Aqua proves one trusted freshwater decision loop before adding breadth. Stage entry depends on evidence, not calendar pressure.
+VELYQUA proves one trusted freshwater decision loop before adding breadth. Stage entry depends on evidence, not calendar pressure.
 
 ## Current position
 
-Version 0.3.1 is a cloud-enabled vertical slice plus the Open Aqua OS foundation.
+Version 0.3.1 is a cloud-enabled vertical slice plus the VELYQUA OS foundation.
 
 It includes working manual capture, Aqua Now states, Tank Memory history, water-change preview, owner accounts, local-first document writes, private Supabase sync, merge handling, export, deletion and a governed capability registry. It does not represent the complete P0 product.
 
-Account-bound launch work remains outside the repository: the founder must activate production Supabase, Apple Developer, App Store Connect and Expo/EAS services. A source commit alone does not place Open Aqua in TestFlight.
+Account-bound launch work remains outside the repository: the founder must activate production Supabase, Apple Developer, App Store Connect and Expo/EAS services. A source commit alone does not place VELYQUA in TestFlight.
 
 ## Delivery sequence
 

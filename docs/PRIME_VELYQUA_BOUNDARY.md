@@ -1,4 +1,4 @@
-# Prime ↔ Open Aqua ↔ Open Aqua Edge Boundary
+# Prime ↔ VELYQUA ↔ VELYQUA Edge Boundary
 
 **Status:** Domain-specific architecture boundary / integration map
 **Effective:** 25 August 2026
@@ -7,23 +7,23 @@
 
 ## Scope relationship
 
-This document is the **Open Aqua-specific boundary underneath the ecosystem architecture**. It must not be interpreted as making Prime an Open Aqua subsystem or designing Prime primarily around aquariums.
+This document is the **VELYQUA-specific boundary underneath the ecosystem architecture**. It must not be interpreted as making Prime an VELYQUA subsystem or designing Prime primarily around aquariums.
 
-The ecosystem-level roles of Prime, Open Aqua, the Career Website, The Portal, GitHub/evidence and Edge are governed by `ECOSYSTEM_ARCHITECTURE.md`. This document goes deeper only where aquarium-domain and physical-device boundaries require additional precision.
+The ecosystem-level roles of Prime, VELYQUA, the Career Website, The Portal, GitHub/evidence and Edge are governed by `ECOSYSTEM_ARCHITECTURE.md`. This document goes deeper only where aquarium-domain and physical-device boundaries require additional precision.
 
 ## Decision
 
-Prime, Open Aqua and Open Aqua Edge remain separate systems with explicit contracts.
+Prime, VELYQUA and VELYQUA Edge remain separate systems with explicit contracts.
 
 - **Prime = governed general-purpose intelligence and orchestration control plane.**
-- **Open Aqua = aquarium domain operating system and biological decision layer.**
-- **Open Aqua Edge = optional physical telemetry/device adapter layer.**
+- **VELYQUA = aquarium domain operating system and biological decision layer.**
+- **VELYQUA Edge = optional physical telemetry/device adapter layer.**
 
-Do not merge Prime into Open Aqua and do not duplicate Prime's generic orchestration machinery inside Open Aqua.
+Do not merge Prime into VELYQUA and do not duplicate Prime's generic orchestration machinery inside VELYQUA.
 
 ## What Prime already does
 
-Prime 7.3.1.1 already contains substantial generic infrastructure that Open Aqua should not rebuild:
+Prime 7.3.1.1 already contains substantial generic infrastructure that VELYQUA should not rebuild:
 
 - local Ollama-backed fast/deep/embedding model runtime;
 - SQLite persistent state;
@@ -47,9 +47,9 @@ Prime 7.3.1.1 already contains substantial generic infrastructure that Open Aqua
 
 Prime's specialist layer currently includes strategy, research, data, engineering, quality and economic routing. Its deterministic grounding guard explicitly blocks unsupported source/data claims and can block Data missions when no verified dataset is attached.
 
-## What Open Aqua owns
+## What VELYQUA owns
 
-Open Aqua remains authoritative for aquarium-specific meaning and product truth:
+VELYQUA remains authoritative for aquarium-specific meaning and product truth:
 
 - freshwater tank event ledger;
 - freshwater digital twin;
@@ -67,11 +67,11 @@ Open Aqua remains authoritative for aquarium-specific meaning and product truth:
 - owner-facing aquarium workflows;
 - aquarium capability maturity: Working / Foundation / Planned / Deferred.
 
-Prime must not silently redefine Open Aqua biological rules or convert an unvalidated Open Aqua hypothesis into a validated fact.
+Prime must not silently redefine VELYQUA biological rules or convert an unvalidated VELYQUA hypothesis into a validated fact.
 
-## What Open Aqua Edge owns
+## What VELYQUA Edge owns
 
-Open Aqua Edge is a future optional adapter/telemetry layer. It may eventually own:
+VELYQUA Edge is a future optional adapter/telemetry layer. It may eventually own:
 
 - ESP32-class firmware;
 - sensor drivers and probe-interface adapters;
@@ -83,16 +83,16 @@ Open Aqua Edge is a future optional adapter/telemetry layer. It may eventually o
 - signal-quality/device-health telemetry;
 - safe low-level actuator adapters if/when explicitly admitted by product governance.
 
-Edge does not own biological interpretation. A pH probe reading is an observation; Open Aqua decides its aquarium meaning.
+Edge does not own biological interpretation. A pH probe reading is an observation; VELYQUA decides its aquarium meaning.
 
 ## Authority flow
 
 ```text
 Physical aquarium
       ↓
-Open Aqua Edge (optional observations/device state)
+VELYQUA Edge (optional observations/device state)
       ↓
-Open Aqua (domain truth, digital twin, confidence, biological interpretation)
+VELYQUA (domain truth, digital twin, confidence, biological interpretation)
       ↓
 Prime (general planning/orchestration over explicitly supplied evidence)
       ↓
@@ -104,11 +104,11 @@ For future physical control, the reverse path must be separately governed:
 ```text
 Prime proposes/coordinates
       ↓
-Open Aqua validates aquarium-specific preconditions and policy
+VELYQUA validates aquarium-specific preconditions and policy
       ↓
 Independent safety/authority gate
       ↓
-Qualified Open Aqua Edge actuator
+Qualified VELYQUA Edge actuator
       ↓
 Physical equipment
 ```
@@ -117,9 +117,9 @@ No LLM output is itself permission to actuate aquarium equipment.
 
 ## Integration contract: evidence before autonomy
 
-Prime currently does not have a native Open Aqua connector. Until one is deliberately built, Open Aqua data supplied to Prime must be treated as an explicit evidence packet, never assumed to exist.
+Prime currently does not have a native VELYQUA connector. Until one is deliberately built, VELYQUA data supplied to Prime must be treated as an explicit evidence packet, never assumed to exist.
 
-A future Open Aqua → Prime evidence packet should be bounded and provenance-rich, for example:
+A future VELYQUA → Prime evidence packet should be bounded and provenance-rich, for example:
 
 - tank identifier (non-secret internal ID);
 - observation/event IDs;
@@ -129,9 +129,9 @@ A future Open Aqua → Prime evidence packet should be bounded and provenance-ri
 - device/sensor identifiers where relevant;
 - calibration version;
 - freshness;
-- Open Aqua confidence;
+- VELYQUA confidence;
 - applicable rule/model version;
-- biological interpretation generated by Open Aqua;
+- biological interpretation generated by VELYQUA;
 - uncertainty/limitations;
 - permitted decision scope.
 
@@ -139,7 +139,7 @@ Prime may reason over that packet, route work, verify internal deliverables and 
 
 ## Non-duplication matrix
 
-| Capability | Prime | Open Aqua | Edge |
+| Capability | Prime | VELYQUA | Edge |
 |---|---|---|---|
 | Generic LLM orchestration | **Owns** | Consume later | No |
 | Generic objectives/projects/task queues | **Owns** | Do not duplicate | No |
@@ -160,22 +160,22 @@ Prime may reason over that packet, route work, verify internal deliverables and 
 
 ### Now — V0
 
-Keep Prime out of the physical prototype's critical path. Open Aqua V0 must first generate trustworthy aquarium evidence. A Prime outage or model failure must not prevent basic aquarium recording or monitoring.
+Keep Prime out of the physical prototype's critical path. VELYQUA V0 must first generate trustworthy aquarium evidence. A Prime outage or model failure must not prevent basic aquarium recording or monitoring.
 
 ### Next — evidence bridge
 
-Once V0 has real data, build the smallest read-only Open Aqua → Prime evidence export/adapter. Prime should initially be allowed to analyze and plan only. No physical command path.
+Once V0 has real data, build the smallest read-only VELYQUA → Prime evidence export/adapter. Prime should initially be allowed to analyze and plan only. No physical command path.
 
 ### Later — governed orchestration
 
-Allow Prime to coordinate research, experiment analysis, benchmark planning and internal engineering tasks using Open Aqua evidence packets. Preserve Open Aqua as the domain authority.
+Allow Prime to coordinate research, experiment analysis, benchmark planning and internal engineering tasks using VELYQUA evidence packets. Preserve VELYQUA as the domain authority.
 
 ### Much later — qualified action path
 
-Only after Open Aqua has validated observability, confidence, hardware qualification and safe fallback rules should any Prime-coordinated physical action be considered. Every action remains subject to explicit domain and authority gates.
+Only after VELYQUA has validated observability, confidence, hardware qualification and safe fallback rules should any Prime-coordinated physical action be considered. Every action remains subject to explicit domain and authority gates.
 
 ## Domain invariant
 
-**Prime orchestrates. Open Aqua understands the aquarium. Edge observes and, only when separately qualified, acts. Safety and evidence determine authority.**
+**Prime orchestrates. VELYQUA understands the aquarium. Edge observes and, only when separately qualified, acts. Safety and evidence determine authority.**
 
 This invariant operates underneath the broader ecosystem invariant in `ECOSYSTEM_ARCHITECTURE.md`.
