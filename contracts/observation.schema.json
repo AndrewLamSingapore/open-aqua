@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velyqua/contracts/observation.schema.json",
+  "title": "Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "observation_id", "source", "observed_at", "kind", "evidence_level"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "observation_id": {"type": "string", "pattern": "^VLY-OBS-[A-Z0-9-]+$"},
+    "source": {"const": "velyqua"},
+    "experiment_id": {"type": ["string", "null"]},
+    "tank_id": {"type": ["string", "null"]},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "kind": {"enum": ["sensor", "reference_test", "care_event", "livestock_observation", "system_event", "derived_result"]},
+    "metric": {"type": ["string", "null"]},
+    "value": {"type": ["number", "string", "boolean", "null"]},
+    "unit": {"type": ["string", "null"]},
+    "evidence_level": {"enum": ["raw", "reference", "derived"]},
+    "provenance": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": ["string", "null"]}
+  }
+}
