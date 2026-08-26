@@ -1,5 +1,7 @@
 # Open Aqua
 
+> **Reconstruction branch notice:** This branch is a clean-room 0.6 capability reconstruction from `main@8ed08da`. It is not the missing original `9c224ec` checkpoint and is not a release candidate. See [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md).
+
 ## A freshwater digital twin — and an experiment in earlier warning.
 
 **Current release: 0.3.1 · iPhone-first · freshwater-only · local-first**
@@ -45,7 +47,9 @@ Continuous ammonia hardware is deliberately deferred unless evidence shows it is
 - Owner-controlled JSON export
 
 ### Local-first reliability
-- Water tests are saved on-device before any network request begins
+- Water tests are committed to an account-scoped Expo SQLite record and deterministic sync outbox before any network request begins
+- Interrupted record/outbox writes roll back together rather than acknowledging a partial save
+- Known earlier AsyncStorage records are imported without deleting the source; malformed sources fail closed
 - Automatic retry when connectivity returns or the app becomes active
 - Deterministic merging of independent offline logs from two devices
 - Realtime change notification between signed-in devices
@@ -110,6 +114,8 @@ Owner action
     ↓
 Account-scoped local record — saved first
     ↓
+Transactional deterministic sync outbox
+    ↓
 Connectivity-aware sync worker
     ↓
 Supabase Auth + tank_documents
@@ -124,7 +130,7 @@ Cloud conflict handling preserves independently added water and care logs from m
 - `App.tsx` — session gate and digital-twin experience
 - `src/auth` — sign-in, account controls, encrypted session storage
 - `src/cloud` — Supabase client configuration
-- `src/storage` — account-scoped local-first tank records
+- `src/storage` — account-scoped SQLite records, deterministic outbox and non-destructive legacy import
 - `src/sync` — upload, download, retry and deterministic merge logic
 - `src/domain` — tank types, rules and transparent estimates
 - `src/os` — capability registry and tank-context contract

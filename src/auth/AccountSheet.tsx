@@ -5,7 +5,7 @@ import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { Button } from '../components';
 import { PRIVACY_POLICY_URL } from '../legal';
-import { loadTankRecord, removeUserTankData } from '../storage/tankStore';
+import { loadTankRecordSqlite, removeUserTankDataSqlite } from '../storage/sqliteTankStore';
 import { colors } from '../theme';
 
 const messageFor = (error: unknown) => error instanceof Error ? error.message : 'Please try again.';
@@ -39,7 +39,7 @@ export function AccountSheet({
     try {
       const { error } = await client.functions.invoke('delete-account', { body: { confirmation: 'DELETE' } });
       if (error) throw error;
-      await removeUserTankData(session.user.id);
+      await removeUserTankDataSqlite(session.user.id);
       await client.auth.signOut({ scope: 'local' });
       Alert.alert('Account deleted', 'Your Open Aqua account and cloud tank records have been removed.');
     } catch (error) {
@@ -52,7 +52,7 @@ export function AccountSheet({
   const exportData = async () => {
     setBusy(true);
     try {
-      const local = await loadTankRecord(session.user.id);
+      const local = await loadTankRecordSqlite(session.user.id);
       if (!(await Sharing.isAvailableAsync())) throw new Error('Sharing is not available on this device.');
       const file = new File(Paths.cache, `open-aqua-export-${new Date().toISOString().slice(0, 10)}.json`);
       if (file.exists) file.delete();
