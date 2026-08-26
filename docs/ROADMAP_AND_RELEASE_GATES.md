@@ -4,11 +4,11 @@ Open Aqua proves one trusted freshwater decision loop before adding breadth. Sta
 
 ## Current position
 
-Version 0.3.1 is a cloud-enabled vertical slice plus the Open Aqua OS foundation.
+Version 0.6.0 is a clean-room cloud-enabled vertical slice plus transactional account-scoped SQLite durability and the Open Aqua OS foundation.
 
 It includes working manual capture, Aqua Now states, Tank Memory history, water-change preview, owner accounts, local-first document writes, private Supabase sync, merge handling, export, deletion and a governed capability registry. It does not represent the complete P0 product.
 
-Account-bound launch work remains outside the repository: the founder must activate production Supabase, Apple Developer, App Store Connect and Expo/EAS services. A source commit alone does not place Open Aqua in TestFlight.
+Account-bound launch work remains outside the repository: the founder must activate production Supabase, Apple Developer, App Store Connect and Expo/EAS services. The repository now enforces separate source, internal-TestFlight and production evidence gates, but a source commit alone does not place Open Aqua in TestFlight.
 
 ## Delivery sequence
 
@@ -24,10 +24,10 @@ Account-bound launch work remains outside the repository: the founder must activ
 
 ## Next implementation focus
 
-The next customer release should close the gap between the 0.3.1 vertical slice and the P0 contract:
+The next customer release should close the gap between the 0.6.0 source candidate and the P0 contract:
 
 1. complete onboarding and Sign in with Apple;
-2. move local records to a transactional outbox without losing existing acknowledged data;
+2. validate the reconstructed transactional outbox against interruption and migration scenarios on real devices;
 3. finish inventory correction, private photo storage and metadata stripping;
 4. complete one-action Aqua Now evidence and rule withdrawal;
 5. add Quiet Plan, outcome checks and immutable scenario records;

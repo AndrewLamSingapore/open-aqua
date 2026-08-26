@@ -2,7 +2,7 @@
 
 ## Supported version
 
-Open Aqua 0.3 is the currently supported source release.
+Open Aqua 0.6.0 is the currently supported clean-room source candidate. This does not claim that a signed TestFlight or production build has passed the external release gates.
 
 ## Protect the important keys
 

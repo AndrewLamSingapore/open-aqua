@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 source and TestFlight-readiness controls — 2026-08-26
+
+- Versioned the clean-room reconstruction as a new 0.6.0 release line without claiming recovery of the missing original.
+- Added an iOS privacy manifest covering current collected data and installed required-reason APIs.
+- Added explicit EAS development, preview and production environments plus a manual-only TestFlight workflow.
+- Added fail-closed source, internal-TestFlight and production preflight commands bound to owner evidence.
+- Added App Store privacy disclosures and an evidence-bearing release attestation template.
+- Kept signed-build, real-device, backend, accessibility, monitoring, privacy, safety and beta gates open until observed evidence exists.
+
 ## 0.6 capability reconstruction candidate — 2026-08-26
 
 - Created from verified `main@8ed08da`; this is not the missing original `9c224ec` checkpoint.

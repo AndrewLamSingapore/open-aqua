@@ -1,10 +1,10 @@
 # Open Aqua
 
-> **Reconstruction branch notice:** This branch is a clean-room 0.6 capability reconstruction from `main@8ed08da`. It is not the missing original `9c224ec` checkpoint and is not a release candidate. See [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md).
+> **0.6 provenance notice:** This release line contains a clean-room capability reconstruction from `main@8ed08da`. It is not the missing original `9c224ec` checkpoint. Source, TestFlight and production readiness are separately gated; see [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md) and [`APP_STORE_RELEASE.md`](APP_STORE_RELEASE.md).
 
 ## A freshwater digital twin — and an experiment in earlier warning.
 
-**Current release: 0.3.1 · iPhone-first · freshwater-only · local-first**
+**Current source candidate: 0.6.0 · iPhone-first · freshwater-only · local-first**
 
 Open Aqua is built around one question:
 
@@ -67,7 +67,9 @@ Continuous ammonia hardware is deliberately deferred unless evidence shows it is
 ### Engineering and release foundation
 - Automated decision-engine and sync-merge tests
 - GitHub Actions quality checks
-- EAS production configuration for TestFlight
+- Fail-closed source, internal-TestFlight and production-readiness checks
+- Manual-only EAS TestFlight build-and-submit workflow
+- Apple privacy manifest and App Store disclosure worksheet
 - Original app icon and launch artwork
 - Governed Open Aqua OS capability registry
 
@@ -170,15 +172,15 @@ npx expo start
 
 For the complete Supabase and TestFlight route, follow [`SETUP_SIMPLE.md`](SETUP_SIMPLE.md).
 
-Before release, run `npm run release:check`, use the [App Store checklist](APP_STORE_RELEASE.md), and review [privacy](PRIVACY.md) and [security](SECURITY.md).
+Before release, run the readiness command for the intended state, use the [App Store checklist](APP_STORE_RELEASE.md), and review [privacy](PRIVACY.md) and [security](SECURITY.md).
 
 ---
 
-## What 0.3.1 means
+## What 0.6.0 means
 
-Version 0.3.1 is a **testable cloud-enabled vertical slice plus governed product foundations**.
+Version 0.6.0 is a **clean-room source candidate with transactional local durability and explicit distribution gates**. It preserves the reconstruction non-claim and does not inherit the identity or validation record of the missing original checkpoint.
 
-It does not claim that every registered capability or P0 requirement is built. It does not claim that the physical early-warning hypothesis has been proven. And code alone cannot place a build in TestFlight: Supabase, Apple Developer, App Store Connect and Expo/EAS account-bound steps must be completed by the owner.
+It does not claim that every registered capability or P0 requirement is built, that the physical early-warning hypothesis has been proven, or that TestFlight/production validation has happened. Code alone cannot create a signed build: Supabase, Apple Developer, App Store Connect, Expo/EAS, a real iPhone and accountable external reviews remain owner-controlled gates.
 
 That distinction is part of the project:
 

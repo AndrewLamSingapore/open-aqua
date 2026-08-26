@@ -1,8 +1,8 @@
 # Open Aqua Privacy Policy
 
-**Effective date:** 13 August 2026
+**Effective date:** 26 August 2026
 
-Open Aqua is a freshwater aquarium record and decision-support application operated by Andrew Lam under the Open Aqua name. This policy describes version 0.3.
+Open Aqua is a freshwater aquarium record and decision-support application operated by Andrew Lam under the Open Aqua name. This policy describes the 0.6.0 clean-room release line.
 
 ## Information Open Aqua handles
 
@@ -10,7 +10,7 @@ Open Aqua is a freshwater aquarium record and decision-support application opera
 - **Aquarium information:** tank details, manually entered water-test results, care activities, owner observations and optional livestock, plant, equipment and care-plan records.
 - **Technical session information:** encrypted authentication tokens on the owner's device and the minimum database metadata required to synchronise records.
 
-Version 0.3 does not use advertising identifiers, analytics trackers or precise device location, and it does not collect contacts, payment information or photographs. The data contract can support owner-added photographs in a later release, but the current customer workflow does not upload or store them.
+Version 0.6.0 does not use advertising identifiers, analytics trackers or precise device location, and it does not collect contacts, payment information or photographs. The data contract can support owner-added photographs in a later release, but the current customer workflow does not upload or store them. The current source does not send crash diagnostics or analytics to a remote monitoring provider.
 
 ## Why the information is used
 
@@ -18,7 +18,7 @@ Open Aqua uses this information only to authenticate the owner, remember aquariu
 
 ## Storage and service providers
 
-Tank and account records are stored in the Open Aqua Supabase project. Supabase provides authentication, database and server functions. A signed-in owner can access only their own tank records through database Row Level Security. Authentication tokens are kept in encrypted device storage. Local tank changes are saved on the device before synchronisation begins.
+Tank and account records are stored in the Open Aqua Supabase project. Supabase provides authentication, database and server functions. A signed-in owner can access only their own tank records through database Row Level Security. Authentication tokens are kept in encrypted device storage. Local tank records and pending synchronisation operations are stored in account-scoped SQLite and committed before network synchronisation begins.
 
 Apple and Expo may process build, distribution and TestFlight information under their own policies; Open Aqua does not send aquarium records to them for advertising.
 
@@ -33,6 +33,8 @@ Records remain until the owner deletes the account. The owner can export cloud t
 ## Security
 
 Open Aqua uses encrypted transport, private account sessions, database access controls and owner-scoped records. No online system can promise absolute security, so owners should use a unique password and keep their devices protected.
+
+The iOS build includes a privacy manifest describing the current data categories and required-reason APIs. App Store privacy answers must be rechecked whenever application behavior, dependencies or production services change.
 
 ## Children
 
