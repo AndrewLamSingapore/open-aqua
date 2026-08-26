@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AndrewLamSingapore/open-aqua/research/schema/opportunity-record.schema.json",
+  "title": "Open Aqua opportunity record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "owner_problem",
+    "hypothesis",
+    "comparator",
+    "falsification",
+    "maturity",
+    "horizon",
+    "priority",
+    "first_experiment",
+    "safety_boundary",
+    "source_ids"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^OA-OPP-[0-9]{3}$" },
+    "name": { "type": "string", "minLength": 1 },
+    "owner_problem": { "type": "string", "minLength": 1 },
+    "hypothesis": { "type": "string", "minLength": 1 },
+    "comparator": { "type": "string", "minLength": 1 },
+    "falsification": { "type": "string", "minLength": 1 },
+    "maturity": { "enum": ["hypothesis", "planned", "instrumented", "collecting", "experimentally_supported", "validated", "productized", "rejected"] },
+    "horizon": { "enum": ["v0", "post_v0", "future_research"] },
+    "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+    "first_experiment": { "type": "string", "minLength": 1 },
+    "safety_boundary": { "type": "string", "minLength": 1 },
+    "source_ids": { "type": "array", "items": { "type": "string", "pattern": "^OA-SRC-[0-9]{4}$" }, "uniqueItems": true }
+  }
+}

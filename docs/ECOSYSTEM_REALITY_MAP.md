@@ -1,7 +1,7 @@
 # Ecosystem Reality Map
 
 **Status:** Authoritative present-state register
-**Effective:** 25 August 2026
+**Effective:** 26 August 2026
 **Authority:** This document governs claims about what exists, works, is integrated, is experimentally supported, or remains future-state across the ecosystem.
 
 ## Governing rule
@@ -26,6 +26,10 @@ No architecture diagram, roadmap, hypothesis, AI output, README, portfolio narra
 | Open Aqua application/repository | Real freshwater application/project with governed architecture and product work | CURRENT / DEMONSTRATED |
 | Open Aqua OS architecture | Documented domain architecture with explicit delivery truth/maturity distinctions | CURRENT / DEMONSTRATED as architecture; not proof every capability is implemented |
 | GitHub evidence/governance documents | Decision, source, experiment and architecture artifacts exist | CURRENT / DEMONSTRATED |
+| Research intelligence architecture | Evidence model, source/opportunity registries, ingestion protocol and experiment template exist | CURRENT / DEMONSTRATED as documentation; manually curated |
+| Fishes/MDPI scientific radar | Seeded research-theme map with 8 initial scientific records | CURRENT / DEMONSTRATED as a non-exhaustive radar; not an Open Aqua validation |
+| OceanStar commercial radar | Public vendor claims are recorded and separated from independent evidence | CURRENT / DEMONSTRATED as intelligence; OceanStar remains an adjacent signal, not a verified direct competitor |
+| Automated literature/competitor ingestion | No operating ingestion or monitoring pipeline exists | NOT STARTED / NO EVIDENCE |
 | Prime 7.3.1.1 Evidence Grounded | Existing private local FastAPI/Ollama multi-agent system with orchestration/governance code | CURRENT / DEMONSTRATED |
 | Prime ↔ Open Aqua integration | No native evidence bridge demonstrated | NOT STARTED / NO EVIDENCE |
 | Open Aqua Edge | Defined future physical telemetry/device layer | PLANNED / UNVALIDATED |
