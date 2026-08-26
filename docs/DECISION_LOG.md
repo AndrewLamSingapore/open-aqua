@@ -44,6 +44,24 @@ This log records material product decisions that affect scope, safety, privacy, 
 | Generic safe ranges | Add clearly separated Tank Normal experiment | Personal history may inform description but never relax welfare constraints. |
 | Broader competitor parity | Selective parity on owner jobs | Differentiate through outcome memory, restraint, time protection and Singapore knowledge. |
 
+## Controlled changes
+
+### 26 August 2026 — VELYQUA identity normalization
+
+| Field | Record |
+|---|---|
+| Effective version | Governance normalization; source release remains 0.3.1 and the 0.6 reconstruction remains a capability candidate |
+| Decision | Adopt VELYQUA 维澜 as the sole current identity; retire the former product name except in marked historical identifiers and migration evidence; make `AndrewLamSingapore/velyqua` the sole authoritative repository |
+| Evidence and alternatives | Lam explicitly directed that VELYQUA completely replaces the former name. Keeping two active identities was rejected because it creates product, repository and release ambiguity |
+| Safety and privacy | No product-safety boundary changes. Manual entry remains authoritative; sensors remain optional; diagnosis, prescription and automatic equipment control remain excluded |
+| Legal status | Working-name adoption only. Trademark, App Store and legal clearance are not claimed and remain owner-controlled gates |
+| Delivery and migration | Documentation, package identity, URI scheme, bundle/package identifiers, database naming and storage keys were renamed. Before external beta, verify Apple, Expo/EAS and Supabase ownership/redirects and decide whether any historical local test data needs migration or can be retired |
+| Approver | Lam, 26 August 2026 |
+| Required changes | Normalize repository governance and provenance; supersede stale pull requests; add the identity-transition release gate; align the personal Master record |
+| Rollback / withdrawal | Revert this controlled change and affected identity configuration together while preserving provenance. Never silently reactivate a retired name or discard recoverable user data |
+
+Historical baseline rows retain their effective dates but are read under the current VELYQUA identity; they are not evidence that the name existed on 12 August.
+
 ## Controlled-change record
 
 Every new material decision must include:
