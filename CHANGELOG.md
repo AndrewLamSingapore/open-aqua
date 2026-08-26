@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6 capability reconstruction candidate — 2026-08-26
+
+- Created from verified `main@8ed08da`; this is not the missing original `9c224ec` checkpoint.
+- Added account-scoped Expo SQLite persistence and a deterministic transactional sync outbox.
+- Added rollback coverage for interrupted record/outbox writes.
+- Added non-destructive import for known earlier AsyncStorage representations.
+- Added fail-closed malformed-data handling with a visible, non-replacing error state.
+- Added account-scoped local deletion and outbox cleanup.
+- Kept external release gates open; see `RECONSTRUCTION_NOTICE.md`.
+
 ## 0.3.1 — 2026-08-13
 
 - Replaced the invented starter aquarium with the founder's real Singapore planted community tank.

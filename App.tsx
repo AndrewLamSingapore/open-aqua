@@ -26,10 +26,13 @@ import { evaluateTank, previewWaterChange } from './src/domain/decisionEngine';
 import { Activity, Reading, Tank, WaterParameter } from './src/domain/types';
 import {
   LocalTankRecord,
-  loadTankRecord,
-  markTankChanged,
-  saveTankRecord
+  markTankChanged
 } from './src/storage/tankStore';
+import {
+  loadTankRecordSqlite,
+  markTankSyncFailureSqlite,
+  saveTankRecordSqlite
+} from './src/storage/sqliteTankStore';
 import { mergeTankSnapshots } from './src/sync/merge';
 import { syncTankRecordWithRetry } from './src/sync/tankSync';
 import { colors } from './src/theme';
@@ -132,6 +135,7 @@ function TankApp({ session }: { session: Session }) {
   const [account, setAccount] = useState(false);
   const [syncState, setSyncState] = useState<SyncState>('local');
   const [syncError, setSyncError] = useState<string>();
+  const [loadError, setLoadError] = useState<string>();
   const recordRef = useRef<LocalTankRecord | null>(null);
   const syncingRef = useRef(false);
   const resyncRef = useRef(false);
@@ -166,9 +170,12 @@ function TankApp({ session }: { session: Session }) {
             pending: true
           }
         : outcome.record;
+      await saveTankRecordSqlite(session.user.id, next, {
+        enqueue: next.pending,
+        clearOutbox: !next.pending
+      });
       recordRef.current = next;
       setRecord(next);
-      await saveTankRecord(session.user.id, next);
       if (changedWhileSyncing) resyncRef.current = true;
       setSyncState(changedWhileSyncing ? 'local' : 'synced');
     } catch (error) {
@@ -177,6 +184,11 @@ function TankApp({ session }: { session: Session }) {
         : 'Unknown synchronisation error';
       setSyncError(message);
       setSyncState('error');
+      try {
+        await markTankSyncFailureSqlite(session.user.id, message);
+      } catch {
+        // Preserve the original visible sync failure; a secondary diagnostic write cannot replace it.
+      }
     } finally {
       syncingRef.current = false;
       if (resyncRef.current) {
@@ -188,14 +200,18 @@ function TankApp({ session }: { session: Session }) {
 
   useEffect(() => {
     let cancelled = false;
-    loadTankRecord(session.user.id).then((loaded) => {
+    loadTankRecordSqlite(session.user.id).then((loaded) => {
       if (cancelled) return;
       recordRef.current = loaded;
       setRecord(loaded);
       setSyncState(loaded.pending ? 'local' : 'synced');
       setTimeout(() => { void sync(); }, 0);
     }).catch((error) => {
-      if (!cancelled) Alert.alert('Tank history could not be opened', error instanceof Error ? error.message : 'Please restart Open Aqua.');
+      if (!cancelled) {
+        const message = error instanceof Error ? error.message : 'Please restart Open Aqua.';
+        setLoadError(message);
+        Alert.alert('Tank history could not be opened safely', message);
+      }
     });
     return () => { cancelled = true; };
   }, [session.user.id, sync]);
@@ -227,13 +243,19 @@ function TankApp({ session }: { session: Session }) {
   const updateTank = async (tank: Tank) => {
     if (!recordRef.current) return;
     const next = markTankChanged(recordRef.current, tank);
+    await saveTankRecordSqlite(session.user.id, next, { enqueue: true });
     recordRef.current = next;
     setRecord(next);
     setSyncState('local');
-    await saveTankRecord(session.user.id, next);
     void sync();
   };
 
+  if (loadError) {
+    return <SafeAreaView style={styles.loading}>
+      <Text style={styles.loadingText}>Your local history was not replaced.</Text>
+      <Text style={styles.loadError}>{loadError}</Text>
+    </SafeAreaView>;
+  }
   if (!record) return <Loading label="Preparing your aquarium history…" />;
   const tank = record.tank;
   const statusLabel = syncError ? `${syncLabels[syncState]} · ${syncError}` : syncLabels[syncState];
@@ -376,6 +398,7 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.cloud },
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.cloud },
   loadingText: { color: colors.muted, marginTop: 12 },
+  loadError: { color: colors.coral, marginTop: 10, paddingHorizontal: 28, textAlign: 'center' },
   header: { paddingHorizontal: 20, paddingVertical: 12, backgroundColor: colors.white, borderBottomWidth: 1, borderColor: colors.line, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   headerCopy: { flex: 1, paddingRight: 10 },
   brand: { fontSize: 12, fontWeight: '900', letterSpacing: 2, color: colors.teal },

@@ -28,6 +28,7 @@ This log records material product decisions that affect scope, safety, privacy, 
 | 0.3 | Introduce the governed Open Aqua OS with stable capability IDs and explicit Working, Foundation, Planned and Deferred states. | `src/os/capabilities.ts` and `OPEN_AQUA_OS.md` |
 | 0.3.1 docs | Convert stable, non-sensitive v2 product direction into reviewable Markdown. Keep raw source documents and private commercial material outside GitHub. | `docs/` and root `README.md` |
 | Research v1 | Separate scientific reports, commercial claims and Open Aqua maturity; seed Fishes/MDPI and OceanStar radars without expanding V0. | `docs/RESEARCH_INTELLIGENCE_DECISION.md` and `research/` |
+| 0.6 reconstruction candidate | Reconstruct only evidence-backed local durability behavior from current `main`; never present the branch as recovery of missing commit `9c224ec`. | `RECONSTRUCTION_NOTICE.md`, `reconstruction-manifest.json` and reconstruction-specific tests |
 
 ## v1.0 to v2.0 changes
 
