@@ -1,6 +1,6 @@
 {
   "name": "open-aqua",
-  "version": "0.3.1",
+  "version": "0.6.0",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -11,8 +11,13 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "verify": "npm run typecheck && npm test",
+    "doctor": "expo-doctor",
     "export:ios": "expo export --platform ios --output-dir dist",
-    "release:check": "npm run verify && npm run export:ios"
+    "release:validate": "node scripts/release-readiness.mjs --source",
+    "release:check": "npm run release:check:source",
+    "release:check:source": "npm run release:validate && npm run verify && npm run doctor && npm run export:ios",
+    "release:check:testflight": "node scripts/release-readiness.mjs --testflight && npm run verify && npm run doctor && npm run export:ios",
+    "release:check:production": "node scripts/release-readiness.mjs --production && npm run verify && npm run doctor && npm run export:ios"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -35,6 +40,7 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/react": "~19.2.2",
+    "expo-doctor": "1.20.2",
     "typescript": "~5.9.2",
     "vitest": "^4.0.18"
   },

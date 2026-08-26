@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.6.0",
+  "candidateCommit": "REPLACE_WITH_FULL_40_CHARACTER_GIT_COMMIT_SHA",
+  "approvedBy": "REPLACE_WITH_ACCOUNTABLE_OWNER",
+  "completedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "testflight": {
+    "productionSupabaseDeployed": { "passed": false, "evidence": "Supabase project URL and deployment record" },
+    "databaseMigrationApplied": { "passed": false, "evidence": "Migration execution record" },
+    "rowLevelSecurityCrossAccountPassed": { "passed": false, "evidence": "Two-account isolation test record" },
+    "deleteAccountFunctionDeployed": { "passed": false, "evidence": "Function deployment and deletion test record" },
+    "authenticationRedirectConfigured": { "passed": false, "evidence": "Supabase redirect configuration and deep-link test" },
+    "appStoreRecordCreated": { "passed": false, "evidence": "App Store Connect app and bundle ID record" },
+    "appleAgreementsCurrent": { "passed": false, "evidence": "Apple agreements status checked" },
+    "appPrivacyDraftPrepared": { "passed": false, "evidence": "App Store Connect privacy-response review" }
+  },
+  "production": {
+    "realIPhoneAcceptancePassed": { "passed": false, "evidence": "Device, iOS version, build and test record" },
+    "twoDeviceConflictPassed": { "passed": false, "evidence": "Two-device merge test record" },
+    "offlineInterruptionPassed": { "passed": false, "evidence": "Offline and interrupted-write test record" },
+    "exportAndDeletionPassed": { "passed": false, "evidence": "Export and permanent deletion test record" },
+    "accessibilityPassed": { "passed": false, "evidence": "VoiceOver, Larger Text, contrast and keyboard review" },
+    "backupRestoreDrillPassed": { "passed": false, "evidence": "Backup and restoration drill record" },
+    "monitoringActive": { "passed": false, "evidence": "Crash, sync and incident-monitoring dashboard" },
+    "privacyReviewPassed": { "passed": false, "evidence": "Qualified privacy review and final disclosures" },
+    "aquariumSafetyReviewPassed": { "passed": false, "evidence": "Qualified aquarium-safety review record" },
+    "appStoreMetadataAndScreenshotsComplete": { "passed": false, "evidence": "Actual-build screenshots and listing review" },
+    "externalBetaExitMetricsPassed": { "passed": false, "evidence": "Beta metric report against documented thresholds" },
+    "incidentRollbackReady": { "passed": false, "evidence": "Named incident owner, rollback and restoration procedure" }
+  }
+}

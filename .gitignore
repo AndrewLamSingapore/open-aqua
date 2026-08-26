@@ -7,3 +7,4 @@ coverage/
 .env.*
 !.env.example
 *.ipa
+.release-attestation.json
