@@ -12,12 +12,13 @@
     "test": "vitest run",
     "verify": "npm run typecheck && npm test",
     "doctor": "expo-doctor",
+    "security:audit": "node scripts/dependency-audit.mjs",
     "export:ios": "expo export --platform ios --output-dir dist",
     "release:validate": "node scripts/release-readiness.mjs --source",
     "release:check": "npm run release:check:source",
-    "release:check:source": "npm run release:validate && npm run verify && npm run doctor && npm run export:ios",
-    "release:check:testflight": "node scripts/release-readiness.mjs --testflight && npm run verify && npm run doctor && npm run export:ios",
-    "release:check:production": "node scripts/release-readiness.mjs --production && npm run verify && npm run doctor && npm run export:ios"
+    "release:check:source": "npm run release:validate && npm run security:audit && npm run verify && npm run doctor && npm run export:ios",
+    "release:check:testflight": "node scripts/release-readiness.mjs --testflight && npm run security:audit && npm run verify && npm run doctor && npm run export:ios",
+    "release:check:production": "node scripts/release-readiness.mjs --production && npm run security:audit && npm run verify && npm run doctor && npm run export:ios"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
