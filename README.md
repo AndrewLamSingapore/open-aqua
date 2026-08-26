@@ -145,6 +145,8 @@ The public product baseline is reviewable Markdown:
 - [Roadmap and Release Gates](docs/ROADMAP_AND_RELEASE_GATES.md)
 - [Decision Log](docs/DECISION_LOG.md)
 - [Clean-Room and Source Policy](docs/CLEAN_ROOM_AND_SOURCES.md)
+- [Ecosystem Reality Map](docs/ECOSYSTEM_REALITY_MAP.md)
+- [Research Intelligence](research/README.md) — Fishes/MDPI radar, OceanStar radar, opportunity matrix and market gaps
 
 Intent does not equal implementation. Current delivery status is governed by `src/os/capabilities.ts`, implementation evidence and automated tests.
 
