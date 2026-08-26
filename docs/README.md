@@ -16,6 +16,9 @@ The 12 August 2026 Open Aqua 2.0 blueprint established the baseline. It no longe
 | [Ammonia Toxicity Fusion V1](AMMONIA_TOXICITY_FUSION_V1.md) | Approved ammonia/NH3 cross-parameter specification |
 | [Roadmap and Release Gates](ROADMAP_AND_RELEASE_GATES.md) | Delivery sequence and validation gates |
 | [Clean Room and Sources](CLEAN_ROOM_AND_SOURCES.md) | Independent-development/source controls |
+| [Ecosystem Reality Map](ECOSYSTEM_REALITY_MAP.md) | Authoritative present-state and claim boundary |
+| [Research Intelligence Decision](RESEARCH_INTELLIGENCE_DECISION.md) | Controlled boundary for scientific and commercial intelligence |
+| [Research Intelligence](../research/README.md) | Evidence model, radars, registries, opportunity matrix and market gaps |
 
 ## Authority model
 
