@@ -1,6 +1,10 @@
-# VELYQUA
+<p align="center">
+  <img src="assets/icon.svg" width="180" alt="VELYQUA 维澜 logo">
+</p>
 
-### 维澜
+<h1 align="center">VELYQUA</h1>
+
+<h3 align="center">维澜</h3>
 
 > **洞察微澜，守护水境。**
 > *Detect subtle change. Safeguard the water environment.*
