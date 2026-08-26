@@ -30,6 +30,7 @@ import {
 } from './src/storage/tankStore';
 import {
   loadTankRecordSqlite,
+  markTankSyncFailureSqlite,
   saveTankRecordSqlite
 } from './src/storage/sqliteTankStore';
 import { mergeTankSnapshots } from './src/sync/merge';
@@ -183,6 +184,11 @@ function TankApp({ session }: { session: Session }) {
         : 'Unknown synchronisation error';
       setSyncError(message);
       setSyncState('error');
+      try {
+        await markTankSyncFailureSqlite(session.user.id, message);
+      } catch {
+        // Preserve the original visible sync failure; a secondary diagnostic write cannot replace it.
+      }
     } finally {
       syncingRef.current = false;
       if (resyncRef.current) {

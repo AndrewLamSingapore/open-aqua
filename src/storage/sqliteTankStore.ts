@@ -128,8 +128,22 @@ function fnv1a(value: string): string {
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
 
+function canonicalize(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (isRecord(value)) {
+    return Object.fromEntries(
+      Object.keys(value).sort().map((key) => [key, canonicalize(value[key])])
+    );
+  }
+  return value;
+}
+
+function canonicalJson(value: unknown): string {
+  return JSON.stringify(canonicalize(value));
+}
+
 export function deterministicOperationId(accountId: string, record: LocalTankRecord): string {
-  const payload = JSON.stringify(record);
+  const payload = canonicalJson(record);
   return `tank:${accountId}:${record.tank.id}:${record.localUpdatedAt}:${fnv1a(payload)}`;
 }
 
@@ -172,16 +186,36 @@ export class AccountSqliteStore {
         account_id TEXT NOT NULL,
         imported_at TEXT NOT NULL
       );
+
+      PRAGMA user_version = 1;
     `);
   }
 
   async load(accountId: string): Promise<LocalTankRecord | null> {
     requireAccountId(accountId);
-    const row = await this.db.getFirstAsync<StoredRecordRow>(
-      'SELECT record_json FROM account_tank_records WHERE account_id = ? LIMIT 1',
-      accountId
-    );
-    return row ? parseLocalTankRecord(row.record_json, 'SQLite account record') : null;
+    const snapshot: { loaded: LocalTankRecord | null; operationCount: number } = {
+      loaded: null,
+      operationCount: 0
+    };
+    await this.db.withExclusiveTransactionAsync(async (transaction) => {
+      const row = await transaction.getFirstAsync<StoredRecordRow>(
+        'SELECT record_json FROM account_tank_records WHERE account_id = ? LIMIT 1',
+        accountId
+      );
+      snapshot.loaded = row ? parseLocalTankRecord(row.record_json, 'SQLite account record') : null;
+      const count = await transaction.getFirstAsync<{ operation_count: number }>(
+        'SELECT COUNT(*) AS operation_count FROM sync_outbox WHERE account_id = ?',
+        accountId
+      );
+      snapshot.operationCount = Number(count?.operation_count ?? 0);
+    });
+    if (!snapshot.loaded && snapshot.operationCount > 0) {
+      throw new MalformedLocalDataError('The sync outbox exists without its SQLite record. No data was replaced; recovery review is required.');
+    }
+    if (snapshot.loaded && snapshot.loaded.pending !== (snapshot.operationCount > 0)) {
+      throw new MalformedLocalDataError('The SQLite record and sync outbox disagree. No data was replaced; recovery review is required.');
+    }
+    return snapshot.loaded;
   }
 
   private async writeRecord(executor: SqlExecutor, accountId: string, record: LocalTankRecord): Promise<void> {
@@ -212,7 +246,7 @@ export class AccountSqliteStore {
       operationId,
       accountId,
       record.tank.id,
-      JSON.stringify(record.tank),
+      canonicalJson(record.tank),
       now,
       now
     );
@@ -300,6 +334,18 @@ export class AccountSqliteStore {
     }));
   }
 
+  async markFailure(accountId: string, message: string): Promise<void> {
+    requireAccountId(accountId);
+    await this.db.runAsync(
+      `UPDATE sync_outbox
+       SET attempts = attempts + 1, last_error = ?, updated_at = ?
+       WHERE account_id = ?`,
+      message.slice(0, 500),
+      this.clock(),
+      accountId
+    );
+  }
+
   async deleteAccount(accountId: string): Promise<void> {
     requireAccountId(accountId);
     await this.db.withExclusiveTransactionAsync(async (transaction) => {
@@ -372,6 +418,11 @@ export async function saveTankRecordSqlite(
     enqueue: options.enqueue ?? record.pending,
     clearOutbox: options.clearOutbox
   });
+}
+
+export async function markTankSyncFailureSqlite(accountId: string, message: string): Promise<void> {
+  const store = await openStore();
+  await store.markFailure(accountId, message);
 }
 
 export async function removeUserTankDataSqlite(accountId: string): Promise<void> {

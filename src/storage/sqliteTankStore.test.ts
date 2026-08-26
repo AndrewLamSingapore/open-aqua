@@ -30,6 +30,7 @@ class FakeSqlite implements SqlitePort {
   outbox = new Map<string, { accountId: string; aggregateId: string; payload: string; createdAt: string }>();
   claims = new Map<string, string>();
   failOutboxWrite = false;
+  failures = new Map<string, { attempts: number; message: string }>();
 
   async execAsync(): Promise<void> {}
 
@@ -75,11 +76,19 @@ class FakeSqlite implements SqlitePort {
       for (const [source, account] of this.claims) if (account === params[0]) this.claims.delete(source);
     } else if (sql.includes('INSERT OR IGNORE INTO migration_claims')) {
       if (!this.claims.has(String(params[0]))) this.claims.set(String(params[0]), String(params[1]));
+    } else if (sql.includes('UPDATE sync_outbox')) {
+      const accountId = String(params[2]);
+      const prior = this.failures.get(accountId);
+      this.failures.set(accountId, { attempts: (prior?.attempts ?? 0) + 1, message: String(params[0]) });
     }
     return {};
   }
 
   async getFirstAsync<T>(sql: string, ...params: (string | number | null)[]): Promise<T | null> {
+    if (sql.includes('COUNT(*) AS operation_count')) {
+      const count = [...this.outbox.values()].filter((row) => row.accountId === params[0]).length;
+      return { operation_count: count } as T;
+    }
     if (sql.includes('FROM account_tank_records')) {
       const record = this.records.get(String(params[0]));
       return (record ? { record_json: record } : null) as T | null;
@@ -121,6 +130,14 @@ describe('SQLite account store reconstruction', () => {
     const record = accountRecord('owner-a');
     expect(deterministicOperationId('owner-a', record)).toBe(deterministicOperationId('owner-a', record));
     expect(deterministicOperationId('owner-a', record)).not.toBe(deterministicOperationId('owner-b', record));
+    const reordered = {
+      pending: record.pending,
+      localUpdatedAt: record.localUpdatedAt,
+      tank: record.tank,
+      schemaVersion: record.schemaVersion,
+      starter: record.starter
+    } as LocalTankRecord;
+    expect(deterministicOperationId('owner-a', reordered)).toBe(deterministicOperationId('owner-a', record));
   });
 
   it('rolls back the record when the matching outbox write is interrupted', async () => {
@@ -177,5 +194,15 @@ describe('SQLite account store reconstruction', () => {
     expect(await store.load('owner-a')).toBeNull();
     expect(await store.load('owner-b')).not.toBeNull();
     expect(await store.listPending('owner-a')).toHaveLength(0);
+  });
+
+  it('records retry failures only against the affected account outbox', async () => {
+    const db = new FakeSqlite();
+    const store = new AccountSqliteStore(db);
+    await store.persist('owner-a', accountRecord('owner-a'));
+    await store.persist('owner-b', accountRecord('owner-b'));
+    await store.markFailure('owner-a', 'network unavailable');
+    expect(db.failures.get('owner-a')).toEqual({ attempts: 1, message: 'network unavailable' });
+    expect(db.failures.has('owner-b')).toBe(false);
   });
 });
