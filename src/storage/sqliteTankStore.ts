@@ -10,12 +10,15 @@ const legacyAccountKey = (accountId: string) => `@open-aqua/user/${accountId}/pr
 
 type SqlValue = string | number | null;
 
-export interface SqlitePort {
-  execAsync(source: string): Promise<void>;
+export interface SqlExecutor {
   runAsync(source: string, ...params: SqlValue[]): Promise<unknown>;
   getFirstAsync<T>(source: string, ...params: SqlValue[]): Promise<T | null>;
   getAllAsync<T>(source: string, ...params: SqlValue[]): Promise<T[]>;
-  withTransactionAsync(task: () => Promise<void>): Promise<void>;
+}
+
+export interface SqlitePort extends SqlExecutor {
+  execAsync(source: string): Promise<void>;
+  withExclusiveTransactionAsync(task: (transaction: SqlExecutor) => Promise<void>): Promise<void>;
 }
 
 type StoredRecordRow = { record_json: string };
@@ -181,8 +184,8 @@ export class AccountSqliteStore {
     return row ? parseLocalTankRecord(row.record_json, 'SQLite account record') : null;
   }
 
-  private async writeRecord(accountId: string, record: LocalTankRecord): Promise<void> {
-    await this.db.runAsync(
+  private async writeRecord(executor: SqlExecutor, accountId: string, record: LocalTankRecord): Promise<void> {
+    await executor.runAsync(
       `INSERT INTO account_tank_records
         (account_id, aggregate_id, schema_version, record_json, updated_at)
        VALUES (?, ?, ?, ?, ?)
@@ -199,10 +202,10 @@ export class AccountSqliteStore {
     );
   }
 
-  private async enqueue(accountId: string, record: LocalTankRecord): Promise<void> {
+  private async enqueue(executor: SqlExecutor, accountId: string, record: LocalTankRecord): Promise<void> {
     const now = this.clock();
     const operationId = deterministicOperationId(accountId, record);
-    await this.db.runAsync(
+    await executor.runAsync(
       `INSERT OR IGNORE INTO sync_outbox
         (operation_id, account_id, aggregate_id, payload_json, attempts, created_at, updated_at, last_error)
        VALUES (?, ?, ?, ?, 0, ?, ?, NULL)`,
@@ -222,16 +225,16 @@ export class AccountSqliteStore {
   ): Promise<void> {
     requireAccountId(accountId);
     parseLocalTankRecord(JSON.stringify(record), 'Record to persist');
-    await this.db.withTransactionAsync(async () => {
-      await this.writeRecord(accountId, record);
+    await this.db.withExclusiveTransactionAsync(async (transaction) => {
+      await this.writeRecord(transaction, accountId, record);
       if (options.clearOutbox) {
-        await this.db.runAsync(
+        await transaction.runAsync(
           'DELETE FROM sync_outbox WHERE account_id = ? AND aggregate_id = ?',
           accountId,
           record.tank.id
         );
       }
-      if (options.enqueue) await this.enqueue(accountId, record);
+      if (options.enqueue) await this.enqueue(transaction, accountId, record);
     });
   }
 
@@ -243,8 +246,8 @@ export class AccountSqliteStore {
     requireAccountId(accountId);
     parseLocalTankRecord(JSON.stringify(candidate), 'Import candidate');
     let selected = candidate;
-    await this.db.withTransactionAsync(async () => {
-      const existing = await this.db.getFirstAsync<StoredRecordRow>(
+    await this.db.withExclusiveTransactionAsync(async (transaction) => {
+      const existing = await transaction.getFirstAsync<StoredRecordRow>(
         'SELECT record_json FROM account_tank_records WHERE account_id = ? LIMIT 1',
         accountId
       );
@@ -254,17 +257,17 @@ export class AccountSqliteStore {
       }
 
       if (sourceKey) {
-        const claim = await this.db.getFirstAsync<MigrationClaimRow>(
+        const claim = await transaction.getFirstAsync<MigrationClaimRow>(
           'SELECT account_id FROM migration_claims WHERE source_key = ? LIMIT 1',
           sourceKey
         );
         if (claim && claim.account_id !== accountId) selected = createStarterRecord();
       }
 
-      await this.writeRecord(accountId, selected);
-      if (selected.pending) await this.enqueue(accountId, selected);
+      await this.writeRecord(transaction, accountId, selected);
+      if (selected.pending) await this.enqueue(transaction, accountId, selected);
       if (sourceKey) {
-        await this.db.runAsync(
+        await transaction.runAsync(
           'INSERT OR IGNORE INTO migration_claims (source_key, account_id, imported_at) VALUES (?, ?, ?)',
           sourceKey,
           accountId,
@@ -299,10 +302,10 @@ export class AccountSqliteStore {
 
   async deleteAccount(accountId: string): Promise<void> {
     requireAccountId(accountId);
-    await this.db.withTransactionAsync(async () => {
-      await this.db.runAsync('DELETE FROM sync_outbox WHERE account_id = ?', accountId);
-      await this.db.runAsync('DELETE FROM account_tank_records WHERE account_id = ?', accountId);
-      await this.db.runAsync('DELETE FROM migration_claims WHERE account_id = ?', accountId);
+    await this.db.withExclusiveTransactionAsync(async (transaction) => {
+      await transaction.runAsync('DELETE FROM sync_outbox WHERE account_id = ?', accountId);
+      await transaction.runAsync('DELETE FROM account_tank_records WHERE account_id = ?', accountId);
+      await transaction.runAsync('DELETE FROM migration_claims WHERE account_id = ?', accountId);
     });
   }
 }

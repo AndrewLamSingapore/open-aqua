@@ -4,6 +4,7 @@ import {
   deterministicOperationId,
   MalformedLocalDataError,
   parseLocalTankRecord,
+  SqlExecutor,
   SqlitePort
 } from './sqliteTankStore';
 import { LocalTankRecord } from './tankStore';
@@ -32,14 +33,14 @@ class FakeSqlite implements SqlitePort {
 
   async execAsync(): Promise<void> {}
 
-  async withTransactionAsync(task: () => Promise<void>): Promise<void> {
+  async withExclusiveTransactionAsync(task: (transaction: SqlExecutor) => Promise<void>): Promise<void> {
     const snapshot = {
       records: new Map(this.records),
       outbox: new Map(this.outbox),
       claims: new Map(this.claims)
     };
     try {
-      await task();
+      await task(this);
     } catch (error) {
       this.records = snapshot.records;
       this.outbox = snapshot.outbox;
