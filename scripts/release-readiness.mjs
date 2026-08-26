@@ -155,6 +155,14 @@ export function validateSource(root, { skipAssets = false } = {}) {
   requireCondition(/^\d+$/.test(app.ios?.buildNumber ?? ''), 'iOS buildNumber must be numeric', failures);
   requireCondition(app.ios?.infoPlist?.ITSAppUsesNonExemptEncryption === false, 'Export-compliance encryption declaration is missing', failures);
 
+  const plugins = app.plugins ?? [];
+  requireCondition(plugins.includes('expo-secure-store'), 'expo-secure-store config plugin is missing', failures);
+  const splashPlugin = plugins.find((entry) => Array.isArray(entry) && entry[0] === 'expo-splash-screen');
+  requireCondition(Boolean(splashPlugin), 'expo-splash-screen config plugin is missing', failures);
+  requireCondition(splashPlugin?.[1]?.image === './assets/splash.png', 'expo-splash-screen must use assets/splash.png', failures);
+  requireCondition(splashPlugin?.[1]?.backgroundColor === '#F4F8F8', 'Unexpected splash-screen background color', failures);
+  requireCondition(app.splash === undefined, 'Legacy root splash configuration is not allowed', failures);
+
   const privacy = app.ios?.privacyManifests ?? {};
   requireCondition(privacy.NSPrivacyTracking === false, 'Privacy manifest must explicitly disable tracking', failures);
   const collected = new Set((privacy.NSPrivacyCollectedDataTypes ?? []).map((entry) => entry.NSPrivacyCollectedDataType));

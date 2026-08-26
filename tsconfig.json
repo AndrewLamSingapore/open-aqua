@@ -3,8 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "types": ["node"],
+    "paths": { "@/*": ["./src/*"] }
   },
   "include": ["App.tsx", "src/**/*.ts", "src/**/*.tsx"]
 }
