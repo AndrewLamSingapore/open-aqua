@@ -27,6 +27,7 @@ This log records material product decisions that affect scope, safety, privacy, 
 | 0.2 | Add owner accounts, local-first private Supabase sync, conflict merge, export, deletion, privacy policy and TestFlight configuration. | Auth, storage, sync, Supabase migration and Edge Function in the repository |
 | 0.3 | Introduce the governed Open Aqua OS with stable capability IDs and explicit Working, Foundation, Planned and Deferred states. | `src/os/capabilities.ts` and `OPEN_AQUA_OS.md` |
 | 0.3.1 docs | Convert stable, non-sensitive v2 product direction into reviewable Markdown. Keep raw source documents and private commercial material outside GitHub. | `docs/` and root `README.md` |
+| Research v1 | Separate scientific reports, commercial claims and Open Aqua maturity; seed Fishes/MDPI and OceanStar radars without expanding V0. | `docs/RESEARCH_INTELLIGENCE_DECISION.md` and `research/` |
 
 ## v1.0 to v2.0 changes
 
