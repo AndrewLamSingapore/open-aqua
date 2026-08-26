@@ -9,7 +9,7 @@
 > **洞察微澜，守护水境。**
 > *Detect subtle change. Safeguard the water environment.*
 
-> **Reconstruction branch notice:** This branch is a clean-room 0.6 capability reconstruction from `main@8ed08da`. It is not the missing original `9c224ec` checkpoint and is not a release candidate. See [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md).
+> **Reconstruction provenance:** `main` contains the clean-room 0.6 capability reconstruction created from `main@8ed08da`. It is not a recovery of the unavailable historical checkpoint `9c224ec`, and it does not close any external release gate. See [`RECONSTRUCTION_NOTICE.md`](RECONSTRUCTION_NOTICE.md).
 
 ## A freshwater digital twin — and an experiment in earlier warning.
 
