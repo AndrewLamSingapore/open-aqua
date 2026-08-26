@@ -2,16 +2,17 @@
 
 **Classification:** Clean-room reconstruction candidate  
 **Created:** 26 August 2026  
-**Branch:** `reconstruction/velyqua-0.6-from-main-2026-08-26`
+**Original reconstruction branch:** `reconstruction/open-aqua-0.6-from-main-2026-08-26`  
+**Current location:** integrated into `main` through pull request #12
 **Verified base:** `main@8ed08da243b3e45e214af0fb3f447a3443d62f1f`
 
 ## This is not the missing original
 
 This branch does not recover, reproduce or continue the Git history of the missing local checkpoint previously recorded as:
 
-- branch `agent/velyqua-0.6-customer-safety`;
+- branch `agent/open-aqua-0.6-customer-safety`;
 - commit `9c224ec1a1a2f0d6ec411c62acda6a4b2b96001c`; and
-- tag `velyqua-0.6-safe-save`.
+- tag `open-aqua-0.6-safe-save`.
 
 That commit was unavailable on GitHub and no local repository or bundle was available when this branch was created. The missing commit is not a parent, merge source, cherry-pick source or validation source for this reconstruction.
 
@@ -40,6 +41,6 @@ The original changed-file list, individual tests, package/app build version, imp
 
 ## Explicit non-claims
 
-This branch is not a production release, recovery proof, TestFlight build or evidence that the original `85/85` checkpoint was reproduced. It does not validate real-iPhone behavior, a production Supabase backend, cross-account server isolation, accessibility, backup/restore, monitoring, privacy compliance or qualified aquarium-safety review.
+This reconstruction is not a production release, recovery proof, TestFlight build or evidence that the original `85/85` checkpoint was reproduced. It does not validate real-iPhone behavior, a production Supabase backend, cross-account server isolation, accessibility, backup/restore, monitoring, privacy compliance or qualified aquarium-safety review.
 
-It must remain review-only until its own CI and external release gates pass. Any eventual integration must use an ordinary reviewed pull request; it must not overwrite or rewrite `main` or the missing checkpoint identity.
+Its source changes passed repository CI and were integrated through ordinary reviewed pull request #12. External release gates remain open: integration into `main` is not TestFlight or production evidence. Historical identifiers above are preserved exactly for provenance and must not be rewritten as if the unavailable checkpoint used the VELYQUA name.

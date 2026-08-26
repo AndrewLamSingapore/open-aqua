@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — identity normalization — 2026-08-26
+
+- Established VELYQUA 维澜 as the sole current identity and `AndrewLamSingapore/velyqua` as the authoritative repository.
+- Preserved unavailable checkpoint identifiers exactly as historical provenance instead of mechanically renaming history.
+- Clarified that the clean-room reconstruction is integrated source evidence, not recovery proof or external release readiness.
+- Added an external-beta gate for Apple, Expo/EAS, Supabase redirect and recoverable local-data identity migration.
+- Superseded stale pre-normalization work rather than allowing it to reintroduce a retired identity.
+
+
 ## 0.6 capability reconstruction candidate — 2026-08-26
 
 - Created from verified `main@8ed08da`; this is not the missing original `9c224ec` checkpoint.

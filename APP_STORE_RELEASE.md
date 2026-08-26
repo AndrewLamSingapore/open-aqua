@@ -2,6 +2,16 @@
 
 The source is release-candidate ready when `npm run release:check` passes. A real TestFlight build still requires the owner-controlled Supabase, Expo and Apple accounts described in `SETUP_SIMPLE.md`.
 
+## Identity-transition gate
+
+Complete these checks before inviting any external tester. A repository rename does not migrate account-bound services or data.
+
+- [ ] Confirm whether any Apple/App Store record exists under the retired bundle identifier; migrate or formally retire it
+- [ ] Confirm the VELYQUA Expo/EAS project identity and ownership
+- [ ] Confirm Supabase authentication redirects accept `velyqua://**` and remove retired redirects only after recovery is unnecessary
+- [ ] Inventory founder/test-device data created under earlier identifiers and document whether it is migrated, exported or intentionally retired
+- [ ] Record the decision and evidence in the release log; do not infer completion from source CI
+
 ## Required owner setup
 
 - [ ] Supabase production project created in the owner's account

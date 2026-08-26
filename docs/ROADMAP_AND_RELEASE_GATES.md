@@ -90,7 +90,8 @@ Do not expand or submit while any of the following is true:
 - owner export or deletion fails;
 - placeholders, broken links, unfinished pages or known launch crashes remain;
 - privacy, accessibility or animal-safety review is incomplete; or
-- App Store disclosures differ from actual data and permission behavior.
+- App Store disclosures differ from actual data and permission behavior; or
+- the VELYQUA identity transition is unresolved across Apple, Expo/EAS, Supabase redirects or recoverable local data.
 
 ## Roadmap rule
 

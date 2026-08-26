@@ -3,15 +3,15 @@
   "classification": "clean_room_reconstruction",
   "claim": "not_original_recovery",
   "created_at": "2026-08-26",
-  "branch": "reconstruction/velyqua-0.6-from-main-2026-08-26",
+  "branch": "reconstruction/open-aqua-0.6-from-main-2026-08-26",
   "base": {
     "branch": "main",
     "commit": "8ed08da243b3e45e214af0fb3f447a3443d62f1f"
   },
   "missing_original_reference_only": {
-    "branch": "agent/velyqua-0.6-customer-safety",
+    "branch": "agent/open-aqua-0.6-customer-safety",
     "commit": "9c224ec1a1a2f0d6ec411c62acda6a4b2b96001c",
-    "tag": "velyqua-0.6-safe-save",
+    "tag": "open-aqua-0.6-safe-save",
     "available_to_reconstruction": false,
     "used_as_parent_or_source": false
   },
@@ -31,5 +31,10 @@
     "detailed_implementation_decisions",
     "complete_validation_transcript"
   ],
-  "release_status": "review_only_not_release_candidate"
+  "release_status": "integrated_source_external_release_gates_open",
+  "integration": {
+    "status": "merged_to_main",
+    "pull_request": 12,
+    "note": "Historical identifiers retain the name used when they were recorded; VELYQUA is the sole current product identity."
+  }
 }
