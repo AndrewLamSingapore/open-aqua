@@ -3,7 +3,7 @@
 **Status:** Authoritative governance index
 **Effective:** 21 August 2026
 
-GitHub repository `AndrewLamSingapore/velyqua` is the authoritative VELYQUA single source of truth. Conversation history, PDFs, DOCX files, investor decks, social posts and external notes are inputs or derived artifacts only. They do not override this repository.
+GitHub repository `AndrewLamSingapore/velyqua` is the authoritative VELYQUA single source of truth. VELYQUA 维澜 is the sole current product and platform identity. The former product name is retired and may appear only in clearly marked historical identifiers or migration evidence. Conversation history, PDFs, DOCX files, investor decks, social posts and external notes are inputs or derived artifacts only. They do not override this repository.
 
 ## Prototype North Star — LOCKED
 
@@ -112,6 +112,16 @@ Normative truth says what VELYQUA is allowed or required to be. Delivery truth s
 The prototype additionally adopts the relational sensor-fusion principle above: correlate first, infer second, and validate predictive value against a periodic-testing baseline. This is an experimental architecture principle, not authorization to invent causal relationships or unsupported safety thresholds.
 
 Continuous dissolved oxygen is recorded as a candidate experiment, not a V1 requirement. It must demonstrate incremental predictive value relative to its total experimental burden before promotion into the minimum sensor set.
+
+## 26 August 2026 identity normalization
+
+- VELYQUA 维澜 is the sole current working identity; the former name has no active product, repository or roadmap authority.
+- The authoritative repository is `AndrewLamSingapore/velyqua`. Redirects, historical branches, missing local checkpoints and superseded pull requests are provenance only.
+- Formal trademark, App Store and legal clearance remains pending. Repository adoption is not a claim of registration or clearance.
+- The software MVP remains manual-first and requires no sensors. VELYQUA Edge and the physical sensor-fusion programme remain experimental and do not authorize automatic equipment control.
+- The clean-room 0.6 reconstruction is integrated implementation evidence, not recovery of the unavailable historical checkpoint and not proof of external release readiness.
+- Before any external beta, the owner must resolve the identity transition across Apple, Expo/EAS, Supabase redirects and any recoverable local test data. The release checklist is the operational gate.
+- This normalization was approved by Lam on 26 August 2026. Rollback means reverting the controlled change while preserving historical identifiers and migration evidence; it does not silently reactivate the retired identity.
 
 ## External artifacts
 
