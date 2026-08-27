@@ -4,21 +4,23 @@ This increment implements the next cross-system leg without changing VELYQUA's p
 
 ## Runtime state machine
 
-```text
+~~~text
 PRIME ExperimentSpec
-  → validate target + contract
+  → require target_system = velyqua + validate contract
   → awaiting_owner_approval
-  → explicit owner approval
+  → authenticated owner approval record
   → approved_for_observation
   → collecting_evidence
-  → VELYQUA Observation records
-```
+  → provenance-bearing VELYQUA Observation records
+~~~
 
 PRIME's `verified` state is advisory and never becomes VELYQUA owner approval automatically.
 
+Owner approval is explicitly scoped to `observation_only` and records the owner identity, approval time, and approval provenance. The persistence adapter must obtain that identity from VELYQUA's authenticated owner boundary; this protocol module does not authenticate callers or grant owner authority.
+
 ## Allowed scope
 
-This boundary permits structured observation/evidence collection only. Observation records preserve experiment identity, evidence level and provenance so they can later be returned to PRIME for evidence-grounded evaluation.
+This boundary permits structured observation/evidence collection only. Inbound specifications must explicitly target VELYQUA and include non-empty evidence requirements. Observation records preserve experiment identity, RFC 3339 observation time, evidence level, and non-empty provenance so they can later be returned to PRIME for evidence-grounded evaluation.
 
 ## Explicitly excluded
 
