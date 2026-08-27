@@ -1,6 +1,6 @@
 # PRIME → VELYQUA Experiment Execution Boundary
 
-This increment implements the next cross-system leg without changing VELYQUA's product SSOT, SQLite/outbox durability boundary, or manual-first safety model.
+This increment implements the protocol boundary and its local persistence leg without changing VELYQUA's product SSOT or manual-first safety model.
 
 ## Runtime state machine
 
@@ -16,7 +16,7 @@ PRIME ExperimentSpec
 
 PRIME's `verified` state is advisory and never becomes VELYQUA owner approval automatically.
 
-Owner approval is explicitly scoped to `observation_only` and records the owner identity, approval time, and approval provenance. The persistence adapter must obtain that identity from VELYQUA's authenticated owner boundary; this protocol module does not authenticate callers or grant owner authority.
+Owner approval is explicitly scoped to `observation_only` and records the owner identity, approval time, and approval provenance. The caller must obtain that identity from VELYQUA's authenticated owner boundary; neither the protocol module nor the persistence adapter authenticates callers or grants owner authority.
 
 ## Allowed scope
 
@@ -35,8 +35,10 @@ This increment does not implement or authorize:
 
 ## SSOT and durability
 
-Existing VELYQUA domain records and the account-scoped SQLite + transactional outbox remain authoritative for the app. The integration module is a protocol boundary, not a replacement storage system. A later persistence adapter must reuse the existing local durability/outbox model rather than introduce a second local source of truth.
+Existing VELYQUA domain records and the account-scoped SQLite + transactional-outbox boundary remain authoritative for the app. Experiment executions, observations, and their integration outbox use the same SQLite database connection as tank data, with account-scoped keys, atomic record/outbox writes, deterministic replay ids, fail-closed decoding, export, and deletion. This is an additive adapter, not a second local source of truth.
+
+This adapter deliberately does not transmit outbox entries. A later, separately authorized transport may acknowledge a row only after the corresponding PRIME endpoint accepts its payload.
 
 ## Next leg
 
-After this boundary is verified, the next implementation is a persistence/outbox adapter for experiment executions and observations, followed by a PRIME observation-ingestion/evaluation endpoint and a Portal result/update contract.
+After this adapter is verified and merged, the next implementation is a PRIME observation-ingestion/evaluation endpoint, followed by a Portal result/update contract. Neither is implemented or authorized by this increment.

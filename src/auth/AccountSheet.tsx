@@ -5,6 +5,7 @@ import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { Button } from '../components';
 import { PRIVACY_POLICY_URL } from '../legal';
+import { exportExperimentDataSqlite } from '../storage/sqliteExperimentStore';
 import { loadTankRecordSqlite, removeUserTankDataSqlite } from '../storage/sqliteTankStore';
 import { colors } from '../theme';
 
@@ -52,7 +53,10 @@ export function AccountSheet({
   const exportData = async () => {
     setBusy(true);
     try {
-      const local = await loadTankRecordSqlite(session.user.id);
+      const [local, experiments] = await Promise.all([
+        loadTankRecordSqlite(session.user.id),
+        exportExperimentDataSqlite(session.user.id)
+      ]);
       if (!(await Sharing.isAvailableAsync())) throw new Error('Sharing is not available on this device.');
       const file = new File(Paths.cache, `velyqua-export-${new Date().toISOString().slice(0, 10)}.json`);
       if (file.exists) file.delete();
@@ -65,7 +69,8 @@ export function AccountSheet({
           pending: local.pending,
           lastSyncedAt: local.lastSyncedAt,
           lastCloudRevision: local.lastCloudRevision
-        }
+        },
+        experiments
       }, null, 2));
       await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Export VELYQUA data' });
     } catch (error) {

@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { approveObservationOnly, beginEvidenceCollection, createObservation, ingestPrimeExperiment } from './primeExperiment';
+import {
+  approveObservationOnly,
+  beginEvidenceCollection,
+  createObservation,
+  ingestPrimeExperiment,
+  validateExperimentExecution,
+  validateVelyquaObservation,
+} from './primeExperiment';
 
 const spec = {
   schema_version: '1.0' as const,
@@ -88,5 +95,34 @@ describe('PRIME experiment execution boundary', () => {
       evidenceLevel: 'raw',
       provenance: ['manual-entry:owner'],
     })).toThrow(/observed_at/i);
+  });
+
+  it('fails closed when persisted execution approval is inconsistent', () => {
+    const awaiting = ingestPrimeExperiment(spec, '2026-08-27T00:00:00Z');
+    expect(() => validateExperimentExecution({ ...awaiting, owner_approval: {
+      owner_id: approval.ownerId,
+      approved_at: approval.approvedAt,
+      scope: 'observation_only',
+      provenance: approval.provenance,
+    } })).toThrow(/cannot contain owner approval/i);
+    expect(() => validateExperimentExecution({ ...awaiting, state: 'collecting_evidence' })).toThrow(/owner approval/i);
+  });
+
+  it('validates stored observation identity and finite values', () => {
+    const execution = beginEvidenceCollection(approveObservationOnly(ingestPrimeExperiment(spec), approval));
+    const observation = createObservation({
+      experiment: execution,
+      observationId: 'VLY-OBS-VALIDATION-001',
+      observedAt: '2026-08-27T00:02:00Z',
+      kind: 'sensor',
+      metric: 'temperature',
+      value: 27.1,
+      unit: 'C',
+      evidenceLevel: 'raw',
+      provenance: ['edge-node:temperature-probe'],
+    });
+    expect(validateVelyquaObservation(observation)).toEqual(observation);
+    expect(() => validateVelyquaObservation({ ...observation, value: Number.NaN })).toThrow(/finite/i);
+    expect(() => validateVelyquaObservation({ ...observation, experiment_id: 'wrong' })).toThrow(/experiment_id/i);
   });
 });
