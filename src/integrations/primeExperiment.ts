@@ -10,6 +10,7 @@ export type PrimeExperimentSpec = {
   safety_constraints?: string[];
   target_system: 'velyqua';
   approval_state: 'draft' | 'verified' | 'approved' | 'rejected' | 'completed';
+  created_at?: string;
 };
 
 export type VelyquaObservation = {
@@ -111,6 +112,7 @@ export function validatePrimeExperimentSpec(input: unknown): PrimeExperimentSpec
   if (x.safety_constraints !== undefined && !isNonEmptyStringList(x.safety_constraints)) throw new Error('safety_constraints must contain non-empty strings');
   if (x.target_system !== 'velyqua') throw new Error('ExperimentSpec must explicitly target VELYQUA');
   if (!['draft', 'verified', 'approved', 'rejected', 'completed'].includes(String(x.approval_state))) throw new Error('Invalid approval_state');
+  if (x.created_at !== undefined) requireDateTime(x.created_at, 'created_at');
   return input as PrimeExperimentSpec;
 }
 
@@ -149,7 +151,7 @@ export function validateVelyquaObservation(input: unknown): VelyquaObservation {
 
 export function ingestPrimeExperiment(input: unknown, now = new Date().toISOString()): ExperimentExecution {
   const spec = validatePrimeExperimentSpec(input);
-  const createdAt = requireDateTime(now, 'created_at');
+  const createdAt = requireDateTime(spec.created_at ?? now, 'created_at');
   // PRIME verification is advisory. VELYQUA never treats it as owner approval.
   if (spec.approval_state === 'rejected') {
     return {
