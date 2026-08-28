@@ -19,7 +19,8 @@ type Fetcher = (url: string, init: {
 }) => Promise<FetchResponse>;
 
 export type PrimeTransportConfig = {
-  baseUrl: string;
+  baseUrl?: string;
+  endpointUrl?: string;
   token: string;
   batchSize?: number;
   fetcher?: Fetcher;
@@ -61,6 +62,22 @@ function normalizeBaseUrl(value: string): string {
   parsed.search = '';
   parsed.hash = '';
   return parsed.toString().replace(/\/$/, '');
+}
+
+function eventEndpoint(config: PrimeTransportConfig): string {
+  if (config.endpointUrl) {
+    const parsed = new URL(config.endpointUrl.trim());
+    const loopback = ['localhost', '127.0.0.1', '::1'].includes(parsed.hostname);
+    if (parsed.protocol !== 'https:' && !(parsed.protocol === 'http:' && loopback)) {
+      throw new Error('PRIME transport requires HTTPS except on the local loopback interface.');
+    }
+    if (parsed.username || parsed.password || parsed.hash) {
+      throw new Error('PRIME endpoint URL must not contain credentials or a fragment.');
+    }
+    return parsed.toString();
+  }
+  if (!config.baseUrl) throw new Error('A PRIME base URL or owner bridge endpoint is required.');
+  return `${normalizeBaseUrl(config.baseUrl)}/api/integrations/velyqua/events`;
 }
 
 function parseOperation(operation: IntegrationOutboxOperation): unknown {
@@ -118,7 +135,7 @@ export async function flushPrimeExperimentOutbox(
   store: PrimeOutboxStore = defaultStore,
 ): Promise<PrimeOutboxFlushResult> {
   const account = requireAccountId(accountId);
-  const baseUrl = normalizeBaseUrl(config.baseUrl);
+  const endpointUrl = eventEndpoint(config);
   const token = config.token.trim();
   if (!token) throw new Error('A PRIME integration token is required.');
   const fetcher = config.fetcher ?? (globalThis.fetch as unknown as Fetcher);
@@ -134,7 +151,7 @@ export async function flushPrimeExperimentOutbox(
     try {
       if (operation.accountId !== account) throw new Error('Outbox account boundary mismatch.');
       const payload = parseOperation(operation);
-      const response = await fetcher(`${baseUrl}/api/integrations/velyqua/events`, {
+      const response = await fetcher(endpointUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
