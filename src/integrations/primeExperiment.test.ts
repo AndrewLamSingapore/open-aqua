@@ -27,6 +27,14 @@ const approval = {
 };
 
 describe('PRIME experiment execution boundary', () => {
+  it('preserves a stable PRIME creation timestamp across bridge replay', () => {
+    const execution = ingestPrimeExperiment({
+      ...spec,
+      created_at: '2026-08-27T00:00:00Z',
+    }, '2026-08-28T00:00:00Z');
+    expect(execution.created_at).toBe('2026-08-27T00:00:00Z');
+  });
+
   it('never converts PRIME verification into owner approval', () => {
     const execution = ingestPrimeExperiment(spec, '2026-08-27T00:00:00Z');
     expect(execution.state).toBe('awaiting_owner_approval');
