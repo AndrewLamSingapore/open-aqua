@@ -48,6 +48,26 @@ export type ExperimentExecution = {
 const PRIME_EXPERIMENT_ID = /^PRM-EXP-[A-Z0-9-]+$/;
 const VELYQUA_OBSERVATION_ID = /^VLY-OBS-[A-Z0-9-]+$/;
 const RFC3339_DATE_TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+const EXECUTION_STATES: ExperimentExecution['state'][] = [
+  'awaiting_owner_approval',
+  'approved_for_observation',
+  'collecting_evidence',
+  'completed',
+  'rejected',
+];
+const OBSERVATION_KINDS: VelyquaObservation['kind'][] = [
+  'sensor',
+  'reference_test',
+  'care_event',
+  'livestock_observation',
+  'system_event',
+  'derived_result',
+];
+const EVIDENCE_LEVELS: VelyquaObservation['evidence_level'][] = ['raw', 'reference', 'derived'];
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
 
 function isNonEmptyStringList(value: unknown, requireItem = false): value is string[] {
   return Array.isArray(value)
@@ -55,11 +75,27 @@ function isNonEmptyStringList(value: unknown, requireItem = false): value is str
     && value.every(item => typeof item === 'string' && item.trim().length > 0);
 }
 
+function isNullableString(value: unknown): value is string | null {
+  return value === null || typeof value === 'string';
+}
+
 function requireDateTime(value: unknown, label: string): string {
   if (typeof value !== 'string' || !RFC3339_DATE_TIME.test(value) || Number.isNaN(Date.parse(value))) {
     throw new Error(`${label} must be an RFC 3339 date-time`);
   }
   return value;
+}
+
+function validateOwnerApproval(value: unknown): OwnerApproval {
+  if (!isRecord(value)
+    || typeof value.owner_id !== 'string'
+    || !value.owner_id.trim()
+    || value.scope !== 'observation_only'
+    || !isNonEmptyStringList(value.provenance, true)) {
+    throw new Error('Experiment execution requires an auditable observation-only owner approval');
+  }
+  requireDateTime(value.approved_at, 'approved_at');
+  return value as unknown as OwnerApproval;
 }
 
 export function validatePrimeExperimentSpec(input: unknown): PrimeExperimentSpec {
@@ -76,6 +112,39 @@ export function validatePrimeExperimentSpec(input: unknown): PrimeExperimentSpec
   if (x.target_system !== 'velyqua') throw new Error('ExperimentSpec must explicitly target VELYQUA');
   if (!['draft', 'verified', 'approved', 'rejected', 'completed'].includes(String(x.approval_state))) throw new Error('Invalid approval_state');
   return input as PrimeExperimentSpec;
+}
+
+export function validateExperimentExecution(input: unknown): ExperimentExecution {
+  if (!isRecord(input)) throw new Error('Experiment execution must be an object');
+  if (typeof input.experiment_id !== 'string' || !PRIME_EXPERIMENT_ID.test(input.experiment_id)) throw new Error('Invalid PRIME experiment_id');
+  if (typeof input.candidate_id !== 'string' || !input.candidate_id.trim()) throw new Error('candidate_id is required');
+  if (typeof input.objective !== 'string' || !input.objective.trim()) throw new Error('objective is required');
+  if (!isNonEmptyStringList(input.evidence_requirements, true)) throw new Error('evidence_requirements must contain non-empty strings');
+  if (!EXECUTION_STATES.includes(input.state as ExperimentExecution['state'])) throw new Error('Invalid experiment execution state');
+  requireDateTime(input.created_at, 'created_at');
+
+  const needsApproval = ['approved_for_observation', 'collecting_evidence', 'completed'].includes(String(input.state));
+  if (needsApproval) validateOwnerApproval(input.owner_approval);
+  else if (input.owner_approval !== null) throw new Error('Unapproved or rejected execution cannot contain owner approval');
+  return input as unknown as ExperimentExecution;
+}
+
+export function validateVelyquaObservation(input: unknown): VelyquaObservation {
+  if (!isRecord(input)) throw new Error('Observation must be an object');
+  if (input.schema_version !== '1.0' || input.source !== 'velyqua') throw new Error('Unsupported observation identity');
+  if (typeof input.observation_id !== 'string' || !VELYQUA_OBSERVATION_ID.test(input.observation_id)) throw new Error('Invalid observation_id');
+  if (typeof input.experiment_id !== 'string' || !PRIME_EXPERIMENT_ID.test(input.experiment_id)) throw new Error('Invalid observation experiment_id');
+  if (!isNullableString(input.tank_id)) throw new Error('tank_id must be a string or null');
+  requireDateTime(input.observed_at, 'observed_at');
+  if (!OBSERVATION_KINDS.includes(input.kind as VelyquaObservation['kind'])) throw new Error('Invalid observation kind');
+  if (!isNullableString(input.metric)) throw new Error('metric must be a string or null');
+  if (input.value !== null && !['number', 'string', 'boolean'].includes(typeof input.value)) throw new Error('Invalid observation value');
+  if (typeof input.value === 'number' && !Number.isFinite(input.value)) throw new Error('Observation value must be finite');
+  if (!isNullableString(input.unit)) throw new Error('unit must be a string or null');
+  if (!EVIDENCE_LEVELS.includes(input.evidence_level as VelyquaObservation['evidence_level'])) throw new Error('Invalid evidence_level');
+  if (!isNonEmptyStringList(input.provenance, true)) throw new Error('Observation provenance is required');
+  if (!isNullableString(input.notes)) throw new Error('notes must be a string or null');
+  return input as unknown as VelyquaObservation;
 }
 
 export function ingestPrimeExperiment(input: unknown, now = new Date().toISOString()): ExperimentExecution {
@@ -145,16 +214,13 @@ export function createObservation(args: {
   notes?: string | null;
 }): VelyquaObservation {
   if (args.experiment.state !== 'collecting_evidence') throw new Error('Experiment is not collecting evidence');
-  if (!VELYQUA_OBSERVATION_ID.test(args.observationId)) throw new Error('Invalid observation_id');
-  if (!isNonEmptyStringList(args.provenance, true)) throw new Error('Observation provenance is required');
-  const observedAt = requireDateTime(args.observedAt, 'observed_at');
-  return {
+  const observation: VelyquaObservation = {
     schema_version: '1.0',
     observation_id: args.observationId,
     source: 'velyqua',
     experiment_id: args.experiment.experiment_id,
     tank_id: args.tankId ?? null,
-    observed_at: observedAt,
+    observed_at: args.observedAt,
     kind: args.kind,
     metric: args.metric ?? null,
     value: args.value ?? null,
@@ -163,6 +229,7 @@ export function createObservation(args: {
     provenance: args.provenance.map(item => item.trim()),
     notes: args.notes ?? null,
   };
+  return validateVelyquaObservation(observation);
 }
 
 // Deliberately absent: dosing, switching, device-control or medication execution.

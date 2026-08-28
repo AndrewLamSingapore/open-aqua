@@ -1,25 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { SQLiteDatabase } from 'expo-sqlite';
 import { Tank } from '../domain/types';
+import { removeUserExperimentDataSqlite } from './sqliteExperimentStore';
+import { openVelyquaSqlitePort, SqlExecutor, SqlitePort } from './sqliteDatabase';
 import { createStarterRecord, LocalTankRecord } from './tankStore';
 
-const DATABASE_NAME = 'velyqua-reconstruction-v06.db';
+export type { SqlExecutor, SqlitePort } from './sqliteDatabase';
+
 const LEGACY_TANK_KEY = '@velyqua/tank/v1';
 const LEGACY_MIGRATION_OWNER_KEY = '@velyqua/migration/v2-owner';
 const legacyAccountKey = (accountId: string) => `@velyqua/user/${accountId}/primary-tank/v2`;
-
-type SqlValue = string | number | null;
-
-export interface SqlExecutor {
-  runAsync(source: string, ...params: SqlValue[]): Promise<unknown>;
-  getFirstAsync<T>(source: string, ...params: SqlValue[]): Promise<T | null>;
-  getAllAsync<T>(source: string, ...params: SqlValue[]): Promise<T[]>;
-}
-
-export interface SqlitePort extends SqlExecutor {
-  execAsync(source: string): Promise<void>;
-  withExclusiveTransactionAsync(task: (transaction: SqlExecutor) => Promise<void>): Promise<void>;
-}
 
 type StoredRecordRow = { record_json: string };
 type MigrationClaimRow = { account_id: string };
@@ -361,9 +350,8 @@ let storePromise: Promise<AccountSqliteStore> | undefined;
 async function openStore(): Promise<AccountSqliteStore> {
   if (!storePromise) {
     storePromise = (async () => {
-      const { openDatabaseAsync } = await import('expo-sqlite');
-      const database: SQLiteDatabase = await openDatabaseAsync(DATABASE_NAME);
-      const store = new AccountSqliteStore(database as unknown as SqlitePort);
+      const database = await openVelyquaSqlitePort();
+      const store = new AccountSqliteStore(database);
       await store.initialize();
       return store;
     })().catch((error) => {
@@ -426,6 +414,9 @@ export async function markTankSyncFailureSqlite(accountId: string, message: stri
 }
 
 export async function removeUserTankDataSqlite(accountId: string): Promise<void> {
+  // Experiment records and their outbox use the same database and account scope.
+  // Remove them first so a partial account deletion fails closed with tank data retained.
+  await removeUserExperimentDataSqlite(accountId);
   const store = await openStore();
   await store.deleteAccount(accountId);
   const keys = [legacyAccountKey(accountId)];

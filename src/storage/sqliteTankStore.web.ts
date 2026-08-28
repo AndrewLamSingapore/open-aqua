@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStarterRecord, LocalTankRecord } from './tankStore';
+import { removeUserExperimentDataSqlite } from './sqliteExperimentStore';
 
 const accountKey = (accountId: string) => `@velyqua/web/${accountId}/primary-tank/v2`;
 
@@ -39,5 +40,8 @@ export async function markTankSyncFailureSqlite(_accountId: string, _message: st
 
 export async function removeUserTankDataSqlite(accountId: string): Promise<void> {
   requireAccountId(accountId);
-  await AsyncStorage.removeItem(accountKey(accountId));
+  await Promise.all([
+    AsyncStorage.removeItem(accountKey(accountId)),
+    removeUserExperimentDataSqlite(accountId),
+  ]);
 }
