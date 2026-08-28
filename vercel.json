@@ -1,5 +1,15 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/prime-events",
+      "destination": "/api/prime?route=events"
+    },
+    {
+      "source": "/api/prime-experiments",
+      "destination": "/api/prime?route=experiments"
+    }
+  ]
 }
