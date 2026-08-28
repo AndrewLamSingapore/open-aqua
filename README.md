@@ -196,3 +196,5 @@ That distinction is part of the project:
 ---
 
 VELYQUA is the flagship BUILD project in [Andrew Lam's operations-intelligence portfolio](https://github.com/AndrewLamSingapore).
+
+<!-- Vercel Git integration verification: 2026-08-27 -->
