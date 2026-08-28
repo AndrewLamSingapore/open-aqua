@@ -161,7 +161,7 @@ function TankApp({ session }: { session: Session }) {
     } finally {
       primeSyncingRef.current = false;
     }
-  }, [client, session.user.id, syncPrime]);
+  }, [client, session.user.id]);
 
   const sync = useCallback(async () => {
     if (syncingRef.current) {
@@ -218,7 +218,7 @@ function TankApp({ session }: { session: Session }) {
         setTimeout(() => { void sync(); }, 0);
       }
     }
-  }, [client, session.user.id]);
+  }, [client, session.user.id, syncPrime]);
 
   useEffect(() => {
     let cancelled = false;
