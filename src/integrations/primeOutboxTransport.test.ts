@@ -66,6 +66,28 @@ describe('PRIME transactional outbox transport', () => {
     expect(memory.failed[0]?.message).toMatch(/HTTP 503/);
   });
 
+  it('delivers through an exact authenticated owner bridge endpoint', async () => {
+    const memory = memoryStore([operation()]);
+    let requestedUrl = '';
+    let authorization = '';
+    const result = await flushPrimeExperimentOutbox('owner-1', {
+      endpointUrl: 'https://velyqua.example.test/api/prime-events',
+      token: 'owner-session-token',
+      fetcher: async (url, init) => {
+        requestedUrl = url;
+        authorization = init.headers.Authorization ?? '';
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({ accepted: true, operation_id: 'op-1' }),
+        };
+      },
+    }, memory.store);
+    expect(result.status).toBe('delivered');
+    expect(requestedUrl).toBe('https://velyqua.example.test/api/prime-events');
+    expect(authorization).toBe('Bearer owner-session-token');
+  });
+
   it('rejects cleartext non-loopback transport before reading the outbox', async () => {
     const memory = memoryStore([operation()]);
     await expect(flushPrimeExperimentOutbox('owner-1', {

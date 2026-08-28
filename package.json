@@ -11,9 +11,10 @@
     "build": "expo export --platform web --output-dir dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "verify": "npm run typecheck && npm test",
+    "verify": "npm run typecheck && npm run check:server && npm test",
     "export:ios": "expo export --platform ios --output-dir dist",
-    "release:check": "npm run verify && npm run export:ios"
+    "release:check": "npm run verify && npm run export:ios",
+    "check:server": "node --check api/prime.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -44,5 +45,8 @@
   "overrides": {
     "image-size": "2.0.2",
     "uuid": "11.1.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
