@@ -35,6 +35,10 @@ import {
 } from './src/storage/sqliteTankStore';
 import { mergeTankSnapshots } from './src/sync/merge';
 import { syncTankRecordWithRetry } from './src/sync/tankSync';
+import {
+  primeBridgeConfigured,
+  syncPrimeOwnerBridge
+} from './src/integrations/primeCloudBridge';
 import { colors } from './src/theme';
 
 type Tab = 'now' | 'memory' | 'plan' | 'library';
@@ -88,6 +92,7 @@ const syncLabels: Record<SyncState, string> = {
 };
 
 const makeId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+const primeBridgeUrl = process.env.EXPO_PUBLIC_VELYQUA_BRIDGE_URL?.trim();
 
 export default function App() {
   const [booting, setBooting] = useState(true);
@@ -139,8 +144,24 @@ function TankApp({ session }: { session: Session }) {
   const recordRef = useRef<LocalTankRecord | null>(null);
   const syncingRef = useRef(false);
   const resyncRef = useRef(false);
+  const primeSyncingRef = useRef(false);
 
   useEffect(() => { recordRef.current = record; }, [record]);
+
+  const syncPrime = useCallback(async () => {
+    if (!primeBridgeConfigured(primeBridgeUrl) || primeSyncingRef.current) return;
+    primeSyncingRef.current = true;
+    try {
+      await syncPrimeOwnerBridge(client, session.user.id, primeBridgeUrl);
+    } catch (error) {
+      console.warn(
+        'PRIME owner bridge sync is pending:',
+        error instanceof Error ? error.message : String(error)
+      );
+    } finally {
+      primeSyncingRef.current = false;
+    }
+  }, [client, session.user.id, syncPrime]);
 
   const sync = useCallback(async () => {
     if (syncingRef.current) {
@@ -178,6 +199,7 @@ function TankApp({ session }: { session: Session }) {
       setRecord(next);
       if (changedWhileSyncing) resyncRef.current = true;
       setSyncState(changedWhileSyncing ? 'local' : 'synced');
+      void syncPrime();
     } catch (error) {
       const message = error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
         ? error.message
