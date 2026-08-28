@@ -75,7 +75,7 @@ describe('PRIME transactional outbox transport', () => {
       token: 'owner-session-token',
       fetcher: async (url, init) => {
         requestedUrl = url;
-        authorization = init.headers.Authorization;
+        authorization = init.headers.Authorization ?? '';
         return {
           ok: true,
           status: 200,
