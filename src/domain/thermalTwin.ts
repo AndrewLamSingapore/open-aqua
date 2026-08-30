@@ -52,7 +52,8 @@ export function forecastTemperature(
   const baselineMedianC = median(ys);
 
   let confidence: ThermalForecast['confidence'] = 'limited';
-  if (points.length >= 8 && spanHours >= 4) confidence = 'strong';
+  // Seven hourly samples span a complete six-hour inclusive window.
+  if (points.length >= 7 && spanHours >= 6) confidence = 'strong';
   else if (points.length >= 5 && spanHours >= 2) confidence = 'partial';
 
   return {
