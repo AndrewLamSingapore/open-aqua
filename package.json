@@ -10,11 +10,11 @@
     "web": "expo start --web",
     "build": "expo export --platform web --output-dir dist",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run && node api/_spine.test.cjs",
+    "test": "vitest run && node scripts/spine-policy-contract.cjs",
     "verify": "npm run typecheck && npm run check:server && npm test",
     "export:ios": "expo export --platform ios --output-dir dist",
     "release:check": "npm run verify && npm run export:ios",
-    "check:server": "node --check api/health.js && node --check api/prime.js && node --check api/_spine.js && node --check api/spine.js"
+    "check:server": "node --check api/health.js && node --check api/prime.js && node --check api/_spine.js && node --check api/spine.js && node --check scripts/spine-policy-contract.cjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -41,11 +41,6 @@
     "typescript": "~5.9.2",
     "vitest": "^4.0.18"
   },
-  "overrides": {
-    "image-size": "2.0.2",
-    "uuid": "11.1.1"
-  },
-  "engines": {
-    "node": "22.x"
-  }
+  "overrides": { "image-size": "2.0.2", "uuid": "11.1.1" },
+  "engines": { "node": "22.x" }
 }
