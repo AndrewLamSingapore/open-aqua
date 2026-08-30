@@ -38,7 +38,6 @@ import { mergeTankSnapshots } from './src/sync/merge';
 import { syncTankRecordWithRetry } from './src/sync/tankSync';
 import {
   primeBridgeConfigured,
-  resolvePrimeBridgeBaseUrl,
   syncPrimeOwnerBridge
 } from './src/integrations/primeCloudBridge';
 import { colors } from './src/theme';
@@ -94,11 +93,7 @@ const syncLabels: Record<SyncState, string> = {
 };
 
 const makeId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-const runtimeOrigin = (globalThis as { location?: { origin?: string } }).location?.origin;
-const primeBridgeUrl = resolvePrimeBridgeBaseUrl(
-  process.env.EXPO_PUBLIC_VELYQUA_BRIDGE_URL,
-  runtimeOrigin,
-);
+const primeBridgeUrl = process.env.EXPO_PUBLIC_VELYQUA_BRIDGE_URL?.trim();
 const publicAccessMode = Platform.OS === 'web' && process.env.EXPO_PUBLIC_PUBLIC_ACCESS_MODE !== 'false';
 const publicAccountId = 'public-device-guest';
 
