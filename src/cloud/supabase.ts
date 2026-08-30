@@ -1,7 +1,9 @@
-import 'react-native-url-polyfill/auto';
 import { AppState } from 'react-native';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { setupURLPolyfill } from 'react-native-url-polyfill';
 import { secureSessionStorage } from '../auth/secureSessionStorage';
+
+setupURLPolyfill();
 
 const url = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim();
 const publishableKey = (
