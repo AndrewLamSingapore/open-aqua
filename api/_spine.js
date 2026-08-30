@@ -2,6 +2,7 @@ const POLICY = Object.freeze({ AUTO: 'AUTO', BOUNDED_AUTO: 'BOUNDED_AUTO', GATED
 
 const PLATFORM_RULES = Object.freeze({
   'sensor.read': { state: POLICY.AUTO },
+  'sensor.health': { state: POLICY.AUTO },
   'alert.create': { state: POLICY.AUTO },
   'heater.adjust': { state: POLICY.BOUNDED_AUTO, bounds: { max_delta_c: 0.5, min_interval_minutes: 30 } },
   'feeder.dispense': { state: POLICY.BOUNDED_AUTO, bounds: { max_quantity: 1, max_daily_count: 3, min_interval_minutes: 120 } },
