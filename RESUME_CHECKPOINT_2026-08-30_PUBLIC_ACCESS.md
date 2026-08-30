@@ -6,9 +6,10 @@ Recorded: 2026-08-30 UTC
 
 - Repository: `AndrewLamSingapore/velyqua`
 - Resume branch: `checkpoint/public-access-ready-2026-08-30`
-- Main source checkpoint: `db68a22adf797f4a08a1e222f8b0a070ed8f85cd`
+- Main source checkpoint: `e5211b336a28774d3cf0ab668da24c2ddb67d11a`
 - Public-access implementation commit: `87ffd1d5ca7cb9c3419574bc8c1d58d35314bdf7`
 - Environment documentation commit: `db68a22adf797f4a08a1e222f8b0a070ed8f85cd`
+- Telemetry-baseline compatibility commit: `e5211b336a28774d3cf0ab668da24c2ddb67d11a`
 - Local implementation commit retained in the working checkout: `b43c742`
 
 ## Completed
@@ -36,7 +37,7 @@ https://velyqua.vercel.app/
 ## Safe resume sequence
 
 1. Open the Vercel project `andrew-lam-singapore/velyqua`.
-2. Create a Production deployment from commit `db68a22adf797f4a08a1e222f8b0a070ed8f85cd`.
+2. Create a Production deployment from commit `e5211b336a28774d3cf0ab668da24c2ddb67d11a`.
 3. Wait for status `Ready`.
 4. Open https://velyqua.vercel.app/ in a fresh/private browser session.
 5. Confirm the login form is absent.
