@@ -89,9 +89,6 @@ export async function syncPrimeOwnerBridge(
   bridgeBaseUrl: string,
   fetcher: BridgeFetcher = globalThis.fetch as unknown as BridgeFetcher,
 ): Promise<PrimeBridgeSyncResult> {
-  if (process.env.EXPO_PUBLIC_VELYQUA_LEGACY_PRIME_BRIDGE_ENABLED !== '1') {
-    throw new Error('Legacy Personal JARVIS bridge is disabled in commercial VELYQUA Cloud.');
-  }
   const account = requireAccountId(accountId);
   const baseUrl = normalizeBridgeBaseUrl(bridgeBaseUrl);
   const token = await ownerSessionToken(client, account);
