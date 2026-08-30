@@ -4,6 +4,7 @@ import {
   Alert,
   AppState,
   Linking,
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -37,6 +38,7 @@ import { mergeTankSnapshots } from './src/sync/merge';
 import { syncTankRecordWithRetry } from './src/sync/tankSync';
 import {
   primeBridgeConfigured,
+  resolvePrimeBridgeBaseUrl,
   syncPrimeOwnerBridge
 } from './src/integrations/primeCloudBridge';
 import { colors } from './src/theme';
@@ -92,7 +94,13 @@ const syncLabels: Record<SyncState, string> = {
 };
 
 const makeId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-const primeBridgeUrl = process.env.EXPO_PUBLIC_VELYQUA_BRIDGE_URL?.trim();
+const runtimeOrigin = (globalThis as { location?: { origin?: string } }).location?.origin;
+const primeBridgeUrl = resolvePrimeBridgeBaseUrl(
+  process.env.EXPO_PUBLIC_VELYQUA_BRIDGE_URL,
+  runtimeOrigin,
+);
+const publicAccessMode = Platform.OS === 'web' && process.env.EXPO_PUBLIC_PUBLIC_ACCESS_MODE !== 'false';
+const publicAccountId = 'public-device-guest';
 
 export default function App() {
   const [booting, setBooting] = useState(true);
@@ -100,6 +108,10 @@ export default function App() {
   const [recovering, setRecovering] = useState(false);
 
   useEffect(() => {
+    if (publicAccessMode) {
+      setBooting(false);
+      return;
+    }
     const authClient = supabase;
     if (!authClient) {
       setBooting(false);
@@ -126,14 +138,16 @@ export default function App() {
     };
   }, []);
 
+  if (publicAccessMode) return <TankApp publicAccess />;
   if (!cloudConfiguration.ready) return <CloudSetupScreen missing={cloudConfiguration.missing} />;
   if (booting) return <Loading label="Opening your private tank…" />;
   if (!session) return <AuthScreen client={requireSupabase()} />;
   return <><TankApp session={session} />{recovering && <RecoverySheet client={requireSupabase()} onDone={() => setRecovering(false)} />}</>;
 }
 
-function TankApp({ session }: { session: Session }) {
-  const client = requireSupabase();
+function TankApp({ session, publicAccess = false }: { session?: Session; publicAccess?: boolean }) {
+  const client = publicAccess ? null : requireSupabase();
+  const accountId = publicAccess ? publicAccountId : session!.user.id;
   const [record, setRecord] = useState<LocalTankRecord | null>(null);
   const [tab, setTab] = useState<Tab>('now');
   const [quick, setQuick] = useState(false);
@@ -149,7 +163,7 @@ function TankApp({ session }: { session: Session }) {
   useEffect(() => { recordRef.current = record; }, [record]);
 
   const syncPrime = useCallback(async () => {
-    if (!primeBridgeConfigured(primeBridgeUrl) || primeSyncingRef.current) return;
+    if (publicAccess || !client || !session || !primeBridgeConfigured(primeBridgeUrl) || primeSyncingRef.current) return;
     primeSyncingRef.current = true;
     try {
       await syncPrimeOwnerBridge(client, session.user.id, primeBridgeUrl);
@@ -161,9 +175,13 @@ function TankApp({ session }: { session: Session }) {
     } finally {
       primeSyncingRef.current = false;
     }
-  }, [client, session.user.id]);
+  }, [client, publicAccess, session]);
 
   const sync = useCallback(async () => {
+    if (publicAccess || !client || !session) {
+      setSyncState('local');
+      return;
+    }
     if (syncingRef.current) {
       resyncRef.current = true;
       return;
@@ -218,16 +236,16 @@ function TankApp({ session }: { session: Session }) {
         setTimeout(() => { void sync(); }, 0);
       }
     }
-  }, [client, session.user.id, syncPrime]);
+  }, [client, publicAccess, session, syncPrime]);
 
   useEffect(() => {
     let cancelled = false;
-    loadTankRecordSqlite(session.user.id).then((loaded) => {
+    loadTankRecordSqlite(accountId).then((loaded) => {
       if (cancelled) return;
       recordRef.current = loaded;
       setRecord(loaded);
-      setSyncState(loaded.pending ? 'local' : 'synced');
-      setTimeout(() => { void sync(); }, 0);
+      setSyncState(publicAccess ? 'local' : loaded.pending ? 'local' : 'synced');
+      if (!publicAccess) setTimeout(() => { void sync(); }, 0);
     }).catch((error) => {
       if (!cancelled) {
         const message = error instanceof Error ? error.message : 'Please restart VELYQUA.';
@@ -236,9 +254,10 @@ function TankApp({ session }: { session: Session }) {
       }
     });
     return () => { cancelled = true; };
-  }, [session.user.id, sync]);
+  }, [accountId, publicAccess, sync]);
 
   useEffect(() => {
+    if (publicAccess || !client || !session) return;
     const networkSubscription = NetInfo.addEventListener((state) => {
       if (state.isConnected && state.isInternetReachable !== false) void sync();
       else setSyncState('offline');
@@ -260,16 +279,16 @@ function TankApp({ session }: { session: Session }) {
       appSubscription.remove();
       void client.removeChannel(channel);
     };
-  }, [client, session.user.id, sync]);
+  }, [client, publicAccess, session, sync]);
 
   const updateTank = async (tank: Tank) => {
     if (!recordRef.current) return;
     const next = markTankChanged(recordRef.current, tank);
-    await saveTankRecordSqlite(session.user.id, next, { enqueue: true });
+    await saveTankRecordSqlite(accountId, next, { enqueue: !publicAccess });
     recordRef.current = next;
     setRecord(next);
     setSyncState('local');
-    void sync();
+    if (!publicAccess) void sync();
   };
 
   if (loadError) {
@@ -280,16 +299,20 @@ function TankApp({ session }: { session: Session }) {
   }
   if (!record) return <Loading label="Preparing your aquarium history…" />;
   const tank = record.tank;
-  const statusLabel = syncError ? `${syncLabels[syncState]} · ${syncError}` : syncLabels[syncState];
+  const visibleSyncLabel = publicAccess ? 'Guest mode · saved on this device' : syncLabels[syncState];
+  const statusLabel = syncError ? `${visibleSyncLabel} · ${syncError}` : visibleSyncLabel;
 
   return <SafeAreaView style={styles.safe}>
     <StatusBar style="dark" />
     <View style={styles.header}>
       <View style={styles.headerCopy}><Text style={styles.brand}>VELYQUA · 维澜</Text><Text style={styles.tankName}>{tank.name}</Text></View>
-      <Pressable onPress={() => setAccount(true)} accessibilityLabel="Owner account" style={styles.ownerButton}>
-        <Text style={styles.ownerInitial}>{(session.user.email?.[0] ?? 'O').toUpperCase()}</Text>
+      {publicAccess ? <View style={styles.ownerButton} accessibilityLabel="Public guest access">
+        <Text style={styles.ownerInitial}>G</Text>
+        <Text numberOfLines={2} style={styles.saved}>Free public access{`\n`}Saved on this device</Text>
+      </View> : <Pressable onPress={() => setAccount(true)} accessibilityLabel="Owner account" style={styles.ownerButton}>
+        <Text style={styles.ownerInitial}>{(session?.user.email?.[0] ?? 'O').toUpperCase()}</Text>
         <Text numberOfLines={2} style={[styles.saved, syncState === 'error' && styles.savedError]}>{syncLabels[syncState]}</Text>
-      </Pressable>
+      </Pressable>}
     </View>
     <ScrollView style={styles.body} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
       {tab === 'now' && <AquaNow tank={tank} onPreview={() => setTab('plan')} />}
@@ -304,7 +327,7 @@ function TankApp({ session }: { session: Session }) {
       <Pressable accessibilityLabel="Quick Update" style={styles.plus} onPress={() => setQuick(true)}><Text style={styles.plusText}>＋</Text></Pressable>
     </View>
     {quick && <QuickUpdate tank={tank} onClose={() => setQuick(false)} onSave={updateTank} />}
-    {account && <AccountSheet client={client} session={session} syncLabel={statusLabel} onClose={() => setAccount(false)} onSync={sync} />}
+    {account && client && session && <AccountSheet client={client} session={session} syncLabel={statusLabel} onClose={() => setAccount(false)} onSync={sync} />}
   </SafeAreaView>;
 }
 
