@@ -31,7 +31,7 @@ function observation() {
 
 test('relay creates a canonical redacted portfolio event', () => {
   const event = _test.canonicalEvent(observation());
-  assert.equal(event.version, '1.0');
+  assert.equal(event.schema_version, '1.0.0');
   assert.equal(event.source, 'velyqua');
   assert.equal(event.event_type, 'velyqua.observation.recorded');
   assert.equal(event.payload.tank_identity_redacted, true);

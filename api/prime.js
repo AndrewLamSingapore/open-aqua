@@ -83,6 +83,7 @@ function canonicalEvent(event) {
   const provenance = Array.isArray(source.provenance)
     ? source.provenance.filter(item => typeof item === 'string' && item.trim()).slice(0, 50)
     : [];
+  const canonicalProvenance = provenance.length ? provenance : [`velyqua-operation:${event.operation_id}`];
   const payload = observation ? {
     observation_id: source.observation_id,
     experiment_id: source.experiment_id,
@@ -92,7 +93,7 @@ function canonicalEvent(event) {
     value: source.value,
     unit: source.unit,
     observation_evidence_level: source.evidence_level,
-    provenance,
+    provenance: canonicalProvenance,
     notes: source.notes,
     tank_identity_redacted: true,
   } : {
@@ -104,7 +105,7 @@ function canonicalEvent(event) {
   };
   const state = String(source.state || '');
   const canonical = {
-    version: '1.0',
+    schema_version: '1.0.0',
     event_id: `velyqua-${stableId(event.operation_id)}-${stableId(event.aggregate_id)}`,
     event_type: observation
       ? 'velyqua.observation.recorded'
@@ -114,7 +115,7 @@ function canonicalEvent(event) {
     correlation_id: String(source.experiment_id || event.aggregate_id),
     subject_id: event.aggregate_id,
     evidence_level: observation && source.evidence_level === 'reference' ? 'E2' : observation ? 'E1' : state === 'completed' ? 'E2' : 'E1',
-    provenance,
+    provenance: canonicalProvenance,
     payload,
   };
   return assertContract('portfolio-event-v1', canonical);

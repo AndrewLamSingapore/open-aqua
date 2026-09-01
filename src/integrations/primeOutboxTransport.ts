@@ -137,11 +137,12 @@ function canonicalEvent(operation: IntegrationOutboxOperation, rawPayload: unkno
   const payload = rawPayload as Record<string, unknown>;
   const observation = operation.aggregateType === 'observation';
   const provenance = Array.isArray(payload.provenance) ? payload.provenance.filter((item): item is string => typeof item === 'string') : [];
+  const canonicalProvenance = provenance.length ? provenance : [`velyqua-outbox:${operation.operationId}`];
   const eventPayload = observation ? {
     observation_id: payload.observation_id, experiment_id: payload.experiment_id,
     observed_at: payload.observed_at, kind: payload.kind, metric: payload.metric,
     value: payload.value, unit: payload.unit, observation_evidence_level: payload.evidence_level,
-    provenance, notes: payload.notes, tank_identity_redacted: true,
+    provenance: canonicalProvenance, notes: payload.notes, tank_identity_redacted: true,
   } : {
     experiment_id: payload.experiment_id, candidate_id: payload.candidate_id,
     state: payload.state, objective: payload.objective,
@@ -149,12 +150,12 @@ function canonicalEvent(operation: IntegrationOutboxOperation, rawPayload: unkno
   };
   const state = String(payload.state || '');
   const event: PortfolioEventV1 = {
-    version: '1.0', event_id: `velyqua-${stableId(operation.operationId)}-${stableId(operation.aggregateId)}`,
+    schema_version: '1.0.0', event_id: `velyqua-${stableId(operation.operationId)}-${stableId(operation.aggregateId)}`,
     event_type: observation ? 'velyqua.observation.recorded' : state === 'completed' ? 'velyqua.experiment.completed' : 'velyqua.experiment.state_changed',
     source: 'velyqua', occurred_at: operation.updatedAt,
     correlation_id: String(payload.experiment_id || operation.aggregateId), subject_id: operation.aggregateId,
     evidence_level: observation && payload.evidence_level === 'reference' ? 'E2' : observation ? 'E1' : state === 'completed' ? 'E2' : 'E1',
-    provenance, payload: eventPayload,
+    provenance: canonicalProvenance, payload: eventPayload,
   };
   return assertContract('portfolio-event-v1', event) as PortfolioEventV1;
 }
