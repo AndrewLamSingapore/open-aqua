@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "build": "expo export --platform web --output-dir dist",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run && node scripts/spine-policy-contract.cjs",
+    "test": "vitest run && node --test scripts/prime-relay-contract.cjs && node scripts/spine-policy-contract.cjs",
     "verify": "node scripts/portfolio-contract-integrity.mjs && npm run typecheck && npm run check:server && npm test",
     "export:ios": "expo export --platform ios --output-dir dist",
     "release:check": "npm run verify && npm run export:ios",
