@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict');
 const { validateEnvelope, classifyAction, POLICY } = require('../api/_spine');
-function envelope(action, parameters = {}) { return { tenant_id:'tenant-1',actor_id:'user-1',actor_type:'user',action,parameters,context:{},correlation_id:'corr-1',idempotency_key:`idem-${action}`,schema_version:'1.0',timestamp:new Date().toISOString() }; }
+function envelope(action, parameters = {}) { return { tenant_id:'tenant-1',actor_id:'user-1',actor_type:'user',action,parameters,context:{},correlation_id:'corr-1',idempotency_key:`idem-${action}`,schema_version:'1.0.0',timestamp:new Date().toISOString() }; }
 assert.equal(validateEnvelope(envelope('sensor.read')), null);
 assert.match(validateEnvelope({...envelope('sensor.read'),schema_version:'1'}),/must equal/);
 assert.equal(classifyAction(envelope('sensor.read')).state, POLICY.AUTO);
