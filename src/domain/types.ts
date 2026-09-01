@@ -22,6 +22,12 @@ export type Reading = {
   unit: ReadingUnit;
   observedAt: string;
   method: string;
+  calibration?: {
+    calibratedAt: string;
+    reference: string;
+    offset: number;
+    uncertainty: number;
+  };
   updatedAt?: string;
 };
 

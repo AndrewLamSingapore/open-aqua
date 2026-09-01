@@ -62,7 +62,7 @@ Recommended envelope:
   "retrieved_at": "<consumer-read-time>",
   "provenance": "<manual|sensor|derived|reference|git|prime>",
   "confidence": null,
-  "schema_version": "1"
+  "schema_version": "1.0"
 }
 ```
 

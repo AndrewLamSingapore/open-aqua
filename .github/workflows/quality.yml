@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * *'
 
 permissions:
   contents: read
@@ -20,3 +23,21 @@ jobs:
       - run: npm ci
       - run: npm run verify
       - run: npm run export:ios
+
+  production-smoke:
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Wait for the Git-connected deployment
+        if: github.event_name == 'push'
+        run: sleep 45
+      - run: npm run smoke:production
+        env:
+          VELYQUA_PRODUCTION_URL: ${{ vars.VELYQUA_PRODUCTION_URL || 'https://velyqua.vercel.app' }}

@@ -1,4 +1,5 @@
 import { evaluateTank } from '../domain/decisionEngine';
+import { forecastTemperature } from '../domain/thermalTwin';
 import { Activity, Reading, Tank, WaterParameter } from '../domain/types';
 
 export type TankContextPacket = {
@@ -7,6 +8,7 @@ export type TankContextPacket = {
   latestReadings: Partial<Record<WaterParameter, Reading>>;
   recentActivities: Activity[];
   currentState: ReturnType<typeof evaluateTank>;
+  thermalForecast: ReturnType<typeof forecastTemperature>;
   inventorySummary: {
     livestockRecords: number;
     plants: number;
@@ -42,6 +44,7 @@ export function buildTankContext(tank: Tank, generatedAt = new Date().toISOStrin
       .sort((left, right) => Date.parse(right.occurredAt) - Date.parse(left.occurredAt))
       .slice(0, 20),
     currentState: evaluateTank(tank),
+    thermalForecast: forecastTemperature(tank.readings),
     inventorySummary: {
       livestockRecords: tank.livestock?.filter((item) => item.status === 'active').length ?? 0,
       plants: tank.plants?.filter((item) => item.status === 'active').length ?? 0,
