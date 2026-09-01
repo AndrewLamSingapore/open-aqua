@@ -1,4 +1,5 @@
 const POLICY = Object.freeze({ AUTO: 'AUTO', BOUNDED_AUTO: 'BOUNDED_AUTO', GATED: 'GATED', PROHIBITED: 'PROHIBITED' });
+const { validateActionEnvelope } = require('./generated/portfolio-contracts.cjs');
 
 const PLATFORM_RULES = Object.freeze({
   'sensor.read': { state: POLICY.AUTO },
@@ -12,11 +13,10 @@ const PLATFORM_RULES = Object.freeze({
 });
 
 function validateEnvelope(envelope) {
-  const required = ['tenant_id','actor_id','actor_type','action','parameters','context','correlation_id','idempotency_key','schema_version','timestamp'];
-  if (!envelope || typeof envelope !== 'object' || Array.isArray(envelope)) return 'Action envelope is required.';
-  for (const field of required) if (envelope[field] === undefined || envelope[field] === null || envelope[field] === '') return `Missing ${field}.`;
-  if (String(envelope.schema_version) !== '1') return 'Unsupported action envelope schema version.';
-  return null;
+  const result = validateActionEnvelope(envelope);
+  return result.valid
+    ? null
+    : result.errors.map(({ path, message }) => `${path || '/'} ${message}`).join('; ');
 }
 
 function withinBounds(action, parameters = {}) {

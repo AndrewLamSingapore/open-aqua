@@ -9,6 +9,7 @@ describe('VELYQUA tank context packet', () => {
     expect(packet.inventorySummary).toEqual({ livestockRecords: 6, plants: 0, equipment: 0 });
     expect(packet.tank.dimensions?.grossVolumeLitres).toBe(139.4);
     expect(packet.currentState.state).toBe('more_information_needed');
+    expect(packet.thermalForecast).toBeNull();
   });
 
   it('includes explicit safety constraints for future local-agent use', () => {

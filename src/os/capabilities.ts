@@ -53,7 +53,7 @@ export const velyquaModules = [
     capabilities: [
       { id: 'water.nitrogen-rules', title: 'Nitrogen-cycle rules', ownerValue: 'Checks ammonia, nitrite and nitrate using recent confirmed readings.', status: 'working', audience: 'owner', route: 'now', evidence: ['OA-FW-URG-001', 'OA-FW-NO3-001'] },
       { id: 'water.custom-parameters', title: 'Custom parameters and units', ownerValue: 'Lets specialist owners track values beyond the standard freshwater set.', status: 'planned', audience: 'owner' },
-      { id: 'water.trends', title: 'Trends and charts', ownerValue: 'Shows direction, variation and links between tests and care actions.', status: 'planned', audience: 'owner' },
+      { id: 'water.trends', title: 'Temperature trend intelligence', ownerValue: 'Adds calibrated offsets when supplied, robust anomaly and change-point detection, and a bounded 95% forecast interval.', status: 'working', audience: 'owner', route: 'now', evidence: ['src/domain/thermalTwin.ts', 'TankContextPacket.thermalForecast'] },
       { id: 'water.freshness-windows', title: 'Contextual freshness windows', ownerValue: 'Uses different stale limits for cycling, stable, quarantine and high-bioload tanks.', status: 'planned', audience: 'owner' },
       { id: 'water.source-comparison', title: 'Source-water comparison', ownerValue: 'Explains how replacement water changes the likely result.', status: 'planned', audience: 'owner', asiaFirst: true },
       { id: 'water.planted-balance', title: 'Planted-tank balance', ownerValue: 'Connects light, carbon, nutrients and plant observations without false precision.', status: 'planned', audience: 'owner', asiaFirst: true },

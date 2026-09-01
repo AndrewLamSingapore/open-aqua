@@ -10,6 +10,11 @@ export type ThermalForecast = {
   confidence: 'limited' | 'partial' | 'strong';
   baselineMedianC: number;
   deviationFromBaselineC: number;
+  interval95C: { lower: number; upper: number };
+  residualStdC: number;
+  anomaly: { detected: boolean; robustScore: number };
+  changePoint: { detected: boolean; shiftC: number; robustScore: number };
+  calibration: { status: 'declared' | 'unknown'; maxUncertaintyC: number | null };
 };
 
 function median(values: number[]): number {
@@ -28,7 +33,7 @@ export function forecastTemperature(
 ): ThermalForecast | null {
   const temperatures = readings
     .filter((reading) => reading.parameter === 'temperature' && Number.isFinite(reading.value))
-    .map((reading) => ({ value: reading.value, at: Date.parse(reading.observedAt) }))
+    .map((reading) => ({ value: reading.value + (reading.calibration?.offset ?? 0), at: Date.parse(reading.observedAt), calibration: reading.calibration }))
     .filter((reading) => Number.isFinite(reading.at))
     .sort((a, b) => a.at - b.at);
 
@@ -50,6 +55,22 @@ export function forecastTemperature(
   const currentC = newest.value;
   const projectedC = currentC + slope * horizonHours;
   const baselineMedianC = median(ys);
+  const predicted = xs.map((x) => meanY + slope * (x - meanX));
+  const residuals = ys.map((value, index) => value - predicted[index]!);
+  const residualStdC = Math.sqrt(residuals.reduce((sum, value) => sum + value ** 2, 0) / Math.max(1, residuals.length - 2));
+  const forecastX = xs[xs.length - 1]! + horizonHours;
+  const spread = Math.max(.1, residualStdC) * Math.sqrt(1 + (1 / xs.length) + ((forecastX - meanX) ** 2 / Math.max(denominator, .001)));
+  const calibrationUncertainty = Math.max(0, ...points.map(point => point.calibration?.uncertainty ?? 0));
+  const interval = 1.96 * Math.sqrt(spread ** 2 + calibrationUncertainty ** 2);
+  const history = ys.slice(0, -1);
+  const historyMedian = median(history);
+  const mad = median(history.map(value => Math.abs(value - historyMedian)));
+  const robustScale = Math.max(.1, mad * 1.4826);
+  const anomalyScore = Math.abs(currentC - historyMedian) / robustScale;
+  const recent = ys.slice(-3); const prior = ys.slice(Math.max(0, ys.length - 6), -3);
+  const recentMean = recent.reduce((sum,value)=>sum+value,0)/recent.length;
+  const priorMean = prior.length ? prior.reduce((sum,value)=>sum+value,0)/prior.length : recentMean;
+  const shift = recentMean - priorMean; const changeScore = Math.abs(shift) / robustScale;
 
   let confidence: ThermalForecast['confidence'] = 'limited';
   // Seven hourly samples span a complete six-hour inclusive window.
@@ -66,5 +87,10 @@ export function forecastTemperature(
     confidence,
     baselineMedianC,
     deviationFromBaselineC: projectedC - baselineMedianC,
+    interval95C: { lower: projectedC - interval, upper: projectedC + interval },
+    residualStdC,
+    anomaly: { detected: anomalyScore >= 3.5, robustScore: anomalyScore },
+    changePoint: { detected: prior.length >= 3 && Math.abs(shift) >= .5 && changeScore >= 3, shiftC: shift, robustScore: changeScore },
+    calibration: { status: points.every(point => point.calibration) ? 'declared' : 'unknown', maxUncertaintyC: points.some(point => point.calibration) ? calibrationUncertainty : null },
   };
 }

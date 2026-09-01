@@ -45,13 +45,14 @@ describe('PRIME transactional outbox transport', () => {
       token: 'secret',
       fetcher: async (_url, init) => {
         body = JSON.parse(init.body);
-        return { ok: true, status: 200, json: async () => ({ accepted: true, operation_id: 'op-1' }) };
+        return { ok: true, status: 200, json: async () => ({ accepted: true, event_id: (body as {event_id:string}).event_id }) };
       },
     }, memory.store);
-    expect(result).toEqual({ attempted: 1, delivered: 1, failed: 0, remaining: 0, status: 'delivered' });
+    expect(result).toEqual({ attempted: 1, delivered: 1, failed: 0, remaining: 0, deadLettered: 0, status: 'delivered' });
     expect(memory.acknowledged).toEqual(['op-1']);
     expect(memory.failed).toEqual([]);
-    expect(body).toMatchObject({ event: { schema_version: '1.0', account_id: 'owner-1' } });
+    expect(body).toMatchObject({ version: '1.0', source: 'velyqua', event_type: 'velyqua.experiment.state_changed' });
+    expect(JSON.stringify(body)).not.toContain('owner-1');
   });
 
   it('retains the operation and stops in order on rejection', async () => {
@@ -64,6 +65,11 @@ describe('PRIME transactional outbox transport', () => {
     expect(result).toMatchObject({ attempted: 1, delivered: 0, failed: 1, status: 'blocked' });
     expect(memory.acknowledged).toEqual([]);
     expect(memory.failed[0]?.message).toMatch(/HTTP 503/);
+  });
+
+  it('does not replay operations after the durable dead-letter threshold', async () => {
+    const dead=operation();dead.attempts=8;const memory=memoryStore([dead]);const result=await flushPrimeExperimentOutbox('owner-1',{baseUrl:'https://prime.example.test',token:'secret',fetcher:async()=>{throw new Error('must not send');}},memory.store);
+    expect(result).toMatchObject({attempted:0,deadLettered:1,status:'idle'});
   });
 
   it('delivers through an exact authenticated owner bridge endpoint', async () => {
@@ -86,6 +92,15 @@ describe('PRIME transactional outbox transport', () => {
     expect(result.status).toBe('delivered');
     expect(requestedUrl).toBe('https://velyqua.example.test/api/prime-events');
     expect(authorization).toBe('Bearer owner-session-token');
+  });
+
+  it('redacts tank and account identity from canonical observations', async () => {
+    const item = operation();
+    item.aggregateType = 'observation';item.aggregateId = 'VLY-OBS-ABC123';item.eventType = 'observation.recorded';
+    item.payloadJson = JSON.stringify({schema_version:'1.0',observation_id:item.aggregateId,source:'velyqua',experiment_id:'PRM-EXP-ABC123',tank_id:'private-tank',observed_at:item.updatedAt,kind:'sensor',metric:'temperature',value:26,unit:'C',evidence_level:'raw',provenance:['sensor:1'],notes:null});
+    const memory = memoryStore([item]);let body: Record<string,unknown> = {};
+    await flushPrimeExperimentOutbox('owner-1',{baseUrl:'https://prime.example.test',token:'secret',fetcher:async(_url,init)=>{body=JSON.parse(init.body);return {ok:true,status:200,json:async()=>({accepted:true,event_id:body.event_id})};}},memory.store);
+    expect(JSON.stringify(body)).not.toContain('private-tank');expect(JSON.stringify(body)).not.toContain('owner-1');expect(body).toMatchObject({event_type:'velyqua.observation.recorded'});
   });
 
   it('rejects cleartext non-loopback transport before reading the outbox', async () => {
