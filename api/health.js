@@ -20,7 +20,11 @@ module.exports = function handler(req, res) {
   const cloudConfigured = secureUrl(supabaseUrl) && configured(supabaseKey);
   const spineServerConfigured = secureUrl(process.env.PRIME_BASE_URL) && configured(process.env.PRIME_SPINE_TOKEN);
   const legacyPrimeEnabled = process.env.VELYQUA_LEGACY_PRIME_BRIDGE_ENABLED === '1';
-  const ready = cloudConfigured && spineServerConfigured;
+
+  // VELYQUA is independently healthy when its own cloud backend is configured.
+  // PRIME is an optional stable-spine integration and must not make the
+  // standalone product report unavailable when that integration is absent.
+  const ready = cloudConfigured;
 
   return res.status(ready ? 200 : 503).json({
     ok: ready,
@@ -29,7 +33,7 @@ module.exports = function handler(req, res) {
     revision: process.env.VERCEL_GIT_COMMIT_SHA || null,
     commercial_isolation: true,
     cloud: { configured: cloudConfigured },
-    stable_spine: { server_configured: spineServerConfigured },
+    stable_spine: { server_configured: spineServerConfigured, required_for_health: false },
     legacy_personal_jarvis_bridge: { enabled: legacyPrimeEnabled },
     safety_boundary: 'deterministic policy gate; physical execution remains fail-closed without a verified adapter'
   });
