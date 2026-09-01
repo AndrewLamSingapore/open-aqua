@@ -18,7 +18,7 @@ module.exports = function handler(req, res) {
   const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
   const cloudConfigured = secureUrl(supabaseUrl) && configured(supabaseKey);
-  const spineServerConfigured = cloudConfigured && configured(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const spineServerConfigured = secureUrl(process.env.PRIME_BASE_URL) && configured(process.env.PRIME_SPINE_TOKEN);
   const legacyPrimeEnabled = process.env.VELYQUA_LEGACY_PRIME_BRIDGE_ENABLED === '1';
   const ready = cloudConfigured && spineServerConfigured;
 
