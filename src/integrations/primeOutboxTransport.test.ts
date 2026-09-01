@@ -51,7 +51,7 @@ describe('PRIME transactional outbox transport', () => {
     expect(result).toEqual({ attempted: 1, delivered: 1, failed: 0, remaining: 0, deadLettered: 0, status: 'delivered' });
     expect(memory.acknowledged).toEqual(['op-1']);
     expect(memory.failed).toEqual([]);
-    expect(body).toMatchObject({ version: '1.0', source: 'velyqua', event_type: 'velyqua.experiment.state_changed' });
+    expect(body).toMatchObject({ schema_version: '1.0.0', source: 'velyqua', event_type: 'velyqua.experiment.state_changed' });
     expect(JSON.stringify(body)).not.toContain('owner-1');
   });
 
