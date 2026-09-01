@@ -8,7 +8,8 @@ async function main() {
   assert.equal(body.ok, true);
   assert.equal(body.service, 'velyqua');
   assert.equal(body.cloud?.configured, true);
-  assert.equal(body.stable_spine?.server_configured, true);
+  // PRIME stable-spine integration is optional for standalone VELYQUA health.
+  assert.equal(body.stable_spine?.required_for_health, false);
   console.log(`VELYQUA production smoke passed at ${base}`);
 }
 
