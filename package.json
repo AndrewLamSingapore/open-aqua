@@ -21,11 +21,11 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-community/netinfo": "^12.0.1",
     "@supabase/supabase-js": "^2.112.3",
-    "expo": "~57.0.12",
+    "expo": "~57.0.18",
     "expo-auth-session": "~57.0.6",
     "expo-crypto": "~57.0.1",
     "expo-file-system": "~57.0.2",
-    "expo-linking": "~57.0.5",
+    "expo-linking": "~57.0.8",
     "expo-secure-store": "~57.0.1",
     "expo-sharing": "~57.0.11",
     "expo-sqlite": "~57.0.1",
@@ -43,6 +43,11 @@
     "typescript": "~5.9.2",
     "vitest": "^4.0.18"
   },
-  "overrides": { "image-size": "2.0.2", "uuid": "11.1.1" },
-  "engines": { "node": "22.x" }
+  "overrides": {
+    "image-size": "2.0.2",
+    "uuid": "11.1.1"
+  },
+  "engines": {
+    "node": "22.x"
+  }
 }
