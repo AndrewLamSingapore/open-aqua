@@ -28,3 +28,11 @@ updates:
       - dependency-name: react-dom
         versions:
           - ">19.2.3 <20.0.0"
+      # Keep tooling types aligned with the Node 22 runtime and the current
+      # Expo-compatible TypeScript line.
+      - dependency-name: "@types/node"
+        versions:
+          - ">=25.0.0 <27.0.0"
+      - dependency-name: typescript
+        versions:
+          - ">=6.0.0 <8.0.0"
