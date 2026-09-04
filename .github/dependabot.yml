@@ -5,3 +5,26 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      expo-sdk:
+        patterns:
+          - expo
+          - expo-*
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Expo SDK 57 owns these native/runtime versions. Revisit with the next
+      # coordinated SDK upgrade instead of accepting incompatible solo bumps.
+      - dependency-name: react-native
+        versions:
+          - ">=0.87.0 <0.88.0"
+      - dependency-name: "@react-native-async-storage/async-storage"
+        versions:
+          - ">=3.0.0 <4.0.0"
+      - dependency-name: react
+        versions:
+          - ">19.2.3 <20.0.0"
+      - dependency-name: react-dom
+        versions:
+          - ">19.2.3 <20.0.0"
