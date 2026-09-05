@@ -18,13 +18,7 @@
 VELYQUA is built around one question:
 
 > **Can inexpensive continuous signals detect developing aquarium risk earlier or more meaningfully than periodic testing alone?**
-
-There are two connected systems in this repository:
-
-1. a working iPhone-first freshwater digital-twin product for recording and understanding a real aquarium; and
-2. a governed physical experiment exploring whether cheap sensor fusion can create useful earlier-warning evidence.
-
-The product is working software. **The physical sensor-fusion hypothesis is not yet scientifically validated.** That boundary is intentional.
+**Status:** Observation Contract v1 is design-frozen. Gate 1 implementation has not yet been verified. The initial post–Gate 3 delivery hypothesis is an API, responsive web dashboard and notifications. No native application is committed.
 
 ---
 
